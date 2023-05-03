@@ -153,7 +153,7 @@
 		margin: 2.5rem auto 1.5rem auto;
 		border-radius: 30%;
 		border: 5px solid rgb(var(--foreground));
-		background-image: url('./logo.png');
+		background-image: url('/logo.png');
 		background-size: cover;
 		background-position: center;
 		background-repeat: no-repeat;
@@ -219,22 +219,22 @@
 	}
 	@keyframes fadeImage {
 		0% {
-			background-image: url('./logo.png');
+			background-image: url('/logo.png');
 			opacity: 1;
 		}
 		45% {
-			background-image: url('./logo.png');
+			background-image: url('/logo.png');
 			opacity: 1;
 		}
 		47% {
 			opacity: 0.5;
 		}
 		50% {
-			background-image: url('./selfie.jpg');
+			background-image: url('/selfie.jpg');
 			opacity: 1;
 		}
 		95% {
-			background-image: url('./selfie.jpg');
+			background-image: url('/selfie.jpg');
 			opacity: 1;
 		}
 		97% {
