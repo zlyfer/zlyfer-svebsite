@@ -163,7 +163,7 @@
 
 	.styleButtons {
 		position: fixed;
-		top: 1rem;
+		top: 1.3rem;
 		width: 1.8rem;
 		height: 1.8rem;
 		border-radius: 50%;
@@ -177,11 +177,11 @@
 	}
 
 	#darkModeButton {
-		right: 1rem;
+		right: 1.5rem;
 	}
 
 	#glowingButton {
-		right: 4rem;
+		right: 4.5rem;
 	}
 	#glowingButton.glowing {
 		background-size: 400%;

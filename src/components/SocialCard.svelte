@@ -1,4 +1,8 @@
 <script>
+	/* -------------- Icons ------------- */
+
+	import FaInstagram from 'svelte-icons/fa/FaInstagram.svelte';
+
 	/* --------- Store Variables -------- */
 
 	import { _glowing } from '../stores.js';
@@ -38,7 +42,7 @@
 		style:--typeColorCounter={typeColorCounter}
 	>
 		<a {href} target="_blank">
-			<h2>
+			<h2 class="title">
 				{title}
 			</h2>
 		</a>
@@ -49,7 +53,7 @@
 	.SocialCard {
 		list-style: none;
 		display: flex;
-		padding: 0.25rem;
+		padding: 0.25rem 0;
 		background-image: none;
 		background-size: 400%;
 		border-radius: 0.6rem;
@@ -85,6 +89,13 @@
 		color: white;
 	}
 
+	.title {
+		margin: 0;
+		font-size: 1.25rem;
+		text-align: center;
+		transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
 	@media (hover: none) and (pointer: coarse) {
 		.SocialCard {
 			background-position: 0;
@@ -96,16 +107,9 @@
 			box-shadow: inset 0 0 0 3px rgba(var(--typeColor), 0.8);
 			filter: brightness(1.1) drop-shadow(0 0 0.25rem rgba(var(--typeColor), 1));
 		}
-		.SocialCard h2 {
+		.title {
 			color: white;
 		}
-	}
-
-	h2 {
-		margin: 0;
-		font-size: 1.25rem;
-		text-align: center;
-		transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 	}
 
 	@keyframes glowing {

@@ -139,12 +139,21 @@
 		max-width: var(--globalWidth);
 	}
 
+	@media (max-width: 740px) {
+		main {
+			width: 100%;
+			margin: 0;
+			padding: 0;
+		}
+	}
+
 	.welcome {
 		border: 5px solid rgba(var(--accent), 50%);
 		background: rgba(var(--accent), 10%);
 		border-radius: 20px;
 		display: grid;
 		position: relative;
+		padding: 0 1rem;
 	}
 
 	div.welcomeImg {
@@ -152,7 +161,8 @@
 		aspect-ratio: 1/1;
 		margin: 2.5rem auto 1.5rem auto;
 		border-radius: 30%;
-		border: 5px solid rgb(var(--foreground));
+		border: 5px solid var(--glowColor);
+		box-shadow: inset 0 2px 5px var(--glowColor);
 		background-image: url('/logo.png');
 		background-size: cover;
 		background-position: center;
@@ -200,13 +210,20 @@
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(15ch, 1fr));
 		gap: 1rem;
-		padding: 0;
+		padding-left: 0;
 	}
 	.projectCards {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(30ch, 1fr));
 		gap: 1rem;
 		padding: 0;
+	}
+
+	@media (min-width: 438px) and (max-width: 582px) {
+		.socialCards,
+		.projectCards {
+			grid-template-columns: repeat(auto-fit, minmax(22ch, 1fr));
+		}
 	}
 
 	@keyframes swapGlowColors {
