@@ -36,22 +36,18 @@
 </script>
 
 <main>
-	<div class="welcome">
-		<div class="welcomeImg" class:glowing />
+	<div id="welcome">
+		<div id="welcomeImg" class:glowing />
 		<div class="info">
 			<span class="text">
 				Hello there,
 				<br />
 				<code>Frederik Shull</code> aka <code>zlyfer</code> here!
 				<br />
-				I am a <code>{getAge()}</code> y/o <code>software developer</code>.
+				I am a <code>{getAge()}</code> y/o <code>software developer</code>
 				<br />
 				Feel free to look around
-				<img
-					alt="heart"
-					style="height: 1.85rem; position: absolute; margin-left: 5px; margin-top: -3px;"
-					src="./heart.svg"
-				/>
+				<img class="svgIcon" alt="heart" src="./heart.svg" />
 			</span>
 		</div>
 	</div>
@@ -147,7 +143,7 @@
 		}
 	}
 
-	.welcome {
+	#welcome {
 		border: 5px solid rgba(var(--accent), 50%);
 		background: rgba(var(--accent), 10%);
 		border-radius: 20px;
@@ -156,7 +152,7 @@
 		padding: 0 1rem;
 	}
 
-	div.welcomeImg {
+	#welcomeImg {
 		width: 50%;
 		aspect-ratio: 1/1;
 		margin: 2.5rem auto 1.5rem auto;
@@ -169,33 +165,49 @@
 		background-repeat: no-repeat;
 		animation: fadeImage 20s ease-in-out infinite;
 	}
-	.welcomeImg.glowing {
+	#welcomeImg.glowing {
 		animation: swapGlowColors 20s steps(1, end) infinite, glowing 5s ease-in-out infinite,
 			fadeImage 20s ease-in-out infinite;
 	}
-	.welcome .info {
+	#welcome .info {
 		margin: 1rem auto 2.5rem auto;
 		text-align: center;
 	}
-	.welcome .text {
+	#welcome .text {
 		font-size: 1.3rem;
 		color: rgba(var(--foreground), 90%);
 		font-family: Poppins;
 		line-height: 150%;
 	}
+	#welcome .svgIcon {
+		height: 1.85rem;
+		position: absolute;
+		margin-left: 5px;
+		margin-top: 0px;
+	}
 
 	@media (max-width: 500px) {
-		.welcome .text {
+		#welcome .svgIcon {
+			height: 1.3rem;
+		}
+		#welcome .text {
 			font-size: 1rem;
 		}
 	}
 	@media (max-width: 350px) {
-		.welcome .text {
+		#welcome .svgIcon {
+			margin-top: 2px;
+			height: 1.2rem;
+		}
+		#welcome .text {
 			font-size: 0.8rem;
 		}
 	}
 	@media (max-width: 300px) {
-		.welcome .text {
+		#welcome .svgIcon {
+			height: 1.1rem;
+		}
+		#welcome .text {
 			font-size: 0.7rem;
 		}
 	}
