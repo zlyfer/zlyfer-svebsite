@@ -177,12 +177,27 @@
 		margin: 1rem auto 2.5rem auto;
 		text-align: center;
 	}
-	.welcome .info .text {
+	.welcome .text {
 		font-size: 1.3rem;
 		color: rgba(var(--foreground), 90%);
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
+		font-family: Poppins;
 		line-height: 150%;
+	}
+
+	@media (max-width: 500px) {
+		.welcome .text {
+			font-size: 1rem;
+		}
+	}
+	@media (max-width: 350px) {
+		.welcome .text {
+			font-size: 0.8rem;
+		}
+	}
+	@media (max-width: 300px) {
+		.welcome .text {
+			font-size: 0.7rem;
+		}
 	}
 
 	code {
@@ -190,10 +205,8 @@
 		font-weight: bold;
 		background: rgba(var(--accent), 20%);
 		color: rgb(var(--accent));
-		border-radius: 5px;
-		padding: 0.3em 0.45em;
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
+		border-radius: 10px;
+		padding: 0.2em 0.4em;
 	}
 
 	.chapterTitle {
