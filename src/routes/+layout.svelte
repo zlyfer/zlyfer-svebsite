@@ -168,6 +168,7 @@
 		font-family: system-ui, sans-serif;
 		background-attachment: fixed;
 		background-image: linear-gradient(135deg, rgba(var(--background)), rgba(var(--background2)));
+		margin-bottom: 120px;
 	}
 
 	:global(.prevent-select) {
@@ -178,19 +179,16 @@
 
 	.styleButtons {
 		position: fixed;
-		width: 1.8rem;
-		height: 1.8rem;
+		width: 28px;
+		height: 28px;
 		/* border-radius: 50%; */
 		cursor: pointer;
 		padding: 0.22rem;
-		color: rgba(var(--foreground), 0.8);
 		background-color: rgba(var(--foreground), 0.1);
+		color: rgba(var(--foreground), 0.8);
 		box-shadow: inset 0 0 2px 1px rgba(var(--foreground), 0.2);
-		padding: 0.5rem;
-		right: 2rem;
-	}
-	.styleButtons:active {
-		transform: scale(0.95);
+		padding: 10px;
+		right: 15px;
 	}
 	.styleButtons:first-of-type {
 		border-top-left-radius: 15px;
@@ -202,12 +200,13 @@
 	}
 
 	#darkModeButton {
-		top: 1.3rem;
+		bottom: 58px;
 	}
 
 	#glowingButton {
-		top: 4.1rem;
+		bottom: 10px;
 		color: rgba(255, 255, 255, 0.6);
+		transition: background-color 0.5s ease-in-out;
 	}
 	#glowingButton.glowing {
 		background-size: 400%;

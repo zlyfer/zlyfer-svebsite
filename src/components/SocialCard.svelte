@@ -113,7 +113,7 @@
 				rgb(var(--typeColor)),
 				rgb(var(--typeColorCounter)) 30%
 			);
-			border: 5px solid rgba(var(--typeColor), 0.8);
+			border: 5px solid rgba(var(--typeColor), 1);
 			filter: brightness(1.1) drop-shadow(0 0 0.25rem rgba(var(--typeColor), 1));
 		}
 		.title {

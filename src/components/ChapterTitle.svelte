@@ -107,24 +107,29 @@
 		user-select: none;
 	}
 
-	@media (max-width: 500px) {
+	@media (max-width: 600px) {
 		:root {
-			--fontSize: 42;
+			--fontSize: 40;
 		}
 	}
-	@media (max-width: 400px) {
+	@media (max-width: 500px) {
+		:root {
+			--fontSize: 35;
+		}
+	}
+	@media (max-width: 450px) {
 		:root {
 			--fontSize: 30;
 		}
 	}
-	@media (max-width: 300px) {
+	@media (max-width: 400px) {
 		:root {
-			--fontSize: 24;
+			--fontSize: 25;
 		}
 	}
-	@media (max-width: 250px) {
+	@media (max-width: 350px) {
 		:root {
-			--fontSize: 18;
+			--fontSize: 20;
 		}
 	}
 

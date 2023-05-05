@@ -242,11 +242,11 @@
 			gap: 0.5rem;
 		}
 	}
-	@media (max-width: 741px) {
+	/* @media (max-width: 741px) {
 		.socialCards {
 			grid-template-columns: repeat(auto-fit, minmax(22ch, 1fr));
 		}
-	}
+	} */
 
 	@media (max-width: 705px) {
 		main {
