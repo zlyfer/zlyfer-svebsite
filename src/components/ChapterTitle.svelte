@@ -102,6 +102,9 @@
 		text-transform: uppercase;
 		white-space: pre;
 		margin: 1rem 0;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
 	}
 
 	@media (max-width: 500px) {
