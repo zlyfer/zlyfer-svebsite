@@ -1,31 +1,49 @@
 <script>
+	// @ts-nocheck
+
+	/* ------------ Page Data ----------- */
+
+	// /** @type {import('./$types').PageData} */
+	// export let data;
+
 	/* ------------- Imports ------------ */
 
 	import { onMount } from 'svelte';
 
 	/* -------- Component Imports ------- */
 
+	import ChapterTitle from '../components/ChapterTitle.svelte';
 	import ProjectCard from '../components/ProjectCard.svelte';
-	import SocialCard from '../components/SocialCard.svelte';
 	import Seperator from '../components/Seperator.svelte';
+	import SkillCard from '../components/SkillCard.svelte';
+	import SocialCard from '../components/SocialCard.svelte';
+
+	/* -------------- Icons ------------- */
 
 	/* --------- Store Variables -------- */
 
+	import { _darkMode } from '../stores.js';
 	import { _glowing } from '../stores.js';
+
+	/* ----- Component Subscriptions ---- */
 
 	/* ------------ Variables ----------- */
 
-	let glowing = false;
-
-	/* ------- Store Subscriptions ------ */
-
-	_glowing.subscribe((value) => {
-		glowing = value;
-	});
+	let darkMode;
+	let glowing;
 
 	/* ----------- Life Cycles ---------- */
 
-	onMount(() => {});
+	onMount(() => {
+		_darkMode.subscribe((value) => {
+			darkMode = value;
+		});
+		_glowing.subscribe((value) => {
+			glowing = value;
+		});
+	});
+
+	/* ------------ Functions ----------- */
 
 	function getAge() {
 		const birthDate = new Date('1998-06-24T00:00:00.000Z');
@@ -37,7 +55,9 @@
 
 <main>
 	<div id="welcome">
-		<div id="welcomeImg" class:glowing />
+		<div id="welcomeImgContainer">
+			<div id="welcomeImg" class:glowing />
+		</div>
 		<div class="info">
 			<span class="text">
 				Hello there,
@@ -51,6 +71,10 @@
 			</span>
 		</div>
 	</div>
+
+	<!-- <Seperator /> -->
+
+	<ChapterTitle title="socials" zoomEffect="true" />
 
 	<ul class="socialCards">
 		<SocialCard href="https://dynchan.net" title="DynChan" type="dynchan" />
@@ -69,15 +93,18 @@
 
 	<Seperator />
 
-	<span class="chapterTitle">WIP</span>
+	<ChapterTitle title="work in progress" zoomEffect="true" />
+	<ChapterTitle title="..." zoomEffect="false" />
+	<!--
+	<Seperator />
 
-	<!-- <Seperator />
+	<ChapterTitle title="knowledge" zoomEffect="true" />
 
-	<span class="chapterTitle">Skills</span>
+	<SkillCard />
 
 	<Seperator />
 
-	<span class="chapterTitle">Projects</span>
+	<ChapterTitle title="projects" zoomEffect="true" />
 
 	<ul class="projectCards">
 		<ProjectCard
@@ -109,7 +136,7 @@
 
 		--glowLogo: #4caf50;
 		--glowSelfie: #b38786;
-		--glowColor: var(--glowLogo);
+		--glowColor: var(--glowSelfie);
 
 		--dynchan: 76, 175, 80;
 		--dynchan-counter: 55, 71, 79;
@@ -135,39 +162,43 @@
 		max-width: var(--globalWidth);
 	}
 
-	@media (max-width: 740px) {
-		main {
-			width: 100%;
-			margin: 0;
-			padding: 0;
-		}
-	}
-
 	#welcome {
-		border: 5px solid rgba(var(--accent), 50%);
-		background: rgba(var(--accent), 10%);
-		border-radius: 20px;
 		display: grid;
 		position: relative;
-		padding: 0 1rem;
+		/* padding: 0 1rem; */
+		margin-bottom: 1rem;
+		background: rgba(var(--accent), 10%);
+		border: 5px solid rgba(var(--accent), 50%);
+		border-radius: 5px;
 	}
 
-	#welcomeImg {
+	#welcomeImgContainer {
 		width: 50%;
 		aspect-ratio: 1/1;
 		margin: 2.5rem auto 1.5rem auto;
-		border-radius: 30%;
-		border: 5px solid var(--glowColor);
-		box-shadow: inset 0 2px 5px var(--glowColor);
-		background-image: url('/logo.png');
+		box-shadow: 0 0 0 2px rgba(var(--accent), 50%);
+		border: 30px solid rgba(var(--background), 100%);
+		background: rgba(var(--background), 100%);
+		border-radius: 60px;
+	}
+
+	#welcomeImg {
+		width: 100%;
+		height: 100%;
+		aspect-ratio: 1/1;
+		box-shadow: inset 0 0 5px 2px var(--glowColor);
+		border-radius: 50px;
+		background-image: url('/selfie.jpg');
 		background-size: cover;
 		background-position: center;
 		background-repeat: no-repeat;
+		border: 1px solid var(--glowColor);
 		animation: fadeImage 20s ease-in-out infinite;
+		filter: drop-shadow(0 0 0.2rem var(--glowColor));
 	}
 	#welcomeImg.glowing {
-		animation: swapGlowColors 20s steps(1, end) infinite, glowing 5s ease-in-out infinite,
-			fadeImage 20s ease-in-out infinite;
+		background-image: url('/selfie.jpg');
+		animation: glowing 5s ease-in-out infinite, fadeImage 20s ease-in-out infinite;
 	}
 	#welcome .info {
 		margin: 1rem auto 2.5rem auto;
@@ -186,6 +217,47 @@
 		margin-top: 0px;
 	}
 
+	code {
+		font-size: 0.875em;
+		font-weight: bold;
+		background: rgba(var(--accent), 20%);
+		color: rgb(var(--accent));
+		border-radius: 10px;
+		padding: 0.2em 0.4em;
+	}
+
+	.socialCards {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(15ch, 1fr));
+		gap: 0.7rem;
+		padding-left: 0;
+	}
+	.projectCards {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(30ch, 1fr));
+		gap: 1rem;
+		padding: 0;
+	}
+
+	@media (max-width: 741px) {
+		.socialCards {
+			grid-template-columns: repeat(auto-fit, minmax(22ch, 1fr));
+		}
+	}
+
+	@media (max-width: 705px) {
+		main {
+			width: 100%;
+			margin: 0;
+			padding: 0;
+		}
+	}
+	@media (max-width: 875px) {
+		.socialCards {
+			grid-template-columns: repeat(auto-fit, minmax(30ch, 1fr));
+			gap: 0.5rem;
+		}
+	}
 	@media (max-width: 500px) {
 		#welcome .svgIcon {
 			height: 1.3rem;
@@ -212,71 +284,28 @@
 		}
 	}
 
-	code {
-		font-size: 0.875em;
-		font-weight: bold;
-		background: rgba(var(--accent), 20%);
-		color: rgb(var(--accent));
-		border-radius: 10px;
-		padding: 0.2em 0.4em;
-	}
-
-	.chapterTitle {
-		font-size: 2.8rem;
-		font-weight: bold;
-		color: rgba(var(--foreground), 90%);
-		display: block;
-		text-align: center;
-		margin: 1rem auto 2.5rem;
-		text-transform: uppercase;
-	}
-
-	.socialCards {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(15ch, 1fr));
-		gap: 1rem;
-		padding-left: 0;
-	}
-	.projectCards {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(30ch, 1fr));
-		gap: 1rem;
-		padding: 0;
-	}
-
-	@media (min-width: 438px) and (max-width: 582px) {
-		.socialCards,
-		.projectCards {
-			grid-template-columns: repeat(auto-fit, minmax(22ch, 1fr));
-		}
-	}
-
-	@keyframes swapGlowColors {
-		0% {
-			--glowColor: var(--glowLogo);
-		}
-		50% {
-			--glowColor: var(--glowSelfie);
-		}
-	}
 	@keyframes fadeImage {
 		0% {
-			background-image: url('/logo.png');
+			background-image: url('/selfie.jpg');
+			--glowColor: var(--glowSelfie);
 			opacity: 1;
 		}
 		45% {
-			background-image: url('/logo.png');
+			background-image: url('/selfie.jpg');
+			--glowColor: var(--glowSelfie);
 			opacity: 1;
 		}
 		47% {
 			opacity: 0.5;
 		}
 		50% {
-			background-image: url('/selfie.jpg');
+			background-image: url('/logo.png');
+			--glowColor: var(--glowLogo);
 			opacity: 1;
 		}
 		95% {
-			background-image: url('/selfie.jpg');
+			background-image: url('/logo.png');
+			--glowColor: var(--glowLogo);
 			opacity: 1;
 		}
 		97% {
@@ -285,13 +314,16 @@
 	}
 	@keyframes glowing {
 		0% {
-			filter: drop-shadow(0 0 0.1rem var(--glowColor));
+			filter: drop-shadow(0 0 0.2rem var(--glowColor));
+			box-shadow: inset 0 0 5px 2px var(--glowColor);
 		}
 		50% {
-			filter: drop-shadow(0 0 0.8rem var(--glowColor));
+			filter: drop-shadow(0 0 0.5rem var(--glowColor));
+			box-shadow: inset 0 0 12px 2px var(--glowColor);
 		}
 		100% {
-			filter: drop-shadow(0 0 0.1rem var(--glowColor));
+			filter: drop-shadow(0 0 0.2rem var(--glowColor));
+			box-shadow: inset 0 0 5px 2px var(--glowColor);
 		}
 	}
 </style>

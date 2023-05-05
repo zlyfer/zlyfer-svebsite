@@ -1,5 +1,7 @@
+# Boilerplate
+
+```svelte
 <script>
-	// @ts-nocheck
 	/* ------------- Imports ------------ */
 	/* -------- Component Imports ------- */
 	/* -------------- Icons ------------- */
@@ -11,9 +13,8 @@
 	/* ------------ Functions ----------- */
 </script>
 
-<main>
-	<p>An error has occurred. Please try again later.</p>
-</main>
+<main />
 
 <style>
 </style>
+```

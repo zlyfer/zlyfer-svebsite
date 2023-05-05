@@ -1,7 +1,16 @@
 <script>
+	// @ts-nocheck
+
+	/* ------------ Page Data ----------- */
+
+	// /** @type {import('./$types').PageData} */
+	// export let data;
+
 	/* ------------- Imports ------------ */
 
 	import { onMount } from 'svelte';
+
+	/* -------- Component Imports ------- */
 
 	/* -------------- Icons ------------- */
 
@@ -12,23 +21,30 @@
 
 	/* --------- Store Variables -------- */
 
+	import { _darkMode } from '../stores.js';
 	import { _glowing } from '../stores.js';
+
+	/* ----- Component Subscriptions ---- */
 
 	/* ------------ Variables ----------- */
 
-	let glowing = false;
-	let darkMode = 2;
-	let systemDarkMode = true;
-
-	/* ------- Store Subscriptions ------ */
-
-	_glowing.subscribe((value) => {
-		glowing = value;
-	});
+	let darkMode;
+	let glowing;
+	let systemDarkMode;
 
 	/* ----------- Life Cycles ---------- */
 
 	onMount(() => {
+		console.log(`Window Size: ${window.innerWidth}x${window.innerHeight}`);
+
+		_darkMode.subscribe((value) => {
+			darkMode = value;
+			updateTheme();
+		});
+		_glowing.subscribe((value) => {
+			glowing = value;
+		});
+
 		const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
 		systemDarkMode = darkModeQuery.matches;
 		updateTheme();
@@ -38,17 +54,20 @@
 		});
 	});
 
+	/* ------------ Functions ----------- */
+
 	/* ---------------------------------- */
 	/*              DARKMODE              */
 	/* ---------------------------------- */
 
 	function cycleDarkMode() {
-		darkMode++;
-		if (darkMode > 2) {
-			darkMode = 0;
+		if (darkMode == 2) {
+			_darkMode.update((v) => 0);
+		} else {
+			_darkMode.update((v) => v + 1);
 		}
+		setCookie('darkMode', darkMode);
 		updateTheme();
-		console.log(darkMode);
 	}
 
 	function updateTheme() {
@@ -64,18 +83,12 @@
 			const darkBackGround2 = rootStyle.getPropertyValue('--darkBackGround2');
 
 			if (!isDarkMode()) {
-				// @ts-ignore
 				root.style.setProperty('--foreground', lightForeGround);
-				// @ts-ignore
 				root.style.setProperty('--background', lightBackGround);
-				// @ts-ignore
 				root.style.setProperty('--background2', lightBackGround2);
 			} else {
-				// @ts-ignore
 				root.style.setProperty('--foreground', darkForeGround);
-				// @ts-ignore
 				root.style.setProperty('--background', darkBackGround);
-				// @ts-ignore
 				root.style.setProperty('--background2', darkBackGround2);
 			}
 		}
@@ -93,6 +106,8 @@
 		_glowing.update((v) => !v);
 	}
 </script>
+
+<slot />
 
 <main>
 	<!-- svelte-ignore a11y-interactive-supports-focus -->
@@ -125,8 +140,6 @@
 	</div>
 </main>
 
-<slot />
-
 <style is:global>
 	:root {
 		/* -------------- Sizes ------------- */
@@ -135,7 +148,7 @@
 
 		/* ------------- Colors ------------- */
 
-		--accent: 76, 175, 80;
+		--accent: 33, 150, 243;
 
 		--lightForeGround: 68, 68, 68;
 		--lightBackGround: 250, 250, 250;
@@ -147,6 +160,8 @@
 		--foreground: var(--darkForeGround);
 		--background: var(--darkBackGround);
 		--background2: var(--darkBackGround2);
+
+		--glowingButtonOpacity: 0.5;
 	}
 
 	:global(html) {
@@ -163,45 +178,51 @@
 
 	.styleButtons {
 		position: fixed;
-		top: 1.3rem;
 		width: 1.8rem;
 		height: 1.8rem;
 		border-radius: 50%;
 		cursor: pointer;
 		padding: 0.22rem;
-		color: rgba(var(--background), 1);
-		background-color: rgba(var(--foreground), 1);
+		color: rgba(var(--foreground), 0.8);
+		background-color: rgba(var(--foreground), 0.1);
+		box-shadow: inset 0 0 2px 1px rgba(var(--foreground), 0.2);
+		padding: 0.5rem;
+		right: 2rem;
 	}
 	.styleButtons:active {
 		transform: scale(0.95);
 	}
 
 	#darkModeButton {
-		right: 1.5rem;
+		top: 1.3rem;
 	}
 
 	#glowingButton {
-		right: 4.5rem;
+		top: 4.8rem;
+		color: rgba(255, 255, 255, 0.6);
 	}
 	#glowingButton.glowing {
 		background-size: 400%;
 		background-position: 0%;
 		background-image: linear-gradient(
 			90deg,
-			rgba(255, 0, 0, 1) 0%,
-			rgba(255, 154, 0, 1) 10%,
-			rgba(208, 222, 33, 1) 20%,
-			rgba(79, 220, 74, 1) 30%,
-			rgba(63, 218, 216, 1) 40%,
-			rgba(47, 201, 226, 1) 50%,
-			rgba(28, 127, 238, 1) 60%,
-			rgba(95, 21, 242, 1) 70%,
-			rgba(186, 12, 248, 1) 80%,
-			rgba(251, 7, 217, 1) 90%,
-			rgba(255, 0, 0, 1) 100%
+			rgba(255, 0, 0, var(--glowingButtonOpacity)) 0%,
+			rgba(255, 154, 0, var(--glowingButtonOpacity)) 10%,
+			rgba(208, 222, 33, var(--glowingButtonOpacity)) 20%,
+			rgba(79, 220, 74, var(--glowingButtonOpacity)) 30%,
+			rgba(63, 218, 216, var(--glowingButtonOpacity)) 40%,
+			rgba(47, 201, 226, var(--glowingButtonOpacity)) 50%,
+			rgba(28, 127, 238, var(--glowingButtonOpacity)) 60%,
+			rgba(95, 21, 242, var(--glowingButtonOpacity)) 70%,
+			rgba(186, 12, 248, var(--glowingButtonOpacity)) 80%,
+			rgba(251, 7, 217, var(--glowingButtonOpacity)) 90%,
+			rgba(255, 0, 0, var(--glowingButtonOpacity)) 100%
 		);
 		animation: scrolling 60s infinite;
 		animation-timing-function: linear;
+	}
+	#glowingButton:not(.glowing) {
+		color: rgba(var(--foreground), 0.8);
 	}
 	@keyframes scrolling {
 		0% {

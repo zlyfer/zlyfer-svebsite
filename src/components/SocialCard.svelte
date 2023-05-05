@@ -1,42 +1,49 @@
 <script>
-	/* -------------- Icons ------------- */
+	// @ts-nocheck
 
-	import FaInstagram from 'svelte-icons/fa/FaInstagram.svelte';
+	/* ------------- Imports ------------ */
+
+	import { onMount } from 'svelte';
+
+	/* -------- Component Imports ------- */
+
+	/* -------------- Icons ------------- */
 
 	/* --------- Store Variables -------- */
 
+	import { _darkMode } from '../stores.js';
 	import { _glowing } from '../stores.js';
+
+	/* ----- Component Subscriptions ---- */
+
+	export let title;
+	export let href;
+	export let type;
 
 	/* ------------ Variables ----------- */
 
-	let glowing = false;
-
-	/* ------- Store Subscriptions ------ */
-
-	_glowing.subscribe((value) => {
-		glowing = value;
-	});
-
-	/**
-	 * @type {string}
-	 */
-	export let title;
-	/**
-	 * @type {string}
-	 */
-	export let href;
-	/**
-	 * @type {string}
-	 */
-	export let type;
-
+	let darkMode;
+	let glowing;
 	const typeColor = 'var(--' + type + ')';
 	const typeColorCounter = 'var(--' + type + '-counter)';
+
+	/* ----------- Life Cycles ---------- */
+
+	onMount(() => {
+		_darkMode.subscribe((value) => {
+			darkMode = value;
+		});
+		_glowing.subscribe((value) => {
+			glowing = value;
+		});
+	});
+
+	/* ------------ Functions ----------- */
 </script>
 
 <main>
 	<li
-		class="SocialCard"
+		class="socialCard"
 		class:glowing
 		style:--typeColor={typeColor}
 		style:--typeColorCounter={typeColorCounter}
@@ -50,18 +57,20 @@
 </main>
 
 <style>
-	.SocialCard {
+	.socialCard {
 		list-style: none;
 		display: flex;
-		padding: 0.25rem 0;
 		background-image: none;
 		background-size: 400%;
 		border-radius: 0.6rem;
 		background-position: 100%;
 		transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-		box-shadow: inset 0 0 0 5px rgba(var(--typeColor), 0.4);
+		border: 5px solid rgba(var(--typeColor), 0.4);
+		box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
 	}
-	.SocialCard > a {
+	.socialCard > a {
 		width: 100%;
 		text-decoration: none;
 		line-height: 1.4;
@@ -70,22 +79,22 @@
 		color: rgba(var(--foreground), 1);
 		opacity: 0.8;
 	}
-	.SocialCard:is(:hover, :focus-within) {
+	.socialCard:is(:hover, :focus-within) {
 		background-position: 0;
 		background-image: linear-gradient(
 			45deg,
 			rgb(var(--typeColor)),
 			rgb(var(--typeColorCounter)) 30%
 		);
-		box-shadow: inset 0 0 0 3px rgba(var(--typeColor), 1);
+		border: 5px solid rgba(var(--typeColor), 1);
 		transform: scale(1.05);
 	}
-	.SocialCard.glowing:is(:hover, :focus-within) {
+	.socialCard.glowing:is(:hover, :focus-within) {
 		animation-name: glowing;
 		animation-duration: 5s;
 		animation-iteration-count: infinite;
 	}
-	.SocialCard:is(:hover, :focus-within) h2 {
+	.socialCard:is(:hover, :focus-within) h2 {
 		color: white;
 	}
 
@@ -97,14 +106,14 @@
 	}
 
 	@media (hover: none) and (pointer: coarse) {
-		.SocialCard {
+		.socialCard {
 			background-position: 0;
 			background-image: linear-gradient(
 				45deg,
 				rgb(var(--typeColor)),
 				rgb(var(--typeColorCounter)) 30%
 			);
-			box-shadow: inset 0 0 0 3px rgba(var(--typeColor), 0.8);
+			border: 5px solid rgba(var(--typeColor), 0.8);
 			filter: brightness(1.1) drop-shadow(0 0 0.25rem rgba(var(--typeColor), 1));
 		}
 		.title {

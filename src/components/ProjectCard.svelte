@@ -1,20 +1,31 @@
 <script>
-	/**
-	 * @type {string}
-	 */
+	// @ts-nocheck
+
+	/* ------------- Imports ------------ */
+
+	/* -------- Component Imports ------- */
+
+	/* -------------- Icons ------------- */
+
+	/* --------- Store Variables -------- */
+
+	/* ----- Component Subscriptions ---- */
+
 	export let href;
-	/**
-	 * @type {string}
-	 */
 	export let title;
-	/**
-	 * @type {string}
-	 */
 	export let body;
+
+	/* ------------ Variables ----------- */
+
+	/* ------- Store Subscriptions ------ */
+
+	/* ----------- Life Cycles ---------- */
+
+	/* ------------ Functions ----------- */
 </script>
 
 <main>
-	<li class="ProjectCard">
+	<li class="projectCard">
 		<a {href} target="_blank">
 			<h2>
 				{title}
@@ -27,7 +38,7 @@
 </main>
 
 <style>
-	.ProjectCard {
+	.projectCard {
 		list-style: none;
 		display: flex;
 		padding: 0.25rem;
@@ -38,7 +49,7 @@
 		transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 		box-shadow: inset 0 0 0 3px rgba(var(--foreground), 0.1);
 	}
-	.ProjectCard > a {
+	.projectCard > a {
 		width: 100%;
 		text-decoration: none;
 		line-height: 1.4;
@@ -47,14 +58,14 @@
 		color: rgba(var(--foreground), 1);
 		opacity: 0.8;
 	}
-	.ProjectCard:is(:hover, :focus-within) {
+	.projectCard:is(:hover, :focus-within) {
 		background-position: 0;
 		background-image: linear-gradient(45deg, rgb(var(--accent)), rgb(var(--background)) 40%);
 		box-shadow: inset 0 0 0 3px rgba(var(--foreground), 0.5);
 		filter: brightness(1.1);
 	}
-	.ProjectCard:is(:hover, :focus-within) h2,
-	.ProjectCard:is(:hover, :focus-within) p {
+	.projectCard:is(:hover, :focus-within) h2,
+	.projectCard:is(:hover, :focus-within) p {
 		color: white;
 	}
 

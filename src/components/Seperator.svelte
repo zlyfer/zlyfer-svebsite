@@ -1,10 +1,24 @@
+<script>
+	// @ts-nocheck
+
+	/* ------------- Imports ------------ */
+	/* -------- Component Imports ------- */
+	/* -------------- Icons ------------- */
+	/* --------- Store Variables -------- */
+	/* ----- Component Subscriptions ---- */
+	/* ------------ Variables ----------- */
+	/* ------- Store Subscriptions ------ */
+	/* ----------- Life Cycles ---------- */
+	/* ------------ Functions ----------- */
+</script>
+
 <main>
 	<div class="seperator" />
 </main>
 
 <style>
 	.seperator {
-		margin: 2rem auto;
+		margin-bottom: 2rem;
 		width: 100%;
 		height: 2px;
 		background: rgba(var(--foreground), 30%);
