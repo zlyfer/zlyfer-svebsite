@@ -13,6 +13,7 @@
 	/* -------- Component Imports ------- */
 
 	import ChapterTitle from '../components/ChapterTitle.svelte';
+	import CodeText from '../components/CodeText.svelte';
 	import ProjectCard from '../components/ProjectCard.svelte';
 	import Seperator from '../components/Seperator.svelte';
 	import SkillCard from '../components/SkillCard.svelte';
@@ -74,7 +75,7 @@
 
 	<!-- <Seperator /> -->
 
-	<ChapterTitle title="socials" zoomEffect="true" />
+	<ChapterTitle text="socials" zoomEffect="true" />
 
 	<ul class="socialCards">
 		<SocialCard href="https://dynchan.net" title="DynChan" type="dynchan" />
@@ -93,18 +94,17 @@
 
 	<Seperator />
 
-	<ChapterTitle title="work in progress" zoomEffect="true" />
-	<ChapterTitle title="..." zoomEffect="false" />
+	<ChapterTitle text="work in progress" zoomEffect="true" />
 	<!--
 	<Seperator />
 
-	<ChapterTitle title="knowledge" zoomEffect="true" />
+	<ChapterTitle text="knowledge" zoomEffect="true" />
 
 	<SkillCard />
 
 	<Seperator />
 
-	<ChapterTitle title="projects" zoomEffect="true" />
+	<ChapterTitle text="projects" zoomEffect="true" />
 
 	<ul class="projectCards">
 		<ProjectCard
@@ -165,8 +165,6 @@
 	#welcome {
 		display: grid;
 		position: relative;
-		/* padding: 0 1rem; */
-		margin-bottom: 1rem;
 		background: rgba(var(--accent), 10%);
 		border: 5px solid rgba(var(--accent), 50%);
 		border-radius: 5px;
@@ -239,6 +237,12 @@
 		padding: 0;
 	}
 
+	@media (max-width: 875px) {
+		.socialCards {
+			grid-template-columns: repeat(auto-fit, minmax(30ch, 1fr));
+			gap: 0.5rem;
+		}
+	}
 	@media (max-width: 741px) {
 		.socialCards {
 			grid-template-columns: repeat(auto-fit, minmax(22ch, 1fr));
@@ -250,12 +254,6 @@
 			width: 100%;
 			margin: 0;
 			padding: 0;
-		}
-	}
-	@media (max-width: 875px) {
-		.socialCards {
-			grid-template-columns: repeat(auto-fit, minmax(30ch, 1fr));
-			gap: 0.5rem;
 		}
 	}
 	@media (max-width: 500px) {

@@ -16,7 +16,7 @@
 
 	/* ----- Component Subscriptions ---- */
 
-	export let title;
+	export let text;
 	export let zoomEffect;
 
 	/* ------------ Variables ----------- */
@@ -36,7 +36,7 @@
 			glowing = value;
 		});
 
-		letters = title.split('');
+		letters = text.split('');
 		for (let i = 0; i < 5; i++) {
 			letters.push(' ');
 			letters.unshift(' ');
@@ -95,15 +95,34 @@
 		color: rgba(var(--foreground), 90%);
 		cursor: default;
 		display: block;
-		font-size: 2.8rem;
 		font-weight: bold;
 		height: 64px;
-		line-height: 2ch;
-		/* margin: 1rem auto 2.5rem; */
-		margin-bottom: 1rem;
+		line-height: 400%;
 		text-align: center;
 		text-transform: uppercase;
 		white-space: pre;
+		margin: 1rem 0;
+	}
+
+	@media (max-width: 500px) {
+		:root {
+			--fontSize: 42;
+		}
+	}
+	@media (max-width: 400px) {
+		:root {
+			--fontSize: 30;
+		}
+	}
+	@media (max-width: 300px) {
+		:root {
+			--fontSize: 24;
+		}
+	}
+	@media (max-width: 250px) {
+		:root {
+			--fontSize: 18;
+		}
 	}
 
 	.letter {

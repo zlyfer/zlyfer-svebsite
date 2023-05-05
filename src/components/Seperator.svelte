@@ -18,7 +18,6 @@
 
 <style>
 	.seperator {
-		margin-bottom: 2rem;
 		width: 100%;
 		height: 2px;
 		background: rgba(var(--foreground), 30%);

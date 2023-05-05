@@ -113,18 +113,6 @@
 	<!-- svelte-ignore a11y-interactive-supports-focus -->
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div
-		class:glowing
-		class="prevent-select styleButtons"
-		id="glowingButton"
-		role="button"
-		on:click={() => toggleGlowing()}
-	>
-		<FaFire />
-	</div>
-
-	<!-- svelte-ignore a11y-interactive-supports-focus -->
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<div
 		role="button"
 		id="darkModeButton"
 		on:click={() => cycleDarkMode()}
@@ -137,6 +125,18 @@
 		{:else}
 			<FaAdjust />
 		{/if}
+	</div>
+
+	<!-- svelte-ignore a11y-interactive-supports-focus -->
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<div
+		class:glowing
+		class="prevent-select styleButtons"
+		id="glowingButton"
+		role="button"
+		on:click={() => toggleGlowing()}
+	>
+		<FaFire />
 	</div>
 </main>
 
@@ -180,7 +180,7 @@
 		position: fixed;
 		width: 1.8rem;
 		height: 1.8rem;
-		border-radius: 50%;
+		/* border-radius: 50%; */
 		cursor: pointer;
 		padding: 0.22rem;
 		color: rgba(var(--foreground), 0.8);
@@ -192,13 +192,21 @@
 	.styleButtons:active {
 		transform: scale(0.95);
 	}
+	.styleButtons:first-of-type {
+		border-top-left-radius: 15px;
+		border-top-right-radius: 15px;
+	}
+	.styleButtons:last-of-type {
+		border-bottom-left-radius: 15px;
+		border-bottom-right-radius: 15px;
+	}
 
 	#darkModeButton {
 		top: 1.3rem;
 	}
 
 	#glowingButton {
-		top: 4.8rem;
+		top: 4.1rem;
 		color: rgba(255, 255, 255, 0.6);
 	}
 	#glowingButton.glowing {
