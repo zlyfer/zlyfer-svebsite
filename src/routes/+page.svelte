@@ -13,7 +13,6 @@
 	/* -------- Component Imports ------- */
 
 	import ChapterTitle from '../components/ChapterTitle.svelte';
-	import CodeText from '../components/CodeText.svelte';
 	import ProjectCard from '../components/ProjectCard.svelte';
 	import Seperator from '../components/Seperator.svelte';
 	import SkillCard from '../components/SkillCard.svelte';
