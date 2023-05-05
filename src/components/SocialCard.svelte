@@ -110,11 +110,11 @@
 			background-position: 0;
 			background-image: linear-gradient(
 				45deg,
-				rgb(var(--typeColor)),
-				rgb(var(--typeColorCounter)) 30%
+				rgba(var(--typeColor), 30%),
+				rgba(var(--typeColorCounter), 30%) 30%
 			);
 			border: 5px solid rgba(var(--typeColor), 1);
-			filter: brightness(1.1) drop-shadow(0 0 0.25rem rgba(var(--typeColor), 1));
+			filter: drop-shadow(0 0 0.25rem rgba(var(--typeColor), 1));
 		}
 		.title {
 			color: white;
