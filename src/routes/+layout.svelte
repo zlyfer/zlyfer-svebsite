@@ -169,7 +169,6 @@
 		font-family: Poppins;
 		background-attachment: fixed;
 		background-image: linear-gradient(135deg, rgba(var(--background)), rgba(var(--background2)));
-		margin-bottom: 120px;
 	}
 
 	:global(body) {
