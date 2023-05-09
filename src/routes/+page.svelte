@@ -180,7 +180,6 @@
 			tags={['wip', 'discord', 'vue', 'node.js', 'php', 'slim', 'sql']}
 			url="https://dynchan.net/"
 			github="https://github.com/dynchan"
-			cardColor="#4caf50"
 		/>
 		{#each projects as project}
 			<ProjectCard
