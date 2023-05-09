@@ -135,7 +135,7 @@
 
 	.letter {
 		font-size: calc(var(--fontSize) * 0.5px);
-		transition: font-size 0.3s, filter 0.1s;
+		transition: font-size 0.1s, filter 0.1s;
 	}
 	.letter.hovered {
 		font-size: calc(var(--fontSize) * 1px);
@@ -159,6 +159,6 @@
 	}
 	.letter.hovered-5 {
 		font-size: calc(var(--fontSize) * 0.5px);
-		/* filter: drop-shadow(0 0 calc(var(--glowStrength) * 1rem) rgba(var(--foreground), 0%)); */
+		filter: drop-shadow(0 0 calc(var(--glowStrength) * 1rem) rgba(var(--foreground), 5%));
 	}
 </style>

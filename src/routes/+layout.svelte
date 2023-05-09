@@ -9,6 +9,7 @@
 	/* ------------- Imports ------------ */
 
 	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
 
 	/* -------- Component Imports ------- */
 
@@ -66,7 +67,6 @@
 		} else {
 			_darkMode.update((v) => v + 1);
 		}
-		setCookie('darkMode', darkMode);
 		updateTheme();
 	}
 
@@ -109,35 +109,36 @@
 
 <slot />
 
-<main>
-	<!-- svelte-ignore a11y-interactive-supports-focus -->
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<div
-		role="button"
-		id="darkModeButton"
-		on:click={() => cycleDarkMode()}
-		class="prevent-select styleButtons"
-	>
-		{#if darkMode == 0}
-			<FaSun />
-		{:else if darkMode == 1}
-			<FaRegMoon />
-		{:else}
-			<FaAdjust />
-		{/if}
-	</div>
+<!-- svelte-ignore a11y-interactive-supports-focus -->
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 
-	<!-- svelte-ignore a11y-interactive-supports-focus -->
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<div
-		class:glowing
-		class="prevent-select styleButtons"
-		id="glowingButton"
-		role="button"
-		on:click={() => toggleGlowing()}
-	>
-		<FaFire />
-	</div>
+<main>
+	{#if !$page.route.id.startsWith('/project')}
+		<div
+			role="button"
+			id="darkModeButton"
+			on:click={() => cycleDarkMode()}
+			class="prevent-select styleButtons"
+		>
+			{#if darkMode == 0}
+				<FaSun />
+			{:else if darkMode == 1}
+				<FaRegMoon />
+			{:else}
+				<FaAdjust />
+			{/if}
+		</div>
+
+		<div
+			class:glowing
+			class="prevent-select styleButtons"
+			id="glowingButton"
+			role="button"
+			on:click={() => toggleGlowing()}
+		>
+			<FaFire />
+		</div>
+	{/if}
 </main>
 
 <style is:global>
@@ -165,10 +166,15 @@
 	}
 
 	:global(html) {
-		font-family: system-ui, sans-serif;
+		font-family: Poppins;
 		background-attachment: fixed;
 		background-image: linear-gradient(135deg, rgba(var(--background)), rgba(var(--background2)));
 		margin-bottom: 120px;
+	}
+
+	:global(body) {
+		margin: 0;
+		padding: 0;
 	}
 
 	:global(.prevent-select) {

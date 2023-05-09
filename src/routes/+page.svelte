@@ -1,11 +1,6 @@
 <script>
 	// @ts-nocheck
 
-	/* ------------ Page Data ----------- */
-
-	// /** @type {import('./$types').PageData} */
-	// export let data;
-
 	/* ------------- Imports ------------ */
 
 	import { onMount } from 'svelte';
@@ -31,6 +26,76 @@
 
 	let darkMode;
 	let glowing;
+	// tags = ['p5.js', 'vue', 'node.js', 'php', 'slim', 'sql', 'game', 'animation', 'finished', 'wip', 'discontinued', 'discord',]
+	const projects = [
+		{
+			name: 'asteroids',
+			tags: ['finished', 'p5.js', 'game'],
+			description:
+				'An arcade-style Asteroids game with auto generated vertex-based asteroids and infinite border.'
+		},
+		{
+			name: 'snake2',
+			tags: ['finished', 'p5.js', 'game'],
+			description: 'A gridless snake game. More visual pleasing successor of my first attempt.'
+		},
+
+		{
+			name: 'connect-four',
+			tags: ['discontinued', 'game'],
+			description: 'Connect Four game. I was mostly interested in the win-detection algorithm.'
+		},
+		{
+			name: 'square',
+			tags: ['finished', 'p5.js', 'animation'],
+			description: 'Rainbow shapes animation with 5 different modifiers that change over time.'
+		},
+		{
+			name: 'lissajous-curve-table',
+			tags: ['finished', 'p5.js', 'animation'],
+			description: 'A visualisation of the lissajous curve table. Inspired by The Coding Train.'
+		},
+		{
+			name: 'condot',
+			tags: ['finished', 'p5.js', 'animation'],
+			description: 'Slow and calming background animation.'
+		},
+		{
+			name: 'low-poly-art',
+			tags: ['finished', 'p5.js', 'animation'],
+			description: 'Colorful art using vertex based shapes.'
+		},
+		{
+			name: 'barnsley-fern',
+			tags: ['finished', 'p5.js', 'animation'],
+			description: 'The Barnsley Fern fractal - visualized in color.'
+		},
+		{
+			name: 'Material-Clock',
+			tags: ['finished', 'p5.js', 'animation'],
+			description: 'Simplistic material-style clock with milliseconds.'
+		},
+		{
+			name: 'snake',
+			tags: ['finished', 'p5.js', 'game'],
+			description: 'A grid-based snake game with many options and speedrun-potential (seeds).'
+		},
+		{
+			name: 'flicker',
+			tags: ['discontinued', 'p5.js', 'game'],
+			description: 'Colorful balls to flick around. First experiments with p5.js and vectors.'
+		},
+		{
+			name: 'vertex-based-shapes',
+			tags: ['finished', 'p5.js', 'animation'],
+			description: 'Shapes made out of vertices that can be controlled with parameters.'
+		},
+		{
+			name: 'cells',
+			tags: ['discontinued', 'animation'],
+			description: 'Simulation of cells absorbing each other and dividing themselves.'
+		}
+	];
 
 	/* ----------- Life Cycles ---------- */
 
@@ -52,6 +117,9 @@
 		return Math.abs(ageDate.getUTCFullYear() - 1970);
 	}
 </script>
+
+<!-- svelte-ignore a11y-interactive-supports-focus -->
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 
 <main>
 	<div id="welcome">
@@ -91,42 +159,39 @@
 		/>
 	</ul>
 
-	<Seperator />
+	<!-- <Seperator />
 
-	<ChapterTitle text="work in progress" zoomEffect="true" />
-	<!--
-	<Seperator />
+	<ChapterTitle text="work in progress" zoomEffect="true" /> -->
+
+	<!-- <Seperator />
 
 	<ChapterTitle text="knowledge" zoomEffect="true" />
 
-	<SkillCard />
+	<SkillCard /> -->
 
 	<Seperator />
 
-	<ChapterTitle text="projects" zoomEffect="true" />
+	<ChapterTitle text="some projects" zoomEffect="true" />
 
 	<ul class="projectCards">
 		<ProjectCard
-			href="_blank"
-			title="Dummy Project Card"
-			body="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+			title="DynChan"
+			description="Discord Bot for fully dynamic voice/text channels!"
+			tags={['wip', 'discord', 'vue', 'node.js', 'php', 'slim', 'sql']}
+			url="https://dynchan.net/"
+			github="https://github.com/dynchan"
+			cardColor="#4caf50"
 		/>
-		<ProjectCard
-			href="_blank"
-			title="Dummy Project Card"
-			body="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-		/>
-		<ProjectCard
-			href="_blank"
-			title="Dummy Project Card"
-			body="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-		/>
-		<ProjectCard
-			href="_blank"
-			title="Dummy Project Card"
-			body="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-		/>
-	</ul> -->
+		{#each projects as project}
+			<ProjectCard
+				title={project.name}
+				description={project.description}
+				tags={project.tags}
+				url="/project/{project.name}"
+				github="https://github.com/zlyfer/{project.name}"
+			/>
+		{/each}
+	</ul>
 </main>
 
 <style>
@@ -204,7 +269,6 @@
 	#welcome .text {
 		font-size: 1.3rem;
 		color: rgba(var(--foreground), 90%);
-		font-family: Poppins;
 		line-height: 150%;
 	}
 	#welcome .svgIcon {
@@ -225,7 +289,7 @@
 
 	.socialCards {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(15ch, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(17ch, 1fr));
 		gap: 0.7rem;
 		padding-left: 0;
 	}
@@ -239,14 +303,18 @@
 	@media (max-width: 875px) {
 		.socialCards {
 			grid-template-columns: repeat(auto-fit, minmax(30ch, 1fr));
-			gap: 0.5rem;
 		}
 	}
-	/* @media (max-width: 741px) {
+	@media (max-width: 775px) {
 		.socialCards {
-			grid-template-columns: repeat(auto-fit, minmax(22ch, 1fr));
+			grid-template-columns: repeat(auto-fit, minmax(25ch, 1fr));
 		}
-	} */
+	}
+	@media (max-width: 600px) {
+		.socialCards {
+			grid-template-columns: repeat(auto-fit, minmax(20ch, 1fr));
+		}
+	}
 
 	@media (max-width: 705px) {
 		main {

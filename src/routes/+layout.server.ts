@@ -1,12 +1,8 @@
 // @ts-nocheck
-/** @type {import('./$types').PageLoad} */
 /** @type {import('./$types').LayoutServerLoad} */
 
 export function load({ cookies }) {
-	console.log(`Wello Horld!`);
-
 	/* ------------- Cookies ------------ */
-
 	// const cookieBox = {
 	// 	darkMode: 2,
 	// 	glowing: true
@@ -14,14 +10,11 @@ export function load({ cookies }) {
 	// Object.keys(cookieBox).forEach((key) => {
 	// 	initializeCookies(cookies, key, cookieBox[key]);
 	// });
-
 	// const _cookies = {};
 	// cookies.getAll().forEach((cookie) => {
 	// 	_cookies[cookie.name] = cookie.value;
 	// });
-
 	/* ---------------- - --------------- */
-
 	// return { cookies: _cookies };
 }
 

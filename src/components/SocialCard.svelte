@@ -41,13 +41,8 @@
 	/* ------------ Functions ----------- */
 </script>
 
-<main>
-	<li
-		class="socialCard"
-		class:glowing
-		style:--typeColor={typeColor}
-		style:--typeColorCounter={typeColorCounter}
-	>
+<main style:--typeColor={typeColor} style:--typeColorCounter={typeColorCounter}>
+	<li class="socialCard" class:glowing>
 		<a {href} target="_blank">
 			<h2 class="title">
 				{title}
