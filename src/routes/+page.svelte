@@ -223,7 +223,7 @@
 		margin: auto;
 		padding: 5rem;
 		max-width: var(--globalWidth);
-		margin-bottom: 100px;
+		margin-bottom: 130px !important;
 	}
 
 	#welcome {
