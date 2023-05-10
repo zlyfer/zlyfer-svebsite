@@ -43,7 +43,6 @@
 		<a href={url} target={url.startsWith('/project') ? null : '_blank'}>
 			<h2>
 				{title}
-				<!-- - {description.length} -->
 			</h2>
 			<p>
 				{description}
@@ -68,6 +67,7 @@
 		list-style: none;
 		display: flex;
 		padding: 0.25rem;
+		padding-bottom: 1.5rem;
 		background-image: none;
 		background-size: 400%;
 		background-position: 100%;
@@ -108,6 +108,8 @@
 		margin-top: 0.5rem;
 		color: rgba(var(--foreground), 1);
 		font-family: 'Courier New', Courier, monospace;
+		font-weight: bold;
+		font-size: 17px;
 	}
 
 	span.tag {
@@ -118,9 +120,12 @@
 		border-radius: 15px;
 		color: rgba(var(--background), 1);
 		background-color: rgba(var(--foreground), 1);
-		margin: 5px 3px;
+		margin: 2px 2px;
 		width: auto;
 		max-width: auto;
+	}
+	span.tag:hover {
+		filter: brightness(1.1);
 	}
 	span.finished {
 		background-color: #4caf50;
@@ -139,7 +144,7 @@
 		color: #eee;
 	}
 	span.animation {
-		background-color: #8e24aa;
+		background-color: #963caf;
 		color: #eee;
 	}
 	span.discord {
@@ -156,10 +161,6 @@
 	}
 	span.php {
 		background-color: #4f5b93;
-		color: #eee;
-	}
-	span.slim {
-		background-color: #2c3e50;
 		color: #eee;
 	}
 	span.sql {
@@ -205,5 +206,6 @@
 		position: absolute;
 		margin-top: 0.4rem;
 		margin-left: 1rem;
+		color: rgba(var(--foreground), 1);
 	}
 </style>

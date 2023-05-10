@@ -26,7 +26,7 @@
 
 	let darkMode;
 	let glowing;
-	// tags = ['p5.js', 'vue', 'node.js', 'php', 'slim', 'sql', 'game', 'animation', 'finished', 'wip', 'discontinued', 'discord',]
+	// tags = ['p5.js', 'vue', 'node.js', 'php', 'sql', 'game', 'animation', 'finished', 'wip', 'discontinued', 'discord',]
 	const projects = [
 		{
 			name: 'asteroids',
@@ -42,7 +42,7 @@
 
 		{
 			name: 'connect-four',
-			tags: ['discontinued', 'game'],
+			tags: ['discontinued', 'p5.js', 'game'],
 			description: 'Connect Four game. I was mostly interested in the win-detection algorithm.'
 		},
 		{
@@ -177,7 +177,7 @@
 		<ProjectCard
 			title="DynChan"
 			description="Discord Bot for fully dynamic voice/text channels!"
-			tags={['wip', 'discord', 'vue', 'node.js', 'php', 'slim', 'sql']}
+			tags={['wip', 'discord', 'vue', 'node.js', 'php', 'sql']}
 			url="https://dynchan.net/"
 			github="https://github.com/dynchan"
 		/>
@@ -283,7 +283,7 @@
 		font-weight: bold;
 		background: rgba(var(--accent), 20%);
 		color: rgb(var(--accent));
-		border-radius: 10px;
+		border-radius: 5px;
 		padding: 0.2em 0.4em;
 	}
 

@@ -109,10 +109,9 @@
 				rgba(var(--typeColorCounter), 30%) 30%
 			);
 			border: 5px solid rgba(var(--typeColor), 1);
-			filter: drop-shadow(0 0 0.25rem rgba(var(--typeColor), 1));
 		}
 		.title {
-			color: white;
+			color: rgba(var(--foreground), 1);
 		}
 	}
 
