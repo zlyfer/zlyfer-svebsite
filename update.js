@@ -13,7 +13,7 @@ http
 
 			req.on('end', () => {
 				const signature = req.headers['x-hub-signature-256'];
-				console.log(signature);
+
 				if (signature && signature === 'sha256=' + secret) {
 					console.log('Signature valid.');
 					exec('bash /home/zlyfer/websites/zlyfer-svebsite/update.sh', (error, stdout, stderr) => {
