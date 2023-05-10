@@ -1,6 +1,6 @@
 import http from 'http';
 import { exec } from 'child_process';
-const secret = '2ShCW82rZUmz&CBBgsc$$bBmZ%wxR656';
+const { secret } = './update-signature.jsonc';
 
 http
 	.createServer((req, res) => {
@@ -14,8 +14,8 @@ http
 			req.on('end', () => {
 				const signature = req.headers['x-hub-signature-256'];
 				console.log(signature);
-				if (signature && signature === secret) {
-					// Execute the update script
+				if (signature && signature === 'sha256=' + secret) {
+					console.log('Signature valid.');
 					exec('bash /home/zlyfer/websites/zlyfer-svebsite/update.sh', (error, stdout, stderr) => {
 						if (error) {
 							console.error(`exec error: ${error}`);
