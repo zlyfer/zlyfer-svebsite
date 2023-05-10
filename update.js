@@ -13,6 +13,7 @@ http
 
 			req.on('end', () => {
 				const signature = req.headers['x-hub-signature-256'];
+				// test
 
 				if (signature && signature === 'sha256=' + secret) {
 					console.log('Signature valid.');
