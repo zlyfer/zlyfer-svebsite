@@ -1,0 +1,14 @@
+[Unit]
+Description=zlyfer Website - SvelteKit Node Adapter
+After=multi-user.target
+
+[Service]
+Type=idle
+Environment=PORT=4600
+ExecStart=/home/zlyfer/.nvm/versions/node/v16.16.0/bin/node build
+WorkingDirectory=/home/zlyfer/websites/zlyfer-svebsite
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
