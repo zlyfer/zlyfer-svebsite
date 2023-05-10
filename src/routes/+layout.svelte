@@ -36,17 +36,17 @@
 	onMount(() => {
 		console.log(`Window Size: ${window.innerWidth}x${window.innerHeight}`);
 
-		darkMode.subscribe((value) => {
-			updateTheme();
-		});
-		glowing.subscribe((value) => {});
-
 		const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
 		systemDarkMode = darkModeQuery.matches;
 		darkModeQuery.addListener((e) => {
 			systemDarkMode = e.matches;
 			updateTheme();
 		});
+
+		darkMode.subscribe((value) => {
+			updateTheme();
+		});
+		glowing.subscribe((value) => {});
 
 		initVariables();
 	});
@@ -65,16 +65,15 @@
 	/* ---------------------------------- */
 
 	function isDarkMode() {
-		return $darkMode == 1 || ($darkMode == 2 && systemDarkMode);
+		return $darkMode == 'dark' || ($darkMode == 'auto' && systemDarkMode);
 	}
 
 	function cycleDarkMode() {
-		if ($darkMode >= 2) {
-			darkMode.update((v) => 0);
-		} else {
-			darkMode.update((v) => v + 1);
-		}
-		localStorage.setItem('darkMode', `${$darkMode}`);
+		const states = ['auto', 'dark', 'light'];
+		const index = states.indexOf($darkMode);
+		const nextIndex = (index + 1) % states.length;
+		darkMode.update((v) => states[nextIndex]);
+		localStorage.setItem('darkMode', $darkMode);
 		updateTheme();
 	}
 
@@ -125,12 +124,12 @@
 			on:click={() => cycleDarkMode()}
 			class="prevent-select styleButtons"
 		>
-			{#if $darkMode == 0}
-				<FaSun />
-			{:else if $darkMode == 1}
-				<FaRegMoon />
-			{:else}
+			{#if $darkMode == 'auto'}
 				<FaAdjust />
+			{:else if $darkMode == 'dark'}
+				<FaRegMoon />
+			{:else if $darkMode == 'light'}
+				<FaSun />
 			{/if}
 		</div>
 
