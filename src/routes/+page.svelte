@@ -119,7 +119,7 @@
 		</div>
 		<div class="info">
 			<span class="text">
-				Hello there :D
+				Hello there,
 				<br />
 				<code>Frederik Shull</code> aka <code>zlyfer</code> here!
 				<br />
