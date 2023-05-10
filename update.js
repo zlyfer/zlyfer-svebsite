@@ -17,14 +17,14 @@ http
 
 				console.log('New POST request at: ' + new Date().toLocaleString());
 
-				// exec('bash /home/zlyfer/websites/zlyfer-svebsite/update.sh', (error, stdout, stderr) => {
-				// 	if (error) {
-				// 		console.error(`exec error: ${error}`);
-				// 		return;
-				// 	}
-				// 	console.log(`stdout: ${stdout}`);
-				// 	console.error(`stderr: ${stderr}`);
-				// });
+				exec('bash /home/zlyfer/websites/zlyfer-svebsite/update.sh', (error, stdout, stderr) => {
+					if (error) {
+						console.error(`exec error: ${error}`);
+						return;
+					}
+					console.log(`stdout: ${stdout}`);
+					console.error(`stderr: ${stderr}`);
+				});
 
 				res.writeHead(200);
 				res.end();
