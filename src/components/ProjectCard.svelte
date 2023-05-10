@@ -28,9 +28,7 @@
 
 	/* ----------- Life Cycles ---------- */
 
-	onMount(() => {
-		console.log(tags);
-	});
+	onMount(() => {});
 
 	/* ------------ Functions ----------- */
 </script>

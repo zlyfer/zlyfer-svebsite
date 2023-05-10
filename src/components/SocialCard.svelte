@@ -11,8 +11,8 @@
 
 	/* --------- Store Variables -------- */
 
-	import { _darkMode } from '../stores.js';
-	import { _glowing } from '../stores.js';
+	import { darkMode } from '../store.js';
+	import { glowing } from '../store.js';
 
 	/* ----- Component Subscriptions ---- */
 
@@ -22,21 +22,12 @@
 
 	/* ------------ Variables ----------- */
 
-	let darkMode;
-	let glowing;
 	const typeColor = 'var(--' + type + ')';
 	const typeColorCounter = 'var(--' + type + '-counter)';
 
 	/* ----------- Life Cycles ---------- */
 
-	onMount(() => {
-		_darkMode.subscribe((value) => {
-			darkMode = value;
-		});
-		_glowing.subscribe((value) => {
-			glowing = value;
-		});
-	});
+	onMount(() => {});
 
 	/* ------------ Functions ----------- */
 </script>

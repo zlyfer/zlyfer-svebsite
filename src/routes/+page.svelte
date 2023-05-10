@@ -17,15 +17,13 @@
 
 	/* --------- Store Variables -------- */
 
-	import { _darkMode } from '../stores.js';
-	import { _glowing } from '../stores.js';
+	import { darkMode } from '../store.js';
+	import { glowing } from '../store.js';
 
 	/* ----- Component Subscriptions ---- */
 
 	/* ------------ Variables ----------- */
 
-	let darkMode;
-	let glowing;
 	// tags = ['p5.js', 'vue', 'node.js', 'php', 'sql', 'game', 'animation', 'finished', 'wip', 'discontinued', 'discord',]
 	const projects = [
 		{
@@ -92,21 +90,14 @@
 		},
 		{
 			name: 'cells',
-			tags: ['discontinued', 'animation'],
+			tags: ['discontinued', 'p5.js', 'animation'],
 			description: 'Simulation of cells absorbing each other and dividing themselves.'
 		}
 	];
 
 	/* ----------- Life Cycles ---------- */
 
-	onMount(() => {
-		_darkMode.subscribe((value) => {
-			darkMode = value;
-		});
-		_glowing.subscribe((value) => {
-			glowing = value;
-		});
-	});
+	onMount(() => {});
 
 	/* ------------ Functions ----------- */
 

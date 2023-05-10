@@ -11,8 +11,8 @@
 
 	/* --------- Store Variables -------- */
 
-	import { _darkMode } from '../stores.js';
-	import { _glowing } from '../stores.js';
+	import { darkMode } from '../store.js';
+	import { glowing } from '../store.js';
 
 	/* ----- Component Subscriptions ---- */
 
@@ -21,21 +21,12 @@
 
 	/* ------------ Variables ----------- */
 
-	let darkMode;
-	let glowing;
 	let hoveredLetterIndex = null;
 	let letters = [];
 
 	/* ----------- Life Cycles ---------- */
 
 	onMount(() => {
-		_darkMode.subscribe((value) => {
-			darkMode = value;
-		});
-		_glowing.subscribe((value) => {
-			glowing = value;
-		});
-
 		letters = text.split('');
 		for (let i = 0; i < 5; i++) {
 			letters.push(' ');

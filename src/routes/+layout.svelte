@@ -22,15 +22,13 @@
 
 	/* --------- Store Variables -------- */
 
-	import { _darkMode } from '../stores.js';
-	import { _glowing } from '../stores.js';
+	import { darkMode } from '../store.js';
+	import { glowing } from '../store.js';
 
 	/* ----- Component Subscriptions ---- */
 
 	/* ------------ Variables ----------- */
 
-	let darkMode;
-	let glowing;
 	let systemDarkMode;
 
 	/* ----------- Life Cycles ---------- */
@@ -38,35 +36,45 @@
 	onMount(() => {
 		console.log(`Window Size: ${window.innerWidth}x${window.innerHeight}`);
 
-		_darkMode.subscribe((value) => {
-			darkMode = value;
+		darkMode.subscribe((value) => {
 			updateTheme();
 		});
-		_glowing.subscribe((value) => {
-			glowing = value;
-		});
+		glowing.subscribe((value) => {});
 
 		const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
 		systemDarkMode = darkModeQuery.matches;
-		updateTheme();
 		darkModeQuery.addListener((e) => {
 			systemDarkMode = e.matches;
 			updateTheme();
 		});
+
+		initVariables();
 	});
 
 	/* ------------ Functions ----------- */
+
+	function initVariables() {
+		const _darkMode = localStorage.getItem('darkMode') || $darkMode;
+		darkMode.update((v) => _darkMode);
+		const _glowing = (localStorage.getItem('glowing') || $glowing) === 'true';
+		glowing.update((v) => _glowing);
+	}
 
 	/* ---------------------------------- */
 	/*              DARKMODE              */
 	/* ---------------------------------- */
 
+	function isDarkMode() {
+		return $darkMode == 1 || ($darkMode == 2 && systemDarkMode);
+	}
+
 	function cycleDarkMode() {
-		if (darkMode == 2) {
-			_darkMode.update((v) => 0);
+		if ($darkMode >= 2) {
+			darkMode.update((v) => 0);
 		} else {
-			_darkMode.update((v) => v + 1);
+			darkMode.update((v) => v + 1);
 		}
+		localStorage.setItem('darkMode', `${$darkMode}`);
 		updateTheme();
 	}
 
@@ -94,16 +102,13 @@
 		}
 	}
 
-	function isDarkMode() {
-		return darkMode == 1 || (darkMode == 2 && systemDarkMode);
-	}
-
 	/* ---------------------------------- */
 	/*               GLOWING              */
 	/* ---------------------------------- */
 
 	function toggleGlowing() {
-		_glowing.update((v) => !v);
+		glowing.update((v) => !v);
+		localStorage.setItem('glowing', $glowing);
 	}
 </script>
 
@@ -120,9 +125,9 @@
 			on:click={() => cycleDarkMode()}
 			class="prevent-select styleButtons"
 		>
-			{#if darkMode == 0}
+			{#if $darkMode == 0}
 				<FaSun />
-			{:else if darkMode == 1}
+			{:else if $darkMode == 1}
 				<FaRegMoon />
 			{:else}
 				<FaAdjust />
@@ -130,7 +135,7 @@
 		</div>
 
 		<div
-			class:glowing
+			class:glowing={$glowing}
 			class="prevent-select styleButtons"
 			id="glowingButton"
 			role="button"
