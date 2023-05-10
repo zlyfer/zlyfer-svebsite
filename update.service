@@ -1,0 +1,13 @@
+[Unit]
+Description=zlyfer Website - Update Webhook
+After=multi-user.target
+
+[Service]
+Type=idle
+ExecStart=/home/zlyfer/.nvm/versions/node/v16.14.2/bin/node update.js
+WorkingDirectory=/home/zlyfer/websites/zlyfer-svebsite
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
