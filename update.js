@@ -14,7 +14,7 @@ http
 			req.on('end', () => {
 				const signature = req.headers['x-hub-signature-256'];
 				console.log(signature);
-
+				// test
 				if (signature && signature === secret) {
 					// Execute the update script
 					exec('bash /home/zlyfer/websites/zlyfer-svebsite/update.sh', (error, stdout, stderr) => {
