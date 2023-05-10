@@ -1,6 +1,8 @@
 import http from 'http';
 import { exec } from 'child_process';
 
+console.log('Starting webhook.');
+
 http
 	.createServer((req, res) => {
 		if (req.method === 'POST') {
