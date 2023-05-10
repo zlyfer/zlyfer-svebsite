@@ -4,12 +4,6 @@ import { exec } from 'child_process';
 http
 	.createServer((req, res) => {
 		if (req.method === 'POST') {
-			console.log(
-				'New POST request at: ' +
-					new Date().toLocaleString() +
-					' from: ' +
-					req.connection.remoteAddress
-			);
 			// let body = '';
 
 			// req.on('data', (chunk) => {
@@ -18,6 +12,8 @@ http
 
 			req.on('end', () => {
 				// const signature = req.headers['x-hub-signature-256'];
+
+				console.log('New POST request at: ' + new Date().toLocaleString());
 
 				exec('bash /home/zlyfer/websites/zlyfer-svebsite/update.sh', (error, stdout, stderr) => {
 					if (error) {
