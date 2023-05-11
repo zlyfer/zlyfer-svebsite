@@ -282,13 +282,13 @@
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(17ch, 1fr));
 		gap: 0.7rem;
-		padding-left: 0;
+		padding: 0 5px;
 	}
 	.projectCards {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(30ch, 1fr));
 		gap: 1rem;
-		padding: 0;
+		padding: 0 5px;
 	}
 
 	@media (max-width: 875px) {
@@ -307,12 +307,6 @@
 		}
 	}
 	@media (max-width: 450px) {
-		.socialCards:first-of-type {
-			padding-left: 5px;
-		}
-		.socialCards:last-of-type {
-			padding-right: 5px;
-		}
 		.socialCards {
 			gap: 0.5rem;
 			grid-template-columns: repeat(auto-fit, minmax(15ch, 1fr));
