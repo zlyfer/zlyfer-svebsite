@@ -306,6 +306,11 @@
 			grid-template-columns: repeat(auto-fit, minmax(20ch, 1fr));
 		}
 	}
+	@media (max-width: 450px) {
+		.socialCards {
+			grid-template-columns: repeat(auto-fit, minmax(15ch, 1fr));
+		}
+	}
 
 	@media (max-width: 705px) {
 		main {
