@@ -307,7 +307,14 @@
 		}
 	}
 	@media (max-width: 450px) {
+		.socialCards:first-of-type {
+			padding-left: 5px;
+		}
+		.socialCards:last-of-type {
+			padding-right: 5px;
+		}
 		.socialCards {
+			gap: 0.5rem;
 			grid-template-columns: repeat(auto-fit, minmax(15ch, 1fr));
 		}
 	}
