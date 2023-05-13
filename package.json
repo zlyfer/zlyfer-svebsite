@@ -30,6 +30,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"p5-svelte": "^3.1.2",
 		"svelte-icons": "^2.1.0"
 	}
 }

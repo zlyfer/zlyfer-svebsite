@@ -4,6 +4,7 @@
 	/* ------------- Imports ------------ */
 
 	import { onMount } from 'svelte';
+	import P5 from 'p5-svelte';
 
 	/* -------- Component Imports ------- */
 
@@ -19,6 +20,7 @@
 
 	import { darkMode } from '../store.js';
 	import { glowing } from '../store.js';
+	import { text } from 'svelte/internal';
 
 	/* ----- Component Subscriptions ---- */
 
@@ -107,10 +109,137 @@
 		const ageDate = new Date(ageDifMs);
 		return Math.abs(ageDate.getUTCFullYear() - 1970);
 	}
+
+	/* -------------- P5.js ------------- */
+
+	const sketch = (p5) => {
+		class Dot {
+			constructor(x, y) {
+				this.pos = p5.createVector(x, y);
+				this.vel = p5.createVector(0, 0.3);
+				this.vel.rotate(p5.random(-p5.PI, p5.PI));
+			}
+
+			// update(dots) {
+			update() {
+				this.move();
+				this.draw();
+				// this.drawConnections(dots);
+			}
+
+			move() {
+				this.pos.add(this.vel);
+				if (this.pos.x < 5 || this.pos.x > p5.width - 5) this.vel.x *= -1;
+				if (this.pos.y < 5 || this.pos.y > p5.height - 5) this.vel.y *= -1;
+				if (this.pos.x < 0 || this.pos.x > p5.width || this.pos.y < 0 || this.pos.y > p5.height)
+					this.pos = p5.createVector(p5.random(5, p5.width - 5), p5.random(5, p5.height - 5));
+			}
+
+			draw() {
+				p5.push();
+				p5.noFill();
+				p5.strokeWeight(3);
+				p5.stroke(theme.dots);
+				p5.translate(this.pos.x, this.pos.y);
+				p5.point(0, 0);
+				p5.pop();
+			}
+
+			drawConnections(dots, full) {
+				let counter = 0;
+				dots.forEach((d) => {
+					let distance = d.pos.dist(this.pos);
+					if (d !== this && distance < connectionDistance) {
+						counter++;
+						if (counter < 10) {
+							p5.push();
+							if (full) {
+								p5.strokeWeight(1);
+								p5.stroke(theme.connection * 0.8);
+							} else {
+								p5.strokeWeight(p5.map(distance, 0, connectionDistance, 0.5, 0.1));
+								p5.stroke(theme.connection, p5.map(distance, 0, connectionDistance, 255, 0));
+							}
+							p5.line(this.pos.x, this.pos.y, d.pos.x, d.pos.y);
+							p5.pop();
+						}
+					}
+				});
+			}
+		}
+
+		const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+		const themes = {
+			light: {
+				dots: 22,
+				connection: 72
+			},
+			dark: {
+				dots: 220,
+				connection: 150
+			}
+		};
+		var theme = mediaQuery.matches ? themes.dark : themes.light;
+		theme = themes.dark;
+
+		const connectionDistance = 150;
+		var killSwitch = 0;
+		var dots;
+
+		function initDots() {
+			dots = [];
+			for (let i = 0; i < Math.min((p5.width * p5.height) / Math.pow(80, 2), 300); i++) {
+				dots.push(new Dot(p5.random(5, p5.width, -5), p5.random(5, p5.height - 5)));
+			}
+		}
+
+		p5.setup = () => {
+			p5.createCanvas(p5.windowWidth, p5.windowHeight);
+			initDots();
+			mediaQuery.addEventListener('change', (e) => {
+				theme = e.matches ? themes.dark : themes.light;
+			});
+		};
+
+		p5.windowResized = () => {
+			p5.resizeCanvas(p5.windowWidth, p5.windowHeight);
+			initDots();
+			killSwitch = 0;
+		};
+
+		p5.draw = () => {
+			const root = document.querySelector(':root');
+			const rootStyle = getComputedStyle(root);
+			const background = rootStyle.getPropertyValue('--background2');
+			const bgColor = background.split(', ').map((x) => parseInt(x));
+			p5.background(bgColor[0], bgColor[1], bgColor[2]);
+			p5.frameRate(60);
+			if (killSwitch < 10) {
+				const fps = Math.floor(p5.frameRate());
+				if (fps != 0 && fps < 30) {
+					killSwitch++;
+				} else if (fps >= 30) {
+					killSwitch = 0;
+				}
+				dots.forEach((d) => {
+					d.update();
+					if (p5.dist(d.pos.x, d.pos.y, p5.mouseX, p5.mouseY) < 200) {
+						d.drawConnections(dots, true);
+					} else {
+						d.drawConnections(dots, false);
+					}
+				});
+			}
+		};
+	};
 </script>
 
 <!-- svelte-ignore a11y-interactive-supports-focus -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
+
+<div id="p5">
+	<P5 {sketch} />
+</div>
 
 <main>
 	<div id="welcome">
@@ -210,6 +339,15 @@
 		--linkedin-counter: 200, 200, 200;
 	}
 
+	#p5 {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+	}
+
 	main {
 		margin: auto;
 		padding: 5rem;
@@ -223,6 +361,9 @@
 		background: rgba(var(--accent), 10%);
 		border: 5px solid rgba(var(--accent), 50%);
 		border-radius: 5px;
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
+		-moz-backdrop-filter: blur(8px);
 	}
 
 	#welcomeImgContainer {

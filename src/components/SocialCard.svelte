@@ -55,6 +55,9 @@
 		box-sizing: border-box;
 		-moz-box-sizing: border-box;
 		-webkit-box-sizing: border-box;
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
+		-moz-backdrop-filter: blur(8px);
 	}
 	.socialCard > a {
 		width: 100%;

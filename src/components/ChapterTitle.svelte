@@ -113,7 +113,6 @@
 			--fontSize: 30;
 		}
 	}
-
 	@media (max-width: 350px) {
 		:root {
 			--fontSize: 30;

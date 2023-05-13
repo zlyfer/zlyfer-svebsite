@@ -198,6 +198,9 @@
 		box-shadow: inset 0 0 2px 1px rgba(var(--foreground), 0.2);
 		padding: 10px;
 		right: 15px;
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
+		-moz-backdrop-filter: blur(8px);
 	}
 	.styleButtons:first-of-type {
 		border-top-left-radius: 15px;
