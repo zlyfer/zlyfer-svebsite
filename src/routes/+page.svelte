@@ -20,6 +20,7 @@
 
 	import { _isDarkMode } from '../store.js';
 	import { glowing } from '../store.js';
+	import { init } from 'svelte/internal';
 
 	/* ----- Component Subscriptions ---- */
 
@@ -244,6 +245,7 @@
 			} else {
 				if (!lowSpec) {
 					lowSpec = true;
+					initDots();
 					killSwitch = 0;
 				}
 			}
