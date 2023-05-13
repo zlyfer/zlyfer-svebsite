@@ -3,7 +3,7 @@
 
 	/* ------------- Imports ------------ */
 
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 	import P5 from 'p5-svelte';
 
 	/* -------- Component Imports ------- */
@@ -96,10 +96,16 @@
 		}
 	];
 
+	var removeP5 = false;
+
 	/* ----------- Life Cycles ---------- */
 
 	onMount(() => {
 		_isDarkMode.subscribe((value) => {});
+	});
+
+	onDestroy(() => {
+		removeP5 = true;
 	});
 
 	/* ------------ Functions ----------- */
@@ -194,7 +200,7 @@
 
 		function initDots() {
 			dots = [];
-			for (let i = 0; i < Math.min((p5.width * p5.height) / Math.pow(80, 2), 300); i++) {
+			for (let i = 0; i < Math.min((p5.width * p5.height) / Math.pow(100, 2), 300); i++) {
 				dots.push(new Dot(p5.random(5, p5.width, -5), p5.random(5, p5.height - 5)));
 			}
 		}
@@ -212,9 +218,11 @@
 		};
 
 		p5.draw = () => {
+			if (removeP5) p5.remove();
+			if (p5.frameCount % 300 == 0) console.log(p5.frameCount);
 			setColor();
 			p5.background(bgColor);
-			p5.frameRate(60);
+			p5.frameRate(120);
 			if (killSwitch < 10) {
 				const fps = Math.floor(p5.frameRate());
 				if (fps != 0 && fps < 30) {
