@@ -111,6 +111,7 @@
 	}
 
 	function isTouchDevice() {
+		if (typeof window === 'undefined') return false;
 		return (
 			'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0
 		);
@@ -220,7 +221,7 @@
 			const bgColor = background.split(', ').map((x) => parseInt(x));
 			p5.background(bgColor[0], bgColor[1], bgColor[2]);
 			p5.frameRate(60);
-			if (killSwitch < 10 && !isTouchDevice()) {
+			if (killSwitch < 10) {
 				const fps = Math.floor(p5.frameRate());
 				if (fps != 0 && fps < 30) {
 					killSwitch++;
@@ -243,9 +244,11 @@
 <!-- svelte-ignore a11y-interactive-supports-focus -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 
-<div id="p5">
-	<P5 {sketch} />
-</div>
+{#if !isTouchDevice()}
+	<div id="p5">
+		<P5 {sketch} />
+	</div>
+{/if}
 
 <main>
 	<div id="welcome">
