@@ -181,6 +181,7 @@
 		}
 
 		const connectionDistance = 150;
+		var lowSpec = false;
 		var fgColor;
 		var bgColor;
 		var killSwitch = 0;
@@ -200,7 +201,9 @@
 
 		function initDots() {
 			dots = [];
-			for (let i = 0; i < Math.min((p5.width * p5.height) / Math.pow(100, 2), 300); i++) {
+			const initAmount = Math.min((p5.width * p5.height) / Math.pow(100, 2), 300);
+			const amount = lowSpec ? initAmount / 2 : initAmount;
+			for (let i = 0; i < amount; i++) {
 				dots.push(new Dot(p5.random(5, p5.width, -5), p5.random(5, p5.height - 5)));
 			}
 		}
@@ -238,6 +241,11 @@
 						d.drawConnections(dots, false);
 					}
 				});
+			} else {
+				if (!lowSpec) {
+					lowSpec = true;
+					killSwitch = 0;
+				}
 			}
 		};
 	};
