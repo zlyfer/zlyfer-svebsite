@@ -110,6 +110,12 @@
 		return Math.abs(ageDate.getUTCFullYear() - 1970);
 	}
 
+	function isTouchDevice() {
+		return (
+			'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0
+		);
+	}
+
 	/* -------------- P5.js ------------- */
 
 	const sketch = (p5) => {
@@ -214,7 +220,7 @@
 			const bgColor = background.split(', ').map((x) => parseInt(x));
 			p5.background(bgColor[0], bgColor[1], bgColor[2]);
 			p5.frameRate(60);
-			if (killSwitch < 10) {
+			if (killSwitch < 10 && !isTouchDevice()) {
 				const fps = Math.floor(p5.frameRate());
 				if (fps != 0 && fps < 30) {
 					killSwitch++;
