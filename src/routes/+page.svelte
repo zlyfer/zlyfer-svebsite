@@ -335,31 +335,6 @@
 </main>
 
 <style>
-	:root {
-		/* ------------- Socials ------------ */
-
-		--glowLogo: #4caf50;
-		--glowSelfie: #b38786;
-		--glowColor: var(--glowSelfie);
-
-		--dynchan: 76, 175, 80;
-		--dynchan-counter: 55, 71, 79;
-		--github: 120, 120, 120;
-		--github-counter: 22, 27, 34;
-		--instagram: 193, 53, 132;
-		--instagram-counter: 244, 181, 84;
-		--tiktok: 254, 44, 85;
-		--tiktok-counter: 37, 244, 238;
-		--youtube: 223, 32, 22;
-		--youtube-counter: 200, 200, 200;
-		--twitch: 138, 68, 240;
-		--twitch-counter: 200, 200, 200;
-		--twitter: 9, 155, 240;
-		--twitter-counter: 200, 200, 200;
-		--linkedin: 10, 102, 194;
-		--linkedin-counter: 200, 200, 200;
-	}
-
 	#p5 {
 		position: fixed;
 		top: 0;
@@ -382,9 +357,9 @@
 		background: rgba(var(--accent), 10%);
 		border: 5px solid rgba(var(--accent), 50%);
 		border-radius: 5px;
-		backdrop-filter: blur(8px);
-		-webkit-backdrop-filter: blur(8px);
-		-moz-backdrop-filter: blur(8px);
+		backdrop-filter: blur(var(--blur));
+		-webkit-backdrop-filter: blur(var(--blur));
+		-moz-backdrop-filter: blur(var(--blur));
 	}
 
 	#welcomeImgContainer {

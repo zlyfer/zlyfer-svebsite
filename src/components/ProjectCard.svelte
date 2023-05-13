@@ -76,9 +76,9 @@
 		border-radius: 5px;
 		border-top-left-radius: 20px;
 		border-top-right-radius: 20px;
-		backdrop-filter: blur(8px);
-		-webkit-backdrop-filter: blur(8px);
-		-moz-backdrop-filter: blur(8px);
+		backdrop-filter: blur(var(--blur));
+		-webkit-backdrop-filter: blur(var(--blur));
+		-moz-backdrop-filter: blur(var(--blur));
 	}
 	.projectCard > a {
 		width: 100%;
@@ -186,9 +186,9 @@
 		border-bottom-right-radius: 20px;
 		background-color: rgba(var(--foreground), 0.1);
 		transition: transform 0.2s;
-		backdrop-filter: blur(8px);
-		-webkit-backdrop-filter: blur(8px);
-		-moz-backdrop-filter: blur(8px);
+		backdrop-filter: blur(var(--blur));
+		-webkit-backdrop-filter: blur(var(--blur));
+		-moz-backdrop-filter: blur(var(--blur));
 	}
 	.animation .githubBar:hover {
 		background-color: rgba(var(--foreground), 0.2);

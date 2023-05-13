@@ -109,7 +109,6 @@
 	/* ---------------------------------- */
 
 	function toggleAnimation() {
-		console.log($animation);
 		animation.update((v) => !v);
 		localStorage.setItem('animation', $animation);
 	}
@@ -150,26 +149,49 @@
 
 <style is:global>
 	:root {
-		/* -------------- Sizes ------------- */
+		/* -------------- Misc ------------- */
 
 		--globalWidth: 80ch;
+		--blur: 15px;
+		--animationButtonOpacity: 0.5;
 
 		/* ------------- Colors ------------- */
 
 		--accent: 33, 150, 243;
-
+		/* ---------------- - --------------- */
 		--lightForeGround: 68, 68, 68;
 		--lightBackGround: 250, 250, 250;
 		--lightBackGround2: 234, 234, 235;
 		--darkForeGround: 255, 255, 255;
 		--darkBackGround: 40, 44, 52;
 		--darkBackGround2: 33, 37, 43;
-
+		/* ---------------- - --------------- */
 		--foreground: var(--darkForeGround);
 		--background: var(--darkBackGround);
 		--background2: var(--darkBackGround2);
 
-		--animationButtonOpacity: 0.5;
+		--glowLogo: #4caf50;
+		--glowSelfie: #b38786;
+		--glowColor: var(--glowSelfie);
+
+		/* ------------- Socials ------------ */
+
+		--dynchan: 76, 175, 80;
+		--dynchan-counter: 55, 71, 79;
+		--github: 120, 120, 120;
+		--github-counter: 22, 27, 34;
+		--instagram: 193, 53, 132;
+		--instagram-counter: 244, 181, 84;
+		--tiktok: 254, 44, 85;
+		--tiktok-counter: 37, 244, 238;
+		--youtube: 223, 32, 22;
+		--youtube-counter: 200, 200, 200;
+		--twitch: 138, 68, 240;
+		--twitch-counter: 200, 200, 200;
+		--twitter: 9, 155, 240;
+		--twitter-counter: 200, 200, 200;
+		--linkedin: 10, 102, 194;
+		--linkedin-counter: 200, 200, 200;
 	}
 
 	:global(html) {
@@ -201,9 +223,9 @@
 		box-shadow: inset 0 0 2px 1px rgba(var(--foreground), 0.2);
 		padding: 10px;
 		right: 15px;
-		backdrop-filter: blur(8px);
-		-webkit-backdrop-filter: blur(8px);
-		-moz-backdrop-filter: blur(8px);
+		backdrop-filter: blur(var(--blur));
+		-webkit-backdrop-filter: blur(var(--blur));
+		-moz-backdrop-filter: blur(var(--blur));
 	}
 	.styleButtons:first-of-type {
 		border-top-left-radius: 15px;
