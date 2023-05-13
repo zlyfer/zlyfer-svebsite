@@ -6,11 +6,14 @@
 	/* ----- Component Subscriptions ---- */
 	/* ------------ Variables ----------- */
 	/* ------- Store Subscriptions ------ */
+
+	import { animation } from '../store.js';
+
 	/* ----------- Life Cycles ---------- */
 	/* ------------ Functions ----------- */
 </script>
 
-<main />
+<main class:animation={$animation} />
 
 <style>
 </style>

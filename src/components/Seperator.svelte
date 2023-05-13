@@ -5,6 +5,9 @@
 	/* -------- Component Imports ------- */
 	/* -------------- Icons ------------- */
 	/* --------- Store Variables -------- */
+
+	import { animation } from '../store.js';
+
 	/* ----- Component Subscriptions ---- */
 	/* ------------ Variables ----------- */
 	/* ------- Store Subscriptions ------ */
@@ -12,7 +15,7 @@
 	/* ------------ Functions ----------- */
 </script>
 
-<main>
+<main class:animation={$animation}>
 	<div class="seperator" />
 </main>
 

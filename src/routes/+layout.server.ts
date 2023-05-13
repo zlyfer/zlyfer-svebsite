@@ -5,7 +5,7 @@ export function load({ cookies }) {
 	/* ------------- Cookies ------------ */
 	// const cookieBox = {
 	// 	darkMode: 2,
-	// 	glowing: true
+	// 	animation: true
 	// };
 	// Object.keys(cookieBox).forEach((key) => {
 	// 	initializeCookies(cookies, key, cookieBox[key]);

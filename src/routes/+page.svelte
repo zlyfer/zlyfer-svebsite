@@ -19,8 +19,7 @@
 	/* --------- Store Variables -------- */
 
 	import { _isDarkMode } from '../store.js';
-	import { glowing } from '../store.js';
-	import { init } from 'svelte/internal';
+	import { animation } from '../store.js';
 
 	/* ----- Component Subscriptions ---- */
 
@@ -131,7 +130,7 @@
 		class Dot {
 			constructor(x, y) {
 				this.pos = p5.createVector(x, y);
-				this.vel = p5.createVector(0, 0.3);
+				this.vel = p5.createVector(0, 0.15);
 				this.vel.rotate(p5.random(-p5.PI, p5.PI));
 			}
 
@@ -144,8 +143,9 @@
 				this.pos.add(this.vel);
 				if (this.pos.x < 5 || this.pos.x > p5.width - 5) this.vel.x *= -1;
 				if (this.pos.y < 5 || this.pos.y > p5.height - 5) this.vel.y *= -1;
-				if (this.pos.x < 0 || this.pos.x > p5.width || this.pos.y < 0 || this.pos.y > p5.height)
+				if (this.pos.x < 0 || this.pos.x > p5.width || this.pos.y < 0 || this.pos.y > p5.height) {
 					this.pos = p5.createVector(p5.random(5, p5.width - 5), p5.random(5, p5.height - 5));
+				}
 			}
 
 			draw() {
@@ -167,8 +167,8 @@
 						if (counter < 10) {
 							p5.push();
 							if (full) {
-								p5.strokeWeight(0.8);
-								p5.stroke(fgColor.map((c) => c * 1));
+								p5.strokeWeight(0.5);
+								p5.stroke([...fgColor.map((c) => c), ...[255]]);
 							} else {
 								p5.strokeWeight(p5.map(distance, 0, connectionDistance, 0.5, 0.1));
 								p5.stroke(fgColor, p5.map(distance, 0, connectionDistance, 255, 0));
@@ -223,7 +223,6 @@
 
 		p5.draw = () => {
 			if (removeP5) p5.remove();
-			if (p5.frameCount % 300 == 0) console.log(p5.frameCount);
 			setColor();
 			p5.background(bgColor);
 			p5.frameRate(120);
@@ -235,7 +234,9 @@
 					killSwitch = 0;
 				}
 				dots.forEach((d) => {
-					d.update();
+					if ($animation) {
+						d.update();
+					}
 					if (p5.dist(d.pos.x, d.pos.y, p5.mouseX, p5.mouseY) < 200) {
 						d.drawConnections(dots, true);
 					} else {
@@ -256,16 +257,15 @@
 <!-- svelte-ignore a11y-interactive-supports-focus -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 
-{#if !isTouchDevice()}
-	<div id="p5">
-		<P5 {sketch} />
-	</div>
-{/if}
-
-<main>
+<main class:animation={$animation}>
+	{#if !isTouchDevice()}
+		<div id="p5">
+			<P5 {sketch} />
+		</div>
+	{/if}
 	<div id="welcome">
 		<div id="welcomeImgContainer">
-			<div id="welcomeImg" class:glowing />
+			<div id="welcomeImg" />
 		</div>
 		<div class="info">
 			<span class="text">
@@ -411,9 +411,9 @@
 		animation: fadeImage 20s ease-in-out infinite;
 		filter: drop-shadow(0 0 0.2rem var(--glowColor));
 	}
-	#welcomeImg.glowing {
+	.animation #welcomeImg {
 		background-image: url('/selfie.jpg');
-		animation: glowing 5s ease-in-out infinite, fadeImage 20s ease-in-out infinite;
+		animation: animation 5s ease-in-out infinite, fadeImage 20s ease-in-out infinite;
 	}
 	#welcome .info {
 		margin: 1rem auto 2.5rem auto;
@@ -536,7 +536,7 @@
 			opacity: 0.5;
 		}
 	}
-	@keyframes glowing {
+	@keyframes animation {
 		0% {
 			filter: drop-shadow(0 0 0.2rem var(--glowColor));
 			box-shadow: inset 0 0 5px 2px var(--glowColor);

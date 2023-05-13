@@ -11,7 +11,7 @@
 
 	/* --------- Store Variables -------- */
 
-	import { glowing } from '../store.js';
+	import { animation } from '../store.js';
 
 	/* ----- Component Subscriptions ---- */
 
@@ -31,8 +31,12 @@
 	/* ------------ Functions ----------- */
 </script>
 
-<main style:--typeColor={typeColor} style:--typeColorCounter={typeColorCounter}>
-	<li class="socialCard" class:glowing>
+<main
+	class:animation={$animation}
+	style:--typeColor={typeColor}
+	style:--typeColorCounter={typeColorCounter}
+>
+	<li class="socialCard" class:animation={$animation}>
 		<a {href} target="_blank">
 			<h2 class="title">
 				{title}
@@ -67,7 +71,7 @@
 		color: rgba(var(--foreground), 1);
 		opacity: 0.8;
 	}
-	.socialCard:is(:hover, :focus-within) {
+	.animation .socialCard:hover {
 		background-position: 0;
 		background-image: linear-gradient(
 			45deg,
@@ -77,12 +81,12 @@
 		border: 5px solid rgba(var(--typeColor), 1);
 		transform: scale(1.05);
 	}
-	.socialCard.glowing:is(:hover, :focus-within) {
-		animation-name: glowing;
+	.animation .socialCard.animation:hover {
+		animation-name: animation;
 		animation-duration: 5s;
 		animation-iteration-count: infinite;
 	}
-	.socialCard:is(:hover, :focus-within) h2 {
+	.animation .socialCard:hover h2 {
 		color: white;
 	}
 
@@ -108,7 +112,7 @@
 		}
 	}
 
-	@keyframes glowing {
+	@keyframes animation {
 		0% {
 			filter: brightness(1.1) drop-shadow(0 0 0rem rgba(var(--typeColor), 1));
 		}

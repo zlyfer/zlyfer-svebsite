@@ -24,7 +24,7 @@
 
 	import { darkMode } from '../store.js';
 	import { _isDarkMode } from '../store.js';
-	import { glowing } from '../store.js';
+	import { animation } from '../store.js';
 
 	/* ----- Component Subscriptions ---- */
 
@@ -48,7 +48,7 @@
 			_isDarkMode.update((v) => isDarkMode());
 			updateTheme();
 		});
-		glowing.subscribe((value) => {});
+		animation.subscribe((value) => {});
 
 		initVariables();
 	});
@@ -58,8 +58,8 @@
 	function initVariables() {
 		const _darkMode = localStorage.getItem('darkMode') || $darkMode;
 		darkMode.update((v) => _darkMode);
-		const _glowing = (localStorage.getItem('glowing') || $glowing) === 'true';
-		glowing.update((v) => _glowing);
+		const _animation = (localStorage.getItem('animation') || $animation) === 'true';
+		animation.update((v) => _animation);
 	}
 
 	/* ---------------------------------- */
@@ -105,12 +105,13 @@
 	}
 
 	/* ---------------------------------- */
-	/*               GLOWING              */
+	/*              ANIMATION             */
 	/* ---------------------------------- */
 
-	function toggleGlowing() {
-		glowing.update((v) => !v);
-		localStorage.setItem('glowing', $glowing);
+	function toggleAnimation() {
+		console.log($animation);
+		animation.update((v) => !v);
+		localStorage.setItem('animation', $animation);
 	}
 </script>
 
@@ -119,7 +120,7 @@
 <!-- svelte-ignore a11y-interactive-supports-focus -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 
-<main>
+<main class:animation={$animation}>
 	{#if !$page.route.id.startsWith('/project')}
 		<div
 			role="button"
@@ -137,11 +138,10 @@
 		</div>
 
 		<div
-			class:glowing={$glowing}
 			class="prevent-select styleButtons"
-			id="glowingButton"
+			id="animationButton"
 			role="button"
-			on:click={() => toggleGlowing()}
+			on:click={() => toggleAnimation()}
 		>
 			<FaFire />
 		</div>
@@ -169,7 +169,7 @@
 		--background: var(--darkBackGround);
 		--background2: var(--darkBackGround2);
 
-		--glowingButtonOpacity: 0.5;
+		--animationButtonOpacity: 0.5;
 	}
 
 	:global(html) {
@@ -218,32 +218,32 @@
 		bottom: 58px;
 	}
 
-	#glowingButton {
+	#animationButton {
 		bottom: 10px;
 		color: rgba(255, 255, 255, 0.6);
 		transition: background-color 0.5s ease-in-out;
 	}
-	#glowingButton.glowing {
+	.animation #animationButton {
 		background-size: 400%;
 		background-position: 0%;
 		background-image: linear-gradient(
 			90deg,
-			rgba(255, 0, 0, var(--glowingButtonOpacity)) 0%,
-			rgba(255, 154, 0, var(--glowingButtonOpacity)) 10%,
-			rgba(208, 222, 33, var(--glowingButtonOpacity)) 20%,
-			rgba(79, 220, 74, var(--glowingButtonOpacity)) 30%,
-			rgba(63, 218, 216, var(--glowingButtonOpacity)) 40%,
-			rgba(47, 201, 226, var(--glowingButtonOpacity)) 50%,
-			rgba(28, 127, 238, var(--glowingButtonOpacity)) 60%,
-			rgba(95, 21, 242, var(--glowingButtonOpacity)) 70%,
-			rgba(186, 12, 248, var(--glowingButtonOpacity)) 80%,
-			rgba(251, 7, 217, var(--glowingButtonOpacity)) 90%,
-			rgba(255, 0, 0, var(--glowingButtonOpacity)) 100%
+			rgba(255, 0, 0, var(--animationButtonOpacity)) 0%,
+			rgba(255, 154, 0, var(--animationButtonOpacity)) 10%,
+			rgba(208, 222, 33, var(--animationButtonOpacity)) 20%,
+			rgba(79, 220, 74, var(--animationButtonOpacity)) 30%,
+			rgba(63, 218, 216, var(--animationButtonOpacity)) 40%,
+			rgba(47, 201, 226, var(--animationButtonOpacity)) 50%,
+			rgba(28, 127, 238, var(--animationButtonOpacity)) 60%,
+			rgba(95, 21, 242, var(--animationButtonOpacity)) 70%,
+			rgba(186, 12, 248, var(--animationButtonOpacity)) 80%,
+			rgba(251, 7, 217, var(--animationButtonOpacity)) 90%,
+			rgba(255, 0, 0, var(--animationButtonOpacity)) 100%
 		);
 		animation: scrolling 60s infinite;
 		animation-timing-function: linear;
 	}
-	#glowingButton:not(.glowing) {
+	:not(.animation) #animationButton {
 		color: rgba(var(--foreground), 0.8);
 	}
 	@keyframes scrolling {

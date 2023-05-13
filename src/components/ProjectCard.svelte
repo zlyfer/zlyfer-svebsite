@@ -13,6 +13,8 @@
 
 	/* --------- Store Variables -------- */
 
+	import { animation } from '../store.js';
+
 	/* ----- Component Subscriptions ---- */
 
 	export let title;
@@ -36,7 +38,7 @@
 <!-- svelte-ignore a11y-interactive-supports-focus -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 
-<main>
+<main class:animation={$animation}>
 	<li class="projectCard" style:--cardColor={cardColor}>
 		<a href={url} target={url.startsWith('/project') ? null : '_blank'}>
 			<h2>
@@ -87,15 +89,15 @@
 		color: var(--cardColor);
 		opacity: 0.8;
 	}
-	.projectCard:is(:hover, :focus-within) {
+	.animation .projectCard:hover {
 		background-position: 0;
 		background-image: linear-gradient(45deg, var(--cardColor), rgb(var(--background)) 40%);
 		box-shadow: inset 0 0 0 3px rgba(var(--foreground), 0.5);
 		filter: brightness(1.1);
 		transform: scale(0.99);
 	}
-	.projectCard:is(:hover, :focus-within) h2,
-	.projectCard:is(:hover, :focus-within) p {
+	.animation .projectCard:hover h2,
+	.animation .projectCard:hover p {
 		color: white;
 	}
 
@@ -188,7 +190,7 @@
 		-webkit-backdrop-filter: blur(8px);
 		-moz-backdrop-filter: blur(8px);
 	}
-	.githubBar:hover {
+	.animation .githubBar:hover {
 		background-color: rgba(var(--foreground), 0.2);
 		transform: scale(0.99);
 	}

@@ -11,6 +11,8 @@
 
 	/* --------- Store Variables -------- */
 
+	import { animation } from '../store.js';
+
 	/* ----- Component Subscriptions ---- */
 
 	export let text;
@@ -34,13 +36,13 @@
 	/* ------------ Functions ----------- */
 
 	function handleMouseOver(event) {
-		if (zoomEffect === 'true') {
+		if (zoomEffect === 'true' && $animation) {
 			hoveredLetterIndex = parseInt(event.target.getAttribute('data-index'));
 		}
 	}
 
 	function handleMouseLeave() {
-		if (zoomEffect === 'true') {
+		if (zoomEffect === 'true' && $animation) {
 			hoveredLetterIndex = null;
 		}
 	}
@@ -57,7 +59,7 @@
 	}
 </script>
 
-<main>
+<main class:animation={$animation}>
 	<span class="chapterTitle">
 		{#each letters as letter, i}
 			<!-- svelte-ignore a11y-mouse-events-have-key-events -->
