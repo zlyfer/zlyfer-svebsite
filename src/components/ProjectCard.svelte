@@ -89,15 +89,18 @@
 		color: var(--cardColor);
 		opacity: 0.8;
 	}
-	.animation .projectCard:hover {
+	.projectCard:hover {
 		background-position: 0;
 		background-image: linear-gradient(45deg, var(--cardColor), rgb(var(--background)) 40%);
 		box-shadow: inset 0 0 0 3px rgba(var(--foreground), 0.5);
 		filter: brightness(1.1);
-		transform: scale(0.99);
+		filter: brightness(1.1) drop-shadow(0 0 0.3rem var(--cardColor));
 	}
-	.animation .projectCard:hover h2,
-	.animation .projectCard:hover p {
+	.animation .projectCard:hover {
+		animation: animation 3s infinite;
+	}
+	.projectCard:hover h2,
+	.projectCard:hover p {
 		color: white;
 	}
 
@@ -213,5 +216,17 @@
 		margin-top: 0.4rem;
 		margin-left: 1rem;
 		color: rgba(var(--foreground), 1);
+	}
+
+	@keyframes animation {
+		0% {
+			filter: brightness(1.1) drop-shadow(0 0 0rem var(--cardColor));
+		}
+		50% {
+			filter: brightness(1.1) drop-shadow(0 0 0.3rem var(--cardColor));
+		}
+		100% {
+			filter: brightness(1.1) drop-shadow(0 0 0rem var(--cardColor));
+		}
 	}
 </style>

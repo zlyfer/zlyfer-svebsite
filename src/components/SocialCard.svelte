@@ -36,7 +36,7 @@
 	style:--typeColor={typeColor}
 	style:--typeColorCounter={typeColorCounter}
 >
-	<li class="socialCard" class:animation={$animation}>
+	<li class="socialCard">
 		<a {href} target="_blank">
 			<h2 class="title">
 				{title}
@@ -71,7 +71,7 @@
 		color: rgba(var(--foreground), 1);
 		opacity: 0.8;
 	}
-	.animation .socialCard:hover {
+	.socialCard:hover {
 		background-position: 0;
 		background-image: linear-gradient(
 			45deg,
@@ -79,14 +79,12 @@
 			rgb(var(--typeColorCounter)) 30%
 		);
 		border: 5px solid rgba(var(--typeColor), 1);
-		transform: scale(1.05);
+		filter: brightness(1.1) drop-shadow(0 0 0.3rem rgba(var(--typeColor), 1));
 	}
-	.animation .socialCard.animation:hover {
-		animation-name: animation;
-		animation-duration: 5s;
-		animation-iteration-count: infinite;
+	.animation .socialCard:hover {
+		animation: animation 5s infinite;
 	}
-	.animation .socialCard:hover h2 {
+	.socialCard:hover h2 {
 		color: white;
 	}
 
@@ -117,13 +115,13 @@
 			filter: brightness(1.1) drop-shadow(0 0 0rem rgba(var(--typeColor), 1));
 		}
 		25% {
-			filter: brightness(1.1) drop-shadow(0 0 0.5rem rgba(var(--typeColor), 1));
+			filter: brightness(1.1) drop-shadow(0 0 0.3rem rgba(var(--typeColor), 1));
 		}
 		50% {
 			filter: brightness(1.1) drop-shadow(0 0 0rem rgba(var(--typeColor), 1));
 		}
 		75% {
-			filter: brightness(1.1) drop-shadow(0 0 0.5rem rgba(var(--typeColorCounter), 1));
+			filter: brightness(1.1) drop-shadow(0 0 0.3rem rgba(var(--typeColorCounter), 1));
 		}
 		100% {
 			filter: brightness(1.1) drop-shadow(0 0 0rem rgba(var(--typeColorCounter), 1));
