@@ -235,6 +235,9 @@
 		border-bottom-left-radius: 15px;
 		border-bottom-right-radius: 15px;
 	}
+	.styleButtons:hover {
+		filter: brightness(0.8);
+	}
 
 	#darkModeButton {
 		bottom: 58px;
