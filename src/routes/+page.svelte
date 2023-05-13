@@ -18,9 +18,8 @@
 
 	/* --------- Store Variables -------- */
 
-	import { darkMode } from '../store.js';
+	import { _isDarkMode } from '../store.js';
 	import { glowing } from '../store.js';
-	import { text } from 'svelte/internal';
 
 	/* ----- Component Subscriptions ---- */
 
@@ -99,7 +98,9 @@
 
 	/* ----------- Life Cycles ---------- */
 
-	onMount(() => {});
+	onMount(() => {
+		_isDarkMode.subscribe((value) => {});
+	});
 
 	/* ------------ Functions ----------- */
 
@@ -127,11 +128,9 @@
 				this.vel.rotate(p5.random(-p5.PI, p5.PI));
 			}
 
-			// update(dots) {
 			update() {
 				this.move();
 				this.draw();
-				// this.drawConnections(dots);
 			}
 
 			move() {
@@ -145,8 +144,8 @@
 			draw() {
 				p5.push();
 				p5.noFill();
-				p5.strokeWeight(3);
-				p5.stroke(theme.dots);
+				p5.strokeWeight(2);
+				p5.stroke(fgColor, 255);
 				p5.translate(this.pos.x, this.pos.y);
 				p5.point(0, 0);
 				p5.pop();
@@ -161,11 +160,11 @@
 						if (counter < 10) {
 							p5.push();
 							if (full) {
-								p5.strokeWeight(1);
-								p5.stroke(theme.connection * 0.8);
+								p5.strokeWeight(0.8);
+								p5.stroke(fgColor.map((c) => c * 1));
 							} else {
 								p5.strokeWeight(p5.map(distance, 0, connectionDistance, 0.5, 0.1));
-								p5.stroke(theme.connection, p5.map(distance, 0, connectionDistance, 255, 0));
+								p5.stroke(fgColor, p5.map(distance, 0, connectionDistance, 255, 0));
 							}
 							p5.line(this.pos.x, this.pos.y, d.pos.x, d.pos.y);
 							p5.pop();
@@ -175,23 +174,23 @@
 			}
 		}
 
-		const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-		const themes = {
-			light: {
-				dots: 22,
-				connection: 72
-			},
-			dark: {
-				dots: 220,
-				connection: 150
-			}
-		};
-		var theme = mediaQuery.matches ? themes.dark : themes.light;
-		theme = themes.dark;
-
 		const connectionDistance = 150;
+		var fgColor;
+		var bgColor;
 		var killSwitch = 0;
 		var dots;
+
+		function setColor() {
+			const rootStyle = getComputedStyle(document.querySelector(':root'));
+			fgColor = rootStyle
+				.getPropertyValue('--foreground')
+				.split(', ')
+				.map((x) => parseInt(x));
+			bgColor = rootStyle
+				.getPropertyValue('--background')
+				.split(', ')
+				.map((x) => parseInt(x));
+		}
 
 		function initDots() {
 			dots = [];
@@ -201,11 +200,9 @@
 		}
 
 		p5.setup = () => {
+			setColor();
 			p5.createCanvas(p5.windowWidth, p5.windowHeight);
 			initDots();
-			mediaQuery.addEventListener('change', (e) => {
-				theme = e.matches ? themes.dark : themes.light;
-			});
 		};
 
 		p5.windowResized = () => {
@@ -215,11 +212,8 @@
 		};
 
 		p5.draw = () => {
-			const root = document.querySelector(':root');
-			const rootStyle = getComputedStyle(root);
-			const background = rootStyle.getPropertyValue('--background2');
-			const bgColor = background.split(', ').map((x) => parseInt(x));
-			p5.background(bgColor[0], bgColor[1], bgColor[2]);
+			setColor();
+			p5.background(bgColor);
 			p5.frameRate(60);
 			if (killSwitch < 10) {
 				const fps = Math.floor(p5.frameRate());

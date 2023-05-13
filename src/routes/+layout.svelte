@@ -23,6 +23,7 @@
 	/* --------- Store Variables -------- */
 
 	import { darkMode } from '../store.js';
+	import { _isDarkMode } from '../store.js';
 	import { glowing } from '../store.js';
 
 	/* ----- Component Subscriptions ---- */
@@ -44,6 +45,7 @@
 		});
 
 		darkMode.subscribe((value) => {
+			_isDarkMode.update((v) => isDarkMode());
 			updateTheme();
 		});
 		glowing.subscribe((value) => {});
@@ -73,6 +75,7 @@
 		const index = states.indexOf($darkMode);
 		const nextIndex = (index + 1) % states.length;
 		darkMode.update((v) => states[nextIndex]);
+
 		localStorage.setItem('darkMode', $darkMode);
 		updateTheme();
 	}
@@ -89,14 +92,14 @@
 			const darkBackGround = rootStyle.getPropertyValue('--darkBackGround');
 			const darkBackGround2 = rootStyle.getPropertyValue('--darkBackGround2');
 
-			if (!isDarkMode()) {
-				root.style.setProperty('--foreground', lightForeGround);
-				root.style.setProperty('--background', lightBackGround);
-				root.style.setProperty('--background2', lightBackGround2);
-			} else {
+			if (isDarkMode()) {
 				root.style.setProperty('--foreground', darkForeGround);
 				root.style.setProperty('--background', darkBackGround);
 				root.style.setProperty('--background2', darkBackGround2);
+			} else {
+				root.style.setProperty('--foreground', lightForeGround);
+				root.style.setProperty('--background', lightBackGround);
+				root.style.setProperty('--background2', lightBackGround2);
 			}
 		}
 	}

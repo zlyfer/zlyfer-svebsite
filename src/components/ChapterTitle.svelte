@@ -11,9 +11,6 @@
 
 	/* --------- Store Variables -------- */
 
-	import { darkMode } from '../store.js';
-	import { glowing } from '../store.js';
-
 	/* ----- Component Subscriptions ---- */
 
 	export let text;
