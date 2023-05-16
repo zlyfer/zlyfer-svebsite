@@ -121,12 +121,7 @@
 
 <main class:animation={$animation}>
 	{#if !$page.route.id.startsWith('/project')}
-		<div
-			role="button"
-			id="darkModeButton"
-			on:click={() => cycleDarkMode()}
-			class="prevent-select styleButtons"
-		>
+		<div id="darkModeButton" class="prevent-select styleButtons" on:click={() => cycleDarkMode()}>
 			{#if $darkMode == 'auto'}
 				<FaAdjust />
 			{:else if $darkMode == 'dark'}
@@ -137,9 +132,8 @@
 		</div>
 
 		<div
-			class="prevent-select styleButtons"
 			id="animationButton"
-			role="button"
+			class="prevent-select styleButtons"
 			on:click={() => toggleAnimation()}
 		>
 			<FaFire />
