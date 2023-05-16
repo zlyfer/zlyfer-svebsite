@@ -498,12 +498,12 @@
 			opacity: 0.5;
 		}
 		50% {
-			background-image: url('/logo.png');
+			background-image: url('/logo.jpg');
 			--glowColor: var(--glowLogo);
 			opacity: 1;
 		}
 		95% {
-			background-image: url('/logo.png');
+			background-image: url('/logo.jpg');
 			--glowColor: var(--glowLogo);
 			opacity: 1;
 		}
