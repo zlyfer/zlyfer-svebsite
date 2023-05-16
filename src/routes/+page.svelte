@@ -129,9 +129,11 @@
 	const sketch = (p5) => {
 		class Dot {
 			constructor(x, y) {
+				this.id = Math.floor(Math.random() * 99999999);
 				this.pos = p5.createVector(x, y);
 				this.vel = p5.createVector(0, 0.15);
 				this.vel.rotate(p5.random(-p5.PI, p5.PI));
+				this.connections = [];
 			}
 
 			update() {
@@ -161,8 +163,10 @@
 			drawConnections(dots, full) {
 				let counter = 0;
 				dots.forEach((d) => {
+					if (d.connections.includes(this.id)) return;
 					let distance = d.pos.dist(this.pos);
 					if (d !== this && distance < connectionDistance) {
+						if (!this.connections.includes(d.id)) this.connections.push(d.id);
 						counter++;
 						if (counter < 10) {
 							p5.push();
@@ -176,6 +180,8 @@
 							p5.line(this.pos.x, this.pos.y, d.pos.x, d.pos.y);
 							p5.pop();
 						}
+					} else {
+						this.connections = this.connections.filter((c) => c !== d.id);
 					}
 				});
 			}
@@ -187,6 +193,7 @@
 		var bgColor;
 		var killSwitch = 0;
 		var dots;
+		// var lastFrameRate = 0;
 
 		function setColor() {
 			const rootStyle = getComputedStyle(document.querySelector(':root'));
@@ -221,6 +228,19 @@
 			killSwitch = 0;
 		};
 
+		// function showFPS() {
+		// 	if (p5.frameCount % 10 == 0) {
+		// 		lastFrameRate = Math.floor(p5.frameRate());
+		// 	}
+		// 	p5.push();
+		// 	p5.fill(255);
+		// 	p5.stroke(0);
+		// 	p5.strokeWeight(1);
+		// 	p5.textSize(12);
+		// 	p5.text(lastFrameRate, 10, 20);
+		// 	p5.pop();
+		// }
+
 		p5.draw = () => {
 			if (removeP5) p5.remove();
 			setColor();
@@ -250,6 +270,7 @@
 					killSwitch = 0;
 				}
 			}
+			// showFPS();
 		};
 	};
 </script>
