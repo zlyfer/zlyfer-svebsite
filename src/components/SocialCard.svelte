@@ -32,17 +32,16 @@
 </script>
 
 <main
+	class="socialCard"
 	class:animation={$animation}
 	style:--typeColor={typeColor}
 	style:--typeColorCounter={typeColorCounter}
 >
-	<li class="socialCard">
-		<a {href} target="_blank">
-			<h2 class="title">
-				{title}
-			</h2>
-		</a>
-	</li>
+	<a {href} target="_blank">
+		<h2 class="title">
+			{title}
+		</h2>
+	</a>
 </main>
 
 <style>
@@ -81,7 +80,7 @@
 		border: 5px solid rgba(var(--typeColor), 1);
 		filter: brightness(1.1) drop-shadow(0 0 0.3rem rgba(var(--typeColor), 1));
 	}
-	.animation .socialCard:hover {
+	.socialCard.animation:hover {
 		animation: animation 5s infinite;
 	}
 	.socialCard:hover h2 {

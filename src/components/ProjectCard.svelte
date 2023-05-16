@@ -38,20 +38,20 @@
 <!-- svelte-ignore a11y-interactive-supports-focus -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 
-<main class:animation={$animation}>
-	<li class="projectCard" style:--cardColor={cardColor}>
-		<a href={url} target={url.startsWith('/project') ? null : '_blank'}>
-			<h2>
-				{title}
-			</h2>
-			<p>
-				{description}
-			</p>
-			{#each tags as tag}
-				<span class="tag {tag}">{tag}</span>
-			{/each}
-		</a>
-	</li>
+<main class="projectCard" class:animation={$animation} style:--cardColor={cardColor}>
+	<!-- <li > -->
+	<a href={url} target={url.startsWith('/project') ? null : '_blank'}>
+		<h2>
+			{title}
+		</h2>
+		<p>
+			{description}
+		</p>
+		{#each tags as tag}
+			<span class="tag {tag}">{tag}</span>
+		{/each}
+	</a>
+	<!-- </li> -->
 	<div class="githubBar">
 		<a href={github} target="_blank">
 			<div class="githubIcon">
@@ -67,13 +67,13 @@
 		list-style: none;
 		display: flex;
 		padding: 0.25rem;
-		padding-bottom: 1.5rem;
+		padding-bottom: 3.5rem;
 		background-image: none;
 		background-size: 400%;
 		background-position: 100%;
 		transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.2s;
 		box-shadow: inset 0 0 0 3px rgba(var(--foreground), 0.1);
-		border-radius: 5px;
+		border-radius: 20px;
 		border-top-left-radius: 20px;
 		border-top-right-radius: 20px;
 		backdrop-filter: blur(var(--blur));
@@ -93,15 +93,24 @@
 		background-position: 0;
 		background-image: linear-gradient(45deg, var(--cardColor), rgb(var(--background)) 40%);
 		box-shadow: inset 0 0 0 3px rgba(var(--foreground), 0.5);
-		filter: brightness(1.1);
 		filter: brightness(1.1) drop-shadow(0 0 0.3rem var(--cardColor));
 	}
-	.animation .projectCard:hover {
+	.projectCard.animation:hover {
 		animation: animation 3s infinite;
 	}
 	.projectCard:hover h2,
 	.projectCard:hover p {
-		color: white;
+		color: #eee;
+	}
+	.projectCard:hover .githubBar {
+		box-shadow: inset 0 0 0 3px #eee;
+		color: #eee;
+	}
+	.projectCard:hover .githubIcon {
+		color: #eee;
+	}
+	.projectCard:hover a {
+		color: #eee;
 	}
 
 	h2 {
@@ -124,7 +133,7 @@
 		font-size: 0.9rem;
 		font-weight: 600;
 		border-radius: 15px;
-		color: rgba(var(--background), 1);
+		color: black;
 		background-color: rgba(var(--foreground), 1);
 		margin: 2px 2px;
 		width: auto;
@@ -135,77 +144,63 @@
 	}
 	span.finished {
 		background-color: #4caf50;
-		color: #eee;
 	}
 	span.wip {
 		background-color: #fdd835;
-		color: #222;
 	}
 	span.discontinued {
 		background-color: #f44336;
-		color: #eee;
 	}
 	span.game {
 		background-color: #2196f3;
-		color: #eee;
 	}
 	span.animation {
-		background-color: #963caf;
-		color: #eee;
+		background-color: #b668ca;
 	}
 	span.discord {
-		background-color: #5562ea;
-		color: #eee;
+		background-color: #606ceb;
 	}
 	span.p5\.js {
 		background-color: #ed225d;
-		color: #eee;
 	}
 	span.node\.js {
 		background-color: #68a063;
-		color: #eee;
 	}
 	span.php {
-		background-color: #4f5b93;
-		color: #eee;
+		background-color: #6a75af;
 	}
 	span.sql {
-		background-color: #005c85;
-		color: #eee;
+		background-color: #0084c2;
 	}
 	span.vue {
 		background-color: #41b883;
-		color: #eee;
 	}
 
 	.githubBar {
-		width: 100%;
+		width: calc(100% - 15px);
 		height: 2.5rem;
 		text-align: center;
 		margin-top: 3px;
+		position: absolute;
+		bottom: 0px;
+		left: 0;
+		margin: 7.5px 7.5px;
 		box-shadow: inset 0 0 0 3px rgba(var(--foreground), 0.1);
-		border-radius: 5px;
-		border-bottom-left-radius: 20px;
-		border-bottom-right-radius: 20px;
+		border-radius: 15px;
 		background-color: rgba(var(--foreground), 0.1);
-		transition: transform 0.2s;
-		backdrop-filter: blur(var(--blur));
-		-webkit-backdrop-filter: blur(var(--blur));
-		-moz-backdrop-filter: blur(var(--blur));
+		transition: box-shadow 0.2s;
 	}
+
 	.animation .githubBar:hover {
-		background-color: rgba(var(--foreground), 0.2);
-		transform: scale(0.99);
+		background-color: rgba(var(--background), 0.1);
 	}
-	.githubBar > a {
+	.githubBar a {
 		text-decoration: none;
 		line-height: 2.5rem;
 		font-weight: bold;
 		color: rgba(var(--foreground), 1);
 		display: block;
-		border-radius: 5px;
-		border-bottom-left-radius: 20px;
-		border-bottom-right-radius: 20px;
+		transition: color 0.2s;
 	}
 	.githubIcon {
 		width: 1.5rem;
@@ -216,6 +211,7 @@
 		margin-top: 0.4rem;
 		margin-left: 1rem;
 		color: rgba(var(--foreground), 1);
+		transition: color 0.2s;
 	}
 
 	@keyframes animation {

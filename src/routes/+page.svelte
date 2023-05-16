@@ -286,18 +286,22 @@
 	<ChapterTitle text="socials" zoomEffect="true" />
 
 	<ul class="socialCards">
-		<SocialCard href="https://dynchan.net" title="DynChan" type="dynchan" />
-		<SocialCard href="https://github.com/zlyfer" title="GitHub" type="github" />
-		<SocialCard href="https://www.instagram.com/zlyfer.arts/" title="Instagram" type="instagram" />
-		<SocialCard href="https://www.tiktok.com/@zlyfer2" title="TikTok" type="tiktok" />
-		<SocialCard href="https://www.youtube.com/@zlyfer" title="Youtube" type="youtube" />
-		<SocialCard href="https://twitch.tv/zlyfer2" title="Twitch" type="twitch" />
-		<SocialCard href="https://twitter.com/zIyfer" title="Twitter" type="twitter" />
-		<SocialCard
-			href="https://www.linkedin.com/in/frederik-shull-aa4b44228/"
-			title="LinkedIn"
-			type="linkedin"
-		/>
+		<li><SocialCard href="https://dynchan.net" title="DynChan" type="dynchan" /></li>
+		<li><SocialCard href="https://github.com/zlyfer" title="GitHub" type="github" /></li>
+		<li>
+			<SocialCard href="https://instagram.com/zlyfer.arts/" title="Instagram" type="instagram" />
+		</li>
+		<li><SocialCard href="https://www.tiktok.com/@zlyfer2" title="TikTok" type="tiktok" /></li>
+		<li><SocialCard href="https://www.youtube.com/@zlyfer" title="Youtube" type="youtube" /></li>
+		<li><SocialCard href="https://twitch.tv/zlyfer2" title="Twitch" type="twitch" /></li>
+		<li><SocialCard href="https://twitter.com/zIyfer" title="Twitter" type="twitter" /></li>
+		<li>
+			<SocialCard
+				href="https://www.linkedin.com/in/frederik-shull-aa4b44228/"
+				title="LinkedIn"
+				type="linkedin"
+			/>
+		</li>
 	</ul>
 
 	<!-- <Seperator />
@@ -315,13 +319,15 @@
 	<ChapterTitle text="some projects" zoomEffect="true" />
 
 	<ul class="projectCards">
-		<ProjectCard
-			title="DynChan"
-			description="Discord Bot for fully dynamic voice/text channels!"
-			tags={['wip', 'discord', 'vue', 'node.js', 'php', 'sql']}
-			url="https://dynchan.net/"
-			github="https://github.com/dynchan"
-		/>
+		<li>
+			<ProjectCard
+				title="DynChan"
+				description="Discord Bot for fully dynamic voice/text channels!"
+				tags={['wip', 'discord', 'vue', 'node.js', 'php', 'sql']}
+				url="https://dynchan.net/"
+				github="https://github.com/dynchan"
+			/>
+		</li>
 		{#each projects as project}
 			<ProjectCard
 				title={project.name}
@@ -413,6 +419,10 @@
 		color: rgb(var(--accent));
 		border-radius: 5px;
 		padding: 0.2em 0.4em;
+	}
+
+	ul {
+		list-style-type: none;
 	}
 
 	.socialCards {
