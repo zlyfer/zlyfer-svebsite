@@ -386,7 +386,7 @@
 		aspect-ratio: 1/1;
 		box-shadow: inset 0 0 5px 2px var(--glowColor);
 		border-radius: 50px;
-		background-image: url('/selfie.jpg');
+		background-image: url('/selfie.webp');
 		background-size: cover;
 		background-position: center;
 		background-repeat: no-repeat;
@@ -395,7 +395,7 @@
 		filter: drop-shadow(0 0 0.2rem var(--glowColor));
 	}
 	.animation #welcomeImg {
-		background-image: url('/selfie.jpg');
+		background-image: url('/selfie.webp');
 		animation: animation 5s ease-in-out infinite, fadeImage 20s ease-in-out infinite;
 	}
 	#welcome .info {
@@ -497,12 +497,12 @@
 
 	@keyframes fadeImage {
 		0% {
-			background-image: url('/selfie.jpg');
+			background-image: url('/selfie.webp');
 			--glowColor: var(--glowSelfie);
 			opacity: 1;
 		}
 		45% {
-			background-image: url('/selfie.jpg');
+			background-image: url('/selfie.webp');
 			--glowColor: var(--glowSelfie);
 			opacity: 1;
 		}
@@ -510,12 +510,12 @@
 			opacity: 0.5;
 		}
 		50% {
-			background-image: url('/logo.jpg');
+			background-image: url('/logo.webp');
 			--glowColor: var(--glowLogo);
 			opacity: 1;
 		}
 		95% {
-			background-image: url('/logo.jpg');
+			background-image: url('/logo.webp');
 			--glowColor: var(--glowLogo);
 			opacity: 1;
 		}
