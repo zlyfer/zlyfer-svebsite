@@ -143,34 +143,34 @@
 		filter: brightness(1.1);
 	}
 	span.finished {
-		background-color: #4caf50;
+		background-color: #5fba62;
 	}
 	span.wip {
 		background-color: #fdd835;
 	}
 	span.discontinued {
-		background-color: #f44336;
+		background-color: #f46e62;
 	}
 	span.game {
-		background-color: #2196f3;
+		background-color: #2b9af3;
 	}
 	span.animation {
-		background-color: #b668ca;
+		background-color: #c27fd1;
 	}
 	span.discord {
-		background-color: #606ceb;
+		background-color: #8790f2;
 	}
 	span.p5\.js {
-		background-color: #ed225d;
+		background-color: #f16a94;
 	}
 	span.node\.js {
-		background-color: #68a063;
+		background-color: #6ca267;
 	}
 	span.php {
-		background-color: #6a75af;
+		background-color: #8893c3;
 	}
 	span.sql {
-		background-color: #0084c2;
+		background-color: #1fb5ff;
 	}
 	span.vue {
 		background-color: #41b883;
