@@ -329,13 +329,15 @@
 			/>
 		</li>
 		{#each projects as project}
-			<ProjectCard
-				title={project.name}
-				description={project.description}
-				tags={project.tags}
-				url="/project/{project.name}"
-				github="https://github.com/zlyfer/{project.name}"
-			/>
+			<li>
+				<ProjectCard
+					title={project.name}
+					description={project.description}
+					tags={project.tags}
+					url="/project/{project.name}"
+					github="https://github.com/zlyfer/{project.name}"
+				/>
+			</li>
 		{/each}
 	</ul>
 </main>
