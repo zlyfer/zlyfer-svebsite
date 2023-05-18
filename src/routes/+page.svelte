@@ -129,7 +129,7 @@
 	const sketch = (p5) => {
 		class Dot {
 			constructor(x, y) {
-				this.id = Math.floor(Math.random() * 99999999);
+				this.id = Math.floor(Math.random() * 10000);
 				this.pos = p5.createVector(x, y);
 				this.vel = p5.createVector(0, 0.15);
 				this.vel.rotate(p5.random(-p5.PI, p5.PI));
@@ -161,28 +161,26 @@
 			}
 
 			drawConnections(dots, full) {
-				let counter = 0;
+				this.connections = [];
 				dots.forEach((d) => {
+					if (this.connections.length >= 2) return;
+					// if (this.connections.length > 10) return;
+					if (this.id == d.id) return;
 					if (d.connections.includes(this.id)) return;
 					let distance = d.pos.dist(this.pos);
-					if (d !== this && distance < connectionDistance) {
-						if (!this.connections.includes(d.id)) this.connections.push(d.id);
-						counter++;
-						if (counter < 10) {
-							p5.push();
-							if (full) {
-								p5.strokeWeight(0.5);
-								p5.stroke([...fgColor.map((c) => c), ...[255]]);
-							} else {
-								p5.strokeWeight(p5.map(distance, 0, connectionDistance, 0.5, 0.1));
-								p5.stroke(fgColor, p5.map(distance, 0, connectionDistance, 255, 0));
-							}
-							p5.line(this.pos.x, this.pos.y, d.pos.x, d.pos.y);
-							p5.pop();
-						}
+					if (distance > connectionDistance) return;
+					// else this.connections = this.connections.filter((c) => c !== d.id);
+					if (!this.connections.includes(d.id)) this.connections.push(d.id);
+					p5.push();
+					if (full) {
+						p5.strokeWeight(0.5);
+						p5.stroke([...fgColor.map((c) => c), ...[255]]);
 					} else {
-						this.connections = this.connections.filter((c) => c !== d.id);
+						p5.strokeWeight(p5.map(distance, 0, connectionDistance, 0.5, 0.1));
+						p5.stroke(fgColor, p5.map(distance, 0, connectionDistance, 255, 0));
 					}
+					p5.line(this.pos.x, this.pos.y, d.pos.x, d.pos.y);
+					p5.pop();
 				});
 			}
 		}
@@ -193,7 +191,6 @@
 		var bgColor;
 		var killSwitch = 0;
 		var dots;
-		// var lastFrameRate = 0;
 
 		function setColor() {
 			const rootStyle = getComputedStyle(document.querySelector(':root'));
@@ -217,6 +214,7 @@
 		}
 
 		p5.setup = () => {
+			p5.frameRate(60);
 			setColor();
 			p5.createCanvas(p5.windowWidth, p5.windowHeight);
 			initDots();
@@ -228,6 +226,7 @@
 			killSwitch = 0;
 		};
 
+		// var lastFrameRate = 0;
 		// function showFPS() {
 		// 	if (p5.frameCount % 10 == 0) {
 		// 		lastFrameRate = Math.floor(p5.frameRate());
@@ -245,7 +244,6 @@
 			if (removeP5) p5.remove();
 			setColor();
 			p5.background(bgColor);
-			p5.frameRate(120);
 			if (killSwitch < 10) {
 				const fps = Math.floor(p5.frameRate());
 				if (fps != 0 && fps < 30) {
