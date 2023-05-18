@@ -214,7 +214,7 @@
 		}
 
 		p5.setup = () => {
-			p5.frameRate(42);
+			p5.frameRate(60);
 			setColor();
 			p5.createCanvas(p5.windowWidth, p5.windowHeight);
 			initDots();
