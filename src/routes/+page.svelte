@@ -163,7 +163,7 @@
 			drawConnections(dots, full) {
 				this.connections = [];
 				dots.forEach((d) => {
-					if (this.connections.length >= 2) return;
+					// if (this.connections.length >= 2) return;
 					// if (this.connections.length > 10) return;
 					if (this.id == d.id) return;
 					if (d.connections.includes(this.id)) return;
@@ -206,7 +206,7 @@
 
 		function initDots() {
 			dots = [];
-			const initAmount = Math.min((p5.width * p5.height) / Math.pow(100, 2), 300);
+			const initAmount = Math.min((p5.width * p5.height) / Math.pow(90, 2), 500);
 			const amount = lowSpec ? initAmount / 2 : initAmount;
 			for (let i = 0; i < amount; i++) {
 				dots.push(new Dot(p5.random(5, p5.width, -5), p5.random(5, p5.height - 5)));
@@ -288,7 +288,7 @@
 		</div>
 		<div class="info">
 			<span class="text">
-				Hello there,2
+				Hello there,
 				<br />
 				<code>Frederik Shull</code> aka <code>zlyfer</code> here!
 				<br />
