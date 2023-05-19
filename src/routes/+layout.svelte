@@ -191,6 +191,7 @@
 	:global(html) {
 		font-family: Poppins;
 		background-attachment: fixed;
+		background-color: rgba(var(--background), 1);
 		background-image: linear-gradient(135deg, rgba(var(--background)), rgba(var(--background2)));
 	}
 
