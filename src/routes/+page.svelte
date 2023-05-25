@@ -360,7 +360,8 @@
 		{/each}
 	</ul>
 
-	<span class="footer no-select"> General Kenobi </span>
+	<span class="footer no-select"> made with ♥ by zlyfer </span>
+	<!-- <span class="footer no-select"> General Kenobi </span> -->
 
 	<div id="blurLayer" />
 	<div class="bgSplash" id="splash1" />
@@ -483,18 +484,6 @@
 			hsla(33, 94%, 57%, 1) 47%,
 			hsla(197, 100%, 64%, 1) 100%
 		);
-		background: -moz-linear-gradient(
-			45deg,
-			hsla(339, 100%, 55%, 1) 0%,
-			hsla(33, 94%, 57%, 1) 47%,
-			hsla(197, 100%, 64%, 1) 100%
-		);
-		background: -webkit-linear-gradient(
-			45deg,
-			hsla(339, 100%, 55%, 1) 0%,
-			hsla(33, 94%, 57%, 1) 47%,
-			hsla(197, 100%, 64%, 1) 100%
-		);
 	}
 
 	#splash2 {
@@ -503,18 +492,6 @@
 		height: 50vh;
 		width: 20vh;
 		background: linear-gradient(
-			45deg,
-			hsla(225, 100%, 68%, 1) 0%,
-			hsla(57, 100%, 71%, 1) 49%,
-			hsla(339, 100%, 55%, 1) 100%
-		);
-		background: -moz-linear-gradient(
-			45deg,
-			hsla(225, 100%, 68%, 1) 0%,
-			hsla(57, 100%, 71%, 1) 49%,
-			hsla(339, 100%, 55%, 1) 100%
-		);
-		background: -webkit-linear-gradient(
 			45deg,
 			hsla(225, 100%, 68%, 1) 0%,
 			hsla(57, 100%, 71%, 1) 49%,
@@ -538,16 +515,21 @@
 	/* --------------- -- --------------- */
 
 	span.footer {
-		margin-top: 35vh;
+		display: block;
+		width: fit-content;
+		margin: 35vh auto 50px auto;
 		text-align: center;
 		font-size: 1.5rem;
-		color: rgba(var(--background), 100%);
-		filter: brightness(0.85);
 		display: block;
 		font-weight: 600;
+		padding: 3px 15px;
+		border-radius: 2rem;
+		backdrop-filter: blur(10px);
+		color: rgba(255, 255, 255, 0.5);
+		background-color: rgba(0, 0, 0, 0.1);
 	}
 	.darkMode span.footer {
-		filter: brightness(1.5);
+		background-color: rgba(255, 255, 255, 0.1);
 	}
 
 	@media (max-width: 875px) {
