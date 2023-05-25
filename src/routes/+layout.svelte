@@ -121,7 +121,7 @@
 
 <main class:animation={$animation}>
 	{#if !$page.route.id.startsWith('/project')}
-		<div id="darkModeButton" class="prevent-select styleButtons" on:click={() => cycleDarkMode()}>
+		<div id="darkModeButton" class="no-select styleButtons" on:click={() => cycleDarkMode()}>
 			{#if $darkMode == 'auto'}
 				<FaAdjust />
 			{:else if $darkMode == 'dark'}
@@ -131,11 +131,7 @@
 			{/if}
 		</div>
 
-		<div
-			id="animationButton"
-			class="prevent-select styleButtons"
-			on:click={() => toggleAnimation()}
-		>
+		<div id="animationButton" class="no-select styleButtons" on:click={() => toggleAnimation()}>
 			<FaFire />
 		</div>
 	{/if}
@@ -200,7 +196,7 @@
 		padding: 0;
 	}
 
-	:global(.prevent-select) {
+	:global(.no-select) {
 		-webkit-user-select: none;
 		-ms-user-select: none;
 		user-select: none;

@@ -276,11 +276,11 @@
 <!-- svelte-ignore a11y-interactive-supports-focus -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 
-<main class:animation={$animation}>
+<main class:darkMode={$_isDarkMode} class:animation={$animation}>
 	{#if !isTouchDevice()}
-		<div id="p5">
+		<!-- <div id="p5">
 			<P5 {sketch} />
-		</div>
+		</div> -->
 	{/if}
 	<div id="welcome">
 		<div id="welcomeImgContainer">
@@ -359,6 +359,12 @@
 			</li>
 		{/each}
 	</ul>
+
+	<span class="footer no-select"> General Kenobi </span>
+
+	<div id="blurLayer" />
+	<div class="bgSplash" id="splash1" />
+	<div class="bgSplash" id="splash2" />
 </main>
 
 <style>
@@ -375,7 +381,6 @@
 		margin: auto;
 		padding: 5rem;
 		max-width: var(--globalWidth);
-		margin-bottom: 130px !important;
 	}
 
 	#welcome {
@@ -383,7 +388,7 @@
 		position: relative;
 		background: rgba(var(--accent), 10%);
 		border: 5px solid rgba(var(--accent), 50%);
-		border-radius: 5px;
+		border-radius: 25px;
 		backdrop-filter: blur(var(--blur));
 		-webkit-backdrop-filter: blur(var(--blur));
 		-moz-backdrop-filter: blur(var(--blur));
@@ -457,6 +462,92 @@
 		grid-template-columns: repeat(auto-fit, minmax(30ch, 1fr));
 		gap: 1rem;
 		padding: 0 5px;
+	}
+
+	/* ---- Colorful Blur Background ---- */
+
+	.bgSplash {
+		position: fixed;
+		z-index: -2;
+		filter: blur(100px);
+	}
+
+	#splash1 {
+		top: 10%;
+		left: 10%;
+		height: 30vh;
+		aspect-ratio: 1/1;
+		background: linear-gradient(
+			45deg,
+			hsla(339, 100%, 55%, 1) 0%,
+			hsla(33, 94%, 57%, 1) 47%,
+			hsla(197, 100%, 64%, 1) 100%
+		);
+		background: -moz-linear-gradient(
+			45deg,
+			hsla(339, 100%, 55%, 1) 0%,
+			hsla(33, 94%, 57%, 1) 47%,
+			hsla(197, 100%, 64%, 1) 100%
+		);
+		background: -webkit-linear-gradient(
+			45deg,
+			hsla(339, 100%, 55%, 1) 0%,
+			hsla(33, 94%, 57%, 1) 47%,
+			hsla(197, 100%, 64%, 1) 100%
+		);
+	}
+
+	#splash2 {
+		bottom: 5vh;
+		right: 25vh;
+		height: 50vh;
+		width: 20vh;
+		background: linear-gradient(
+			45deg,
+			hsla(225, 100%, 68%, 1) 0%,
+			hsla(57, 100%, 71%, 1) 49%,
+			hsla(339, 100%, 55%, 1) 100%
+		);
+		background: -moz-linear-gradient(
+			45deg,
+			hsla(225, 100%, 68%, 1) 0%,
+			hsla(57, 100%, 71%, 1) 49%,
+			hsla(339, 100%, 55%, 1) 100%
+		);
+		background: -webkit-linear-gradient(
+			45deg,
+			hsla(225, 100%, 68%, 1) 0%,
+			hsla(57, 100%, 71%, 1) 49%,
+			hsla(339, 100%, 55%, 1) 100%
+		);
+		transform: rotate(45deg);
+	}
+
+	#blurLayer {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		backdrop-filter: blur(80px);
+		-webkit-backdrop-filter: blur(80px);
+		-moz-backdrop-filter: blur(80px);
+		z-index: -1;
+	}
+
+	/* --------------- -- --------------- */
+
+	span.footer {
+		margin-top: 35vh;
+		text-align: center;
+		font-size: 1.5rem;
+		color: rgba(var(--background), 100%);
+		filter: brightness(0.85);
+		display: block;
+		font-weight: 600;
+	}
+	.darkMode span.footer {
+		filter: brightness(1.5);
 	}
 
 	@media (max-width: 875px) {
