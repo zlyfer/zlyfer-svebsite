@@ -52,14 +52,14 @@
 		{/each}
 	</a>
 	<!-- </li> -->
-	<div class="githubBar">
+	<!-- <div class="githubBar">
 		<a href={github} target="_blank">
 			<div class="githubIcon">
 				<FaGithub />
 			</div>
 			GitHub
 		</a>
-	</div>
+	</div> -->
 </main>
 
 <style>
@@ -102,7 +102,6 @@
 	.projectCard:hover p {
 		color: #eee;
 		text-shadow: rgba(var(--darkBackGround), 1) 2px 1px 7px;
-
 	}
 	.projectCard:hover .githubBar {
 		box-shadow: inset 0 0 0 3px #eee;
