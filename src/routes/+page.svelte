@@ -243,7 +243,8 @@
 	}
 	#welcome .text {
 		font-size: 1.3rem;
-		color: rgba(var(--foreground), 90%);
+		font-weight: 600;
+		color: rgba(var(--foreground), 70%);
 		line-height: 150%;
 	}
 
