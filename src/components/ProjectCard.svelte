@@ -52,14 +52,14 @@
 		{/each}
 	</a>
 	<!-- </li> -->
-	<!-- <div class="githubBar">
+	<div class="githubBar">
 		<a href={github} target="_blank">
 			<div class="githubIcon">
 				<FaGithub />
 			</div>
 			GitHub
 		</a>
-	</div> -->
+	</div>
 </main>
 
 <style>
@@ -79,6 +79,7 @@
 		backdrop-filter: blur(var(--blur));
 		-webkit-backdrop-filter: blur(var(--blur));
 		-moz-backdrop-filter: blur(var(--blur));
+		position: relative;
 	}
 	.projectCard > a {
 		width: 100%;

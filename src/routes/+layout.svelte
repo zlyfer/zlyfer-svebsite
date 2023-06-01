@@ -3,13 +3,11 @@
 
 	/* ------------ Page Data ----------- */
 
-	// /** @type {import('./$types').PageData} */
-	// export let data;
-
 	/* ------------- Imports ------------ */
 
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 	import { page } from '$app/stores';
+	import P5 from 'p5-svelte';
 
 	/* -------- Component Imports ------- */
 
@@ -19,6 +17,7 @@
 	import FaSun from 'svelte-icons/fa/FaSun.svelte';
 	import FaAdjust from 'svelte-icons/fa/FaAdjust.svelte';
 	import FaFire from 'svelte-icons/fa/FaFire.svelte';
+	import IoMdArrowRoundBack from 'svelte-icons/io/IoMdArrowRoundBack.svelte';
 
 	/* --------- Store Variables -------- */
 
@@ -31,6 +30,8 @@
 	/* ------------ Variables ----------- */
 
 	let systemDarkMode;
+	let removeP5 = false;
+	const backButtonRoutes = ['/imprint', '/project/'];
 
 	/* ----------- Life Cycles ---------- */
 
@@ -53,6 +54,10 @@
 		initVariables();
 	});
 
+	onDestroy(() => {
+		removeP5 = true;
+	});
+
 	/* ------------ Functions ----------- */
 
 	function initVariables() {
@@ -60,6 +65,13 @@
 		darkMode.update((v) => _darkMode);
 		const _animation = (localStorage.getItem('animation') || $animation) === 'true';
 		animation.update((v) => _animation);
+	}
+
+	function isTouchDevice() {
+		if (typeof window === 'undefined') return false;
+		return (
+			'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0
+		);
 	}
 
 	/* ---------------------------------- */
@@ -112,6 +124,156 @@
 		animation.update((v) => !v);
 		localStorage.setItem('animation', $animation);
 	}
+
+	/* ---------------------------------- */
+	/*                P5JS                */
+	/* ---------------------------------- */
+
+	const sketch = (p5) => {
+		class Dot {
+			constructor(x, y) {
+				this.id = Math.floor(Math.random() * 10000);
+				this.pos = p5.createVector(x, y);
+				this.vel = p5.createVector(0, 0.15);
+				this.vel.rotate(p5.random(-p5.PI, p5.PI));
+				this.connections = [];
+			}
+
+			update() {
+				this.move();
+				this.draw();
+			}
+
+			move() {
+				this.pos.add(this.vel);
+				if (this.pos.x < 5 || this.pos.x > p5.width - 5) this.vel.x *= -1;
+				if (this.pos.y < 5 || this.pos.y > p5.height - 5) this.vel.y *= -1;
+				if (this.pos.x < 0 || this.pos.x > p5.width || this.pos.y < 0 || this.pos.y > p5.height) {
+					this.pos = p5.createVector(p5.random(5, p5.width - 5), p5.random(5, p5.height - 5));
+				}
+			}
+
+			draw() {
+				p5.push();
+				p5.noFill();
+				p5.strokeWeight(2);
+				p5.stroke(fgColor, 255);
+				p5.translate(this.pos.x, this.pos.y);
+				p5.point(0, 0);
+				p5.pop();
+			}
+
+			drawConnections(dots, full) {
+				this.connections = [];
+				dots.forEach((d) => {
+					// if (this.connections.length >= 2) return;
+					// if (this.connections.length > 10) return;
+					if (this.id == d.id) return;
+					if (d.connections.includes(this.id)) return;
+					let distance = d.pos.dist(this.pos);
+					if (distance > connectionDistance) return;
+					// else this.connections = this.connections.filter((c) => c !== d.id);
+					if (!this.connections.includes(d.id)) this.connections.push(d.id);
+					p5.push();
+					if (full) {
+						p5.strokeWeight(0.5);
+						p5.stroke([...fgColor.map((c) => c), ...[255]]);
+					} else {
+						p5.strokeWeight(p5.map(distance, 0, connectionDistance, 0.5, 0.1));
+						p5.stroke(fgColor, p5.map(distance, 0, connectionDistance, 255, 0));
+					}
+					p5.line(this.pos.x, this.pos.y, d.pos.x, d.pos.y);
+					p5.pop();
+				});
+			}
+		}
+
+		const connectionDistance = 150;
+		let lowSpec = false;
+		let fgColor;
+		let bgColor;
+		let killSwitch = 0;
+		let dots;
+
+		function setColor() {
+			const rootStyle = getComputedStyle(document.querySelector(':root'));
+			fgColor = rootStyle
+				.getPropertyValue('--foreground')
+				.split(', ')
+				.map((x) => parseInt(x));
+			bgColor = rootStyle
+				.getPropertyValue('--background')
+				.split(', ')
+				.map((x) => parseInt(x));
+		}
+
+		function initDots() {
+			dots = [];
+			const initAmount = Math.min((p5.width * p5.height) / Math.pow(90, 2), 500);
+			const amount = lowSpec ? initAmount / 2 : initAmount;
+			for (let i = 0; i < amount; i++) {
+				dots.push(new Dot(p5.random(5, p5.width, -5), p5.random(5, p5.height - 5)));
+			}
+		}
+
+		p5.setup = () => {
+			p5.frameRate(60);
+			setColor();
+			p5.createCanvas(p5.windowWidth, p5.windowHeight);
+			initDots();
+		};
+
+		p5.windowResized = () => {
+			p5.resizeCanvas(p5.windowWidth, p5.windowHeight);
+			initDots();
+			killSwitch = 0;
+		};
+
+		// var lastFrameRate = 0;
+		// function showFPS() {
+		// 	if (p5.frameCount % 10 == 0) {
+		// 		lastFrameRate = Math.floor(p5.frameRate());
+		// 	}
+		// 	p5.push();
+		// 	p5.fill(255);
+		// 	p5.stroke(0);
+		// 	p5.strokeWeight(1);
+		// 	p5.textSize(12);
+		// 	p5.text(lastFrameRate, 10, 20);
+		// 	p5.pop();
+		// }
+
+		p5.draw = () => {
+			if (removeP5) p5.remove();
+			setColor();
+			p5.background(bgColor);
+			if (killSwitch < 10) {
+				const fps = Math.floor(p5.frameRate());
+				if (fps != 0 && fps < 30) {
+					killSwitch++;
+				} else if (fps >= 30) {
+					killSwitch = 0;
+				}
+				dots.forEach((d) => {
+					if ($animation) {
+						d.update();
+					}
+					if (p5.dist(d.pos.x, d.pos.y, p5.mouseX, p5.mouseY) < 200) {
+						d.drawConnections(dots, true);
+					} else {
+						d.drawConnections(dots, false);
+					}
+				});
+			} else {
+				if (!lowSpec) {
+					lowSpec = true;
+					initDots();
+					killSwitch = 0;
+				}
+			}
+			// showFPS();
+		};
+	};
 </script>
 
 <slot />
@@ -120,21 +282,39 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 
 <main class:animation={$animation}>
-	{#if !$page.route.id.startsWith('/project')}
-		<div id="darkModeButton" class="no-select styleButtons" on:click={() => cycleDarkMode()}>
-			{#if $darkMode == 'auto'}
-				<FaAdjust />
-			{:else if $darkMode == 'dark'}
-				<FaRegMoon />
-			{:else if $darkMode == 'light'}
-				<FaSun />
-			{/if}
-		</div>
+	<div id="blurLayer" />
+	<div class="bgSplash" id="splash1" />
+	<div class="bgSplash" id="splash2" />
 
-		<div id="animationButton" class="no-select styleButtons" on:click={() => toggleAnimation()}>
-			<FaFire />
+	<!-- {#if !isTouchDevice()}
+		<div id="p5">
+			<P5 {sketch} />
 		</div>
+	{/if} -->
+
+	{#if backButtonRoutes.some((route) => $page.route.id.startsWith(route))}
+		<a id="backButton" href="/">
+			<IoMdArrowRoundBack />
+		</a>
 	{/if}
+
+	<div id="styleButtons">
+		{#if !$page.route.id.startsWith('/project')}
+			<div id="darkModeButton" class="no-select styleButton" on:click={() => cycleDarkMode()}>
+				{#if $darkMode == 'auto'}
+					<FaAdjust />
+				{:else if $darkMode == 'dark'}
+					<FaRegMoon />
+				{:else if $darkMode == 'light'}
+					<FaSun />
+				{/if}
+			</div>
+
+			<div id="animationButton" class="no-select styleButton" on:click={() => toggleAnimation()}>
+				<FaFire />
+			</div>
+		{/if}
+	</div>
 </main>
 
 <style is:global>
@@ -184,6 +364,8 @@
 		--linkedin-counter: 200, 200, 200;
 	}
 
+	/* ------------- Global ------------- */
+
 	:global(html) {
 		font-family: Poppins;
 		background-attachment: fixed;
@@ -202,11 +384,102 @@
 		user-select: none;
 	}
 
-	.styleButtons {
+	/* -------------- P5js -------------- */
+
+	#p5 {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+	}
+
+	/* ----------- Back Button ---------- */
+
+	#backButton {
+		position: fixed;
+		bottom: 1rem;
+		left: 1rem;
+		width: 2rem;
+		height: 2rem;
+		padding: 0.5rem;
+		border-radius: 50%;
+		cursor: pointer;
+		border: 2px solid;
+		background-color: rgba(var(--background));
+		color: rgba(var(--foreground), 0.8);
+		border-color: rgba(var(--foreground), 0.8);
+	}
+	#backButton:hover {
+		background-color: rgba(var(--foreground));
+		color: rgba(var(--background), 0.8);
+		border-color: rgba(var(--background), 0.8);
+		transform: scale(0.95);
+	}
+
+	/* ---- Colorful Blur Background ---- */
+
+	.bgSplash {
+		position: fixed;
+		z-index: -2;
+		filter: blur(100px);
+	}
+
+	#splash1 {
+		top: 10%;
+		left: 10%;
+		height: 30vh;
+		aspect-ratio: 1/1;
+		background: linear-gradient(
+			45deg,
+			hsla(339, 100%, 55%, 1) 0%,
+			hsla(33, 94%, 57%, 1) 47%,
+			hsla(197, 100%, 64%, 1) 100%
+		);
+	}
+
+	#splash2 {
+		bottom: 5vh;
+		right: 25vh;
+		height: 50vh;
+		width: 20vh;
+		background: linear-gradient(
+			45deg,
+			hsla(225, 100%, 68%, 1) 0%,
+			hsla(57, 100%, 71%, 1) 49%,
+			hsla(339, 100%, 55%, 1) 100%
+		);
+		transform: rotate(45deg);
+	}
+
+	#blurLayer {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		backdrop-filter: blur(80px);
+		-webkit-backdrop-filter: blur(80px);
+		-moz-backdrop-filter: blur(80px);
+		z-index: -1;
+	}
+
+	/* ---------- Style Buttons --------- */
+
+	#styleButtons div:first-child {
+		border-top-left-radius: 15px;
+		border-top-right-radius: 15px;
+	}
+	#styleButtons div:last-child {
+		border-bottom-left-radius: 15px;
+		border-bottom-right-radius: 15px;
+	}
+
+	.styleButton {
 		position: fixed;
 		width: 28px;
 		height: 28px;
-		/* border-radius: 50%; */
 		cursor: pointer;
 		padding: 0.22rem;
 		background-color: rgba(var(--foreground), 0.1);
@@ -218,15 +491,8 @@
 		-webkit-backdrop-filter: blur(var(--blur));
 		-moz-backdrop-filter: blur(var(--blur));
 	}
-	.styleButtons:first-of-type {
-		border-top-left-radius: 15px;
-		border-top-right-radius: 15px;
-	}
-	.styleButtons:last-of-type {
-		border-bottom-left-radius: 15px;
-		border-bottom-right-radius: 15px;
-	}
-	.styleButtons:hover {
+
+	.styleButton:hover {
 		filter: brightness(0.8);
 	}
 
@@ -262,6 +528,9 @@
 	:not(.animation) #animationButton {
 		color: rgba(var(--foreground), 0.8);
 	}
+
+	/* ------------ Keyframes ----------- */
+
 	@keyframes scrolling {
 		0% {
 			background-position: 0%;

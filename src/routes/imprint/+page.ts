@@ -3,6 +3,8 @@
 /** @type {import('./$types').PageLoad} */
 /** @type {import('./$types').LayoutServerLoad} */
 
-export function load({}) {
-	return {};
+export function load({ page }) {
+	console.log(page);
+
+	return { page };
 }

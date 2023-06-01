@@ -3,16 +3,15 @@
 
 	/* ------------- Imports ------------ */
 
-	import { onMount, onDestroy } from 'svelte';
-	import P5 from 'p5-svelte';
+	import { onMount } from 'svelte';
 
 	/* -------- Component Imports ------- */
 
-	import ChapterTitle from '../components/ChapterTitle.svelte';
-	import ProjectCard from '../components/ProjectCard.svelte';
 	import Seperator from '../components/Seperator.svelte';
-	import SkillCard from '../components/SkillCard.svelte';
+	import ChapterTitle from '../components/ChapterTitle.svelte';
 	import SocialCard from '../components/SocialCard.svelte';
+	import SkillCard from '../components/SkillCard.svelte';
+	import ProjectCard from '../components/ProjectCard.svelte';
 
 	/* -------------- Icons ------------- */
 
@@ -25,7 +24,7 @@
 
 	/* ------------ Variables ----------- */
 
-	// tags = ['p5.js', 'vue', 'node.js', 'php', 'sql', 'game', 'animation', 'finished', 'wip', 'discontinued', 'discord',]
+	// NOTE: tags = ['p5.js', 'vue', 'node.js', 'php', 'sql', 'game', 'animation', 'finished', 'wip', 'discontinued', 'discord',]
 	const projects = [
 		{
 			name: 'asteroids',
@@ -96,16 +95,10 @@
 		}
 	];
 
-	var removeP5 = false;
-
 	/* ----------- Life Cycles ---------- */
 
 	onMount(() => {
 		_isDarkMode.subscribe((value) => {});
-	});
-
-	onDestroy(() => {
-		removeP5 = true;
 	});
 
 	/* ------------ Functions ----------- */
@@ -116,172 +109,12 @@
 		const ageDate = new Date(ageDifMs);
 		return Math.abs(ageDate.getUTCFullYear() - 1970);
 	}
-
-	function isTouchDevice() {
-		if (typeof window === 'undefined') return false;
-		return (
-			'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0
-		);
-	}
-
-	/* -------------- P5.js ------------- */
-
-	const sketch = (p5) => {
-		class Dot {
-			constructor(x, y) {
-				this.id = Math.floor(Math.random() * 10000);
-				this.pos = p5.createVector(x, y);
-				this.vel = p5.createVector(0, 0.15);
-				this.vel.rotate(p5.random(-p5.PI, p5.PI));
-				this.connections = [];
-			}
-
-			update() {
-				this.move();
-				this.draw();
-			}
-
-			move() {
-				this.pos.add(this.vel);
-				if (this.pos.x < 5 || this.pos.x > p5.width - 5) this.vel.x *= -1;
-				if (this.pos.y < 5 || this.pos.y > p5.height - 5) this.vel.y *= -1;
-				if (this.pos.x < 0 || this.pos.x > p5.width || this.pos.y < 0 || this.pos.y > p5.height) {
-					this.pos = p5.createVector(p5.random(5, p5.width - 5), p5.random(5, p5.height - 5));
-				}
-			}
-
-			draw() {
-				p5.push();
-				p5.noFill();
-				p5.strokeWeight(2);
-				p5.stroke(fgColor, 255);
-				p5.translate(this.pos.x, this.pos.y);
-				p5.point(0, 0);
-				p5.pop();
-			}
-
-			drawConnections(dots, full) {
-				this.connections = [];
-				dots.forEach((d) => {
-					// if (this.connections.length >= 2) return;
-					// if (this.connections.length > 10) return;
-					if (this.id == d.id) return;
-					if (d.connections.includes(this.id)) return;
-					let distance = d.pos.dist(this.pos);
-					if (distance > connectionDistance) return;
-					// else this.connections = this.connections.filter((c) => c !== d.id);
-					if (!this.connections.includes(d.id)) this.connections.push(d.id);
-					p5.push();
-					if (full) {
-						p5.strokeWeight(0.5);
-						p5.stroke([...fgColor.map((c) => c), ...[255]]);
-					} else {
-						p5.strokeWeight(p5.map(distance, 0, connectionDistance, 0.5, 0.1));
-						p5.stroke(fgColor, p5.map(distance, 0, connectionDistance, 255, 0));
-					}
-					p5.line(this.pos.x, this.pos.y, d.pos.x, d.pos.y);
-					p5.pop();
-				});
-			}
-		}
-
-		const connectionDistance = 150;
-		var lowSpec = false;
-		var fgColor;
-		var bgColor;
-		var killSwitch = 0;
-		var dots;
-
-		function setColor() {
-			const rootStyle = getComputedStyle(document.querySelector(':root'));
-			fgColor = rootStyle
-				.getPropertyValue('--foreground')
-				.split(', ')
-				.map((x) => parseInt(x));
-			bgColor = rootStyle
-				.getPropertyValue('--background')
-				.split(', ')
-				.map((x) => parseInt(x));
-		}
-
-		function initDots() {
-			dots = [];
-			const initAmount = Math.min((p5.width * p5.height) / Math.pow(90, 2), 500);
-			const amount = lowSpec ? initAmount / 2 : initAmount;
-			for (let i = 0; i < amount; i++) {
-				dots.push(new Dot(p5.random(5, p5.width, -5), p5.random(5, p5.height - 5)));
-			}
-		}
-
-		p5.setup = () => {
-			p5.frameRate(60);
-			setColor();
-			p5.createCanvas(p5.windowWidth, p5.windowHeight);
-			initDots();
-		};
-
-		p5.windowResized = () => {
-			p5.resizeCanvas(p5.windowWidth, p5.windowHeight);
-			initDots();
-			killSwitch = 0;
-		};
-
-		// var lastFrameRate = 0;
-		// function showFPS() {
-		// 	if (p5.frameCount % 10 == 0) {
-		// 		lastFrameRate = Math.floor(p5.frameRate());
-		// 	}
-		// 	p5.push();
-		// 	p5.fill(255);
-		// 	p5.stroke(0);
-		// 	p5.strokeWeight(1);
-		// 	p5.textSize(12);
-		// 	p5.text(lastFrameRate, 10, 20);
-		// 	p5.pop();
-		// }
-
-		p5.draw = () => {
-			if (removeP5) p5.remove();
-			setColor();
-			p5.background(bgColor);
-			if (killSwitch < 10) {
-				const fps = Math.floor(p5.frameRate());
-				if (fps != 0 && fps < 30) {
-					killSwitch++;
-				} else if (fps >= 30) {
-					killSwitch = 0;
-				}
-				dots.forEach((d) => {
-					if ($animation) {
-						d.update();
-					}
-					if (p5.dist(d.pos.x, d.pos.y, p5.mouseX, p5.mouseY) < 200) {
-						d.drawConnections(dots, true);
-					} else {
-						d.drawConnections(dots, false);
-					}
-				});
-			} else {
-				if (!lowSpec) {
-					lowSpec = true;
-					initDots();
-					killSwitch = 0;
-				}
-			}
-			// showFPS();
-		};
-	};
 </script>
 
 <!-- svelte-ignore a11y-interactive-supports-focus -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 
 <main class:darkMode={$_isDarkMode} class:animation={$animation}>
-	{#if !isTouchDevice()}
-		<!-- <div id="p5">
-			<P5 {sketch} />
-		</div> -->
-	{/if}
 	<div id="welcome">
 		<div id="welcomeImgContainer">
 			<div id="welcomeImg" />
@@ -294,13 +127,12 @@
 				<br />
 				I am a <code>{getAge()}</code> y/o <code>software developer</code>
 				<br />
-				Feel free to look around
-				<img class="svgIcon" alt="heart" src="./heart.svg" />
+				Feel free to look around!
 			</span>
 		</div>
 	</div>
 
-	<!-- <Seperator /> -->
+	<Seperator />
 
 	<ChapterTitle text="socials" zoomEffect="true" />
 
@@ -360,67 +192,49 @@
 		{/each}
 	</ul>
 
-	<span class="footer no-select"> made with ♥ by zlyfer </span>
-	<!-- <span class="footer no-select"> General Kenobi </span> -->
-
-	<div id="blurLayer" />
-	<div class="bgSplash" id="splash1" />
-	<div class="bgSplash" id="splash2" />
+	<span class="badge no-select">
+		made with ❤ by zlyfer | <a href="/imprint">imprint</a>
+	</span>
 </main>
 
 <style>
-	#p5 {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		z-index: -1;
-	}
-
 	main {
-		margin: auto;
+		margin: 2rem auto;
 		padding: 5rem;
 		max-width: var(--globalWidth);
+		border-radius: 22px;
+		border: 1px solid rgba(var(--accent), 50%);
+		background-color: rgba(255, 255, 255, 0.2);
+	}
+	main.darkMode {
+		background-color: rgba(255, 255, 255, 0.1);
 	}
 
-	#welcome {
-		display: grid;
-		position: relative;
-		background: rgba(var(--accent), 10%);
-		border: 5px solid rgba(var(--accent), 50%);
-		border-radius: 25px;
-		backdrop-filter: blur(var(--blur));
-		-webkit-backdrop-filter: blur(var(--blur));
-		-moz-backdrop-filter: blur(var(--blur));
+	a {
+		color: rgba(var(--accent), 1);
+		text-decoration: none;
 	}
 
-	#welcomeImgContainer {
-		width: 50%;
-		aspect-ratio: 1/1;
-		margin: 2.5rem auto 1.5rem auto;
-		box-shadow: 0 0 0 2px rgba(var(--accent), 50%);
-		border: 30px solid rgba(var(--background), 100%);
-		background: rgba(var(--background), 100%);
-		border-radius: 60px;
-	}
+	/* ---------- Welcome Card ---------- */
 
 	#welcomeImg {
-		width: 100%;
-		height: 100%;
-		aspect-ratio: 1/1;
+		width: 65vw;
+		height: 65vw;
+		max-width: 55ch;
+		max-height: 55ch;
+		aspect-ratio: 1/1 !important;
+		margin: 2.5rem auto;
 		box-shadow: inset 0 0 5px 2px var(--glowColor);
-		border-radius: 50px;
-		background-image: url('/selfie.webp');
+		border-radius: 20px;
+		background-image: url('/logo.webp');
 		background-size: cover;
 		background-position: center;
 		background-repeat: no-repeat;
 		border: 1px solid var(--glowColor);
-		animation: fadeImage 20s ease-in-out infinite;
 		filter: drop-shadow(0 0 0.2rem var(--glowColor));
+		animation: fadeImage 20s ease-in-out infinite;
 	}
 	.animation #welcomeImg {
-		background-image: url('/selfie.webp');
 		animation: animation 5s ease-in-out infinite, fadeImage 20s ease-in-out infinite;
 	}
 	#welcome .info {
@@ -432,12 +246,6 @@
 		color: rgba(var(--foreground), 90%);
 		line-height: 150%;
 	}
-	#welcome .svgIcon {
-		height: 1.85rem;
-		position: absolute;
-		margin-left: 5px;
-		margin-top: 0px;
-	}
 
 	code {
 		font-size: 0.875em;
@@ -447,6 +255,8 @@
 		border-radius: 5px;
 		padding: 0.2em 0.4em;
 	}
+
+	/* -------------- Cards ------------- */
 
 	ul {
 		list-style-type: none;
@@ -465,56 +275,9 @@
 		padding: 0 5px;
 	}
 
-	/* ---- Colorful Blur Background ---- */
+	/* -------------- Badge ------------- */
 
-	.bgSplash {
-		position: fixed;
-		z-index: -2;
-		filter: blur(100px);
-	}
-
-	#splash1 {
-		top: 10%;
-		left: 10%;
-		height: 30vh;
-		aspect-ratio: 1/1;
-		background: linear-gradient(
-			45deg,
-			hsla(339, 100%, 55%, 1) 0%,
-			hsla(33, 94%, 57%, 1) 47%,
-			hsla(197, 100%, 64%, 1) 100%
-		);
-	}
-
-	#splash2 {
-		bottom: 5vh;
-		right: 25vh;
-		height: 50vh;
-		width: 20vh;
-		background: linear-gradient(
-			45deg,
-			hsla(225, 100%, 68%, 1) 0%,
-			hsla(57, 100%, 71%, 1) 49%,
-			hsla(339, 100%, 55%, 1) 100%
-		);
-		transform: rotate(45deg);
-	}
-
-	#blurLayer {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		backdrop-filter: blur(80px);
-		-webkit-backdrop-filter: blur(80px);
-		-moz-backdrop-filter: blur(80px);
-		z-index: -1;
-	}
-
-	/* --------------- -- --------------- */
-
-	span.footer {
+	span.badge {
 		display: block;
 		width: fit-content;
 		margin: 35vh auto 50px auto;
@@ -525,12 +288,17 @@
 		padding: 3px 15px;
 		border-radius: 2rem;
 		backdrop-filter: blur(10px);
-		color: rgba(255, 255, 255, 0.5);
+		-webkit-backdrop-filter: blur(10px);
+		-moz-backdrop-filter: blur(10px);
+		color: rgba(0, 0, 0, 0.4);
 		background-color: rgba(0, 0, 0, 0.1);
 	}
-	.darkMode span.footer {
+	.darkMode span.badge {
+		color: rgba(255, 255, 255, 0.5);
 		background-color: rgba(255, 255, 255, 0.1);
 	}
+
+	/* -------- Responsive Design ------- */
 
 	@media (max-width: 875px) {
 		.socialCards {
@@ -562,57 +330,49 @@
 		}
 	}
 	@media (max-width: 500px) {
-		#welcome .svgIcon {
-			height: 1.3rem;
-		}
 		#welcome .text {
 			font-size: 1rem;
 		}
 	}
 	@media (max-width: 350px) {
-		#welcome .svgIcon {
-			margin-top: 2px;
-			height: 1.2rem;
-		}
 		#welcome .text {
 			font-size: 0.8rem;
 		}
 	}
 	@media (max-width: 300px) {
-		#welcome .svgIcon {
-			height: 1.1rem;
-		}
 		#welcome .text {
 			font-size: 0.7rem;
 		}
 	}
 
+	/* ----------- Animations ----------- */
+
 	@keyframes fadeImage {
 		0% {
 			background-image: url('/selfie.webp');
 			--glowColor: var(--glowSelfie);
-			opacity: 1;
+			-webkit-filter: opacity(1) drop-shadow(0 0 0.2rem var(--glowColor));
 		}
 		45% {
 			background-image: url('/selfie.webp');
 			--glowColor: var(--glowSelfie);
-			opacity: 1;
+			-webkit-filter: opacity(1) drop-shadow(0 0 0.45rem var(--glowColor));
 		}
 		47% {
-			opacity: 0.5;
+			-webkit-filter: opacity(0.5) drop-shadow(0 0 0.46rem var(--glowColor));
 		}
 		50% {
 			background-image: url('/logo.webp');
 			--glowColor: var(--glowLogo);
-			opacity: 1;
+			-webkit-filter: opacity(1) drop-shadow(0 0 0.5rem var(--glowColor));
 		}
 		95% {
 			background-image: url('/logo.webp');
 			--glowColor: var(--glowLogo);
-			opacity: 1;
+			-webkit-filter: opacity(1) drop-shadow(0 0 0.46rem var(--glowColor));
 		}
 		97% {
-			opacity: 0.5;
+			-webkit-filter: opacity(0.5) drop-shadow(0 0 0.45rem var(--glowColor));
 		}
 	}
 	@keyframes animation {
