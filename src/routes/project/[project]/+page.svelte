@@ -40,6 +40,7 @@
 		width: 100vw;
 	}
 	iframe {
+		display: block;
 		border: none;
 		height: 100%;
 		width: 100%;
