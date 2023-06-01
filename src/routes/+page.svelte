@@ -230,7 +230,7 @@
 		background-size: cover;
 		background-position: center;
 		background-repeat: no-repeat;
-		border: 1px solid var(--glowColor);
+		border: 2px solid var(--glowColor);
 		filter: drop-shadow(0 0 0.2rem var(--glowColor));
 		animation: fadeImage 20s ease-in-out infinite;
 	}
