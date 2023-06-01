@@ -203,7 +203,7 @@
 		padding: 5rem;
 		max-width: var(--globalWidth);
 		border-radius: 22px;
-		border: 1px solid rgba(var(--accent), 50%);
+		border: 2px solid rgba(var(--accent), 50%);
 		background-color: rgba(255, 255, 255, 0.2);
 	}
 	main.darkMode {
@@ -230,7 +230,7 @@
 		background-size: cover;
 		background-position: center;
 		background-repeat: no-repeat;
-		border: 2px solid var(--glowColor);
+		border: 1px solid var(--glowColor);
 		filter: drop-shadow(0 0 0.2rem var(--glowColor));
 		animation: fadeImage 20s ease-in-out infinite;
 	}
