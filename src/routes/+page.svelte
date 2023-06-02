@@ -323,6 +323,12 @@
 		}
 	}
 
+	@media (max-width: 120ch) {
+		main {
+			margin: 0;
+			border-radius: 0;
+		}
+	}
 	@media (max-width: 705px) {
 		main {
 			width: 100%;
@@ -334,15 +340,24 @@
 		#welcome .text {
 			font-size: 1rem;
 		}
+		span.badge {
+			font-size: 1.2rem;
+		}
 	}
 	@media (max-width: 350px) {
 		#welcome .text {
 			font-size: 0.8rem;
 		}
+		span.badge {
+			font-size: 1rem;
+		}
 	}
 	@media (max-width: 300px) {
 		#welcome .text {
 			font-size: 0.7rem;
+		}
+		span.badge {
+			font-size: 0.8rem;
 		}
 	}
 
