@@ -281,7 +281,7 @@
 	span.badge {
 		display: block;
 		width: fit-content;
-		margin: 35vh auto 50px auto;
+		margin: 35vh auto 8rem auto;
 		text-align: center;
 		font-size: 1.5rem;
 		display: block;
