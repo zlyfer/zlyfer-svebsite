@@ -205,6 +205,7 @@
 		border-radius: 22px;
 		border: 2px solid rgba(var(--accent), 50%);
 		background-color: rgba(255, 255, 255, 0.2);
+		box-sizing: content-box;
 	}
 	main.darkMode {
 		background-color: rgba(255, 255, 255, 0.1);
