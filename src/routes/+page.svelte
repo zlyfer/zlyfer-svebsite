@@ -203,9 +203,8 @@
 		padding: 5rem;
 		max-width: var(--globalWidth);
 		border-radius: 22px;
-		border: 2px solid rgba(var(--accent), 50%);
+		border: 5px solid rgba(var(--accent), 50%);
 		background-color: rgba(255, 255, 255, 0.2);
-		box-sizing: content-box;
 	}
 	main.darkMode {
 		background-color: rgba(255, 255, 255, 0.1);
@@ -328,6 +327,7 @@
 		main {
 			margin: 0;
 			border-radius: 0;
+			border: 1px solid transparent;
 		}
 	}
 	@media (max-width: 705px) {
