@@ -192,7 +192,7 @@
 		{/each}
 	</ul>
 
-	<span class="badge no-select">
+	<span class="badge">
 		made with ❤ by zlyfer | <a href="/imprint">imprint</a>
 	</span>
 </main>

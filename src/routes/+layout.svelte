@@ -384,6 +384,14 @@
 		user-select: none;
 	}
 
+	:global(*::selection) {
+		/* background: rgba(var(--accent), 0.8); */
+		background: #fd2448;
+		color: rgba(var(--lightBackGround), 1);
+		/* background-color: transparent; */
+		/* text-shadow: rgba(var(--accent), 1) 0 0 10px; */
+	}
+
 	/* -------------- P5js -------------- */
 
 	#p5 {
