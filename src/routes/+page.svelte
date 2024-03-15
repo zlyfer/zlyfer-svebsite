@@ -10,6 +10,7 @@
 	import Seperator from '../components/Seperator.svelte';
 	import ChapterTitle from '../components/ChapterTitle.svelte';
 	import SocialCard from '../components/SocialCard.svelte';
+	import SocialCard2 from '../components/SocialCard2.svelte';
 	import SkillCard from '../components/SkillCard.svelte';
 	import ProjectCard from '../components/ProjectCard.svelte';
 
