@@ -1,10 +1,10 @@
 #!/bin/bash
+source /home/zlyfer/.nvm/nvm.sh
+
 cd /home/zlyfer/websites/zlyfer-svebsite
 git pull
-#/home/zlyfer/.nvm/versions/node/v16.14.2/bin/npm install
-#/home/zlyfer/.nvm/versions/node/v16.14.2/bin/npm run build
-nvm use 16
+nvm use 16.14
 npm install
 npm run build
-systemctl --user restart svebsite
+systemctl restart svebsite
 
