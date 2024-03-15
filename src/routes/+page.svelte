@@ -116,6 +116,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 
 <main class:darkMode={$_isDarkMode} class:animation={$animation}>
+	1
 	<div id="welcome">
 		<div id="welcomeImgContainer">
 			<div id="welcomeImg" />
