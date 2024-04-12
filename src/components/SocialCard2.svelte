@@ -9,6 +9,8 @@
 
 	/* -------------- Icons ------------- */
 
+	import FaGithub from 'svelte-icons/fa/FaGithub.svelte';
+
 	/* --------- Store Variables -------- */
 
 	import { animation } from '../store.js';
@@ -37,99 +39,74 @@
 	style:--typeColor={typeColor}
 	style:--typeColorCounter={typeColorCounter}
 >
-	<!-- <a {href} target="_blank">
+	<a class="link" {href} target="_blank">
 		<h2 class="title">
-			{title}
+			<div class="link-icon">
+				<FaGithub />
+			</div>
+			<span class="link-title">{title}</span>
 		</h2>
-	</a> -->
-
-	<div class="navbar__item -blue">
-		<span class="navbar__icon">
-			<i class="fa-brands fa-twitch" />
-		</span>
-	</div>
+	</a>
 </main>
 
 <style>
-	.socialCard {
-		list-style: none;
-		display: flex;
-		background-image: none;
-		background-size: 400%;
-		border-radius: 20px;
-		background-position: 100%;
-		transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-		border: 5px solid rgba(var(--typeColor), 0.4);
-		box-sizing: border-box;
-		-moz-box-sizing: border-box;
-		-webkit-box-sizing: border-box;
-		backdrop-filter: blur(var(--blur));
-		-webkit-backdrop-filter: blur(var(--blur));
-		-moz-backdrop-filter: blur(var(--blur));
-	}
-	.socialCard > a {
-		width: 100%;
+	.link {
+		display: inline-flex;
+		cursor: pointer;
+		justify-content: center;
+		align-items: center;
+		width: 50px;
+		height: 100%;
+		border-radius: 99em;
+		position: relative;
+		z-index: 1;
+		overflow: hidden;
+		transform-origin: center left;
+		transition: width 0.2s ease-in;
 		text-decoration: none;
-		line-height: 1.4;
-		padding: 1rem 1.3rem;
-		border-radius: 0.35rem;
-		color: rgba(var(--foreground), 1);
-		opacity: 0.8;
+		color: inherit;
 	}
-	.socialCard:hover {
-		background-position: 0;
-		background-image: linear-gradient(
-			45deg,
-			rgb(var(--typeColor)),
-			rgb(var(--typeColorCounter)) 30%
-		);
-		border: 5px solid rgba(var(--typeColor), 1);
-		filter: brightness(1.1) drop-shadow(0 0 0.3rem rgba(var(--typeColor), 1));
+	.link:before {
+		position: absolute;
+		z-index: -1;
+		content: '';
+		display: block;
+		border-radius: 99em;
+		width: 0%;
+		height: 100%;
+		top: 0;
+		transform: translateX(0%);
+		transition: transform 0.2s ease-in;
+		transform-origin: center right;
+		background-color: #eee;
 	}
-	.socialCard.animation:hover {
-		animation: animation 5s infinite;
+	.link:hover,
+	.link:focus {
+		outline: 0;
+		width: 100%;
 	}
-	.socialCard:hover h2 {
-		color: white;
+	.link:hover:before,
+	.link:hover .link-title {
+		width: 100%;
+		/* transform: translateX(0%); */
+		transform: scale(1);
 	}
-
-	.title {
-		margin: 0;
-		font-size: 1.25rem;
+	.link-icon {
+		color: var(--color);
+		font-size: 27px !important;
+		display: block;
+		flex-shrink: 0;
+		left: 18px;
+		position: absolute;
+	}
+	.link-title {
+		color: var(--color);
+		/* transform: translateX(100%); */
+		transform: scale(0);
+		transition: transform 0.2s ease-in;
+		display: block;
 		text-align: center;
-		transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-	}
-
-	@media (hover: none) and (pointer: coarse) {
-		.socialCard {
-			background-position: 0;
-			background-image: linear-gradient(
-				45deg,
-				rgba(var(--typeColor), 30%),
-				rgba(var(--typeColorCounter), 30%) 30%
-			);
-			border: 5px solid rgba(var(--typeColor), 1);
-		}
-		.title {
-			color: rgba(var(--foreground), 1);
-		}
-	}
-
-	@keyframes animation {
-		0% {
-			filter: brightness(1.1) drop-shadow(0 0 0rem rgba(var(--typeColor), 1));
-		}
-		25% {
-			filter: brightness(1.1) drop-shadow(0 0 0.3rem rgba(var(--typeColor), 1));
-		}
-		50% {
-			filter: brightness(1.1) drop-shadow(0 0 0rem rgba(var(--typeColor), 1));
-		}
-		75% {
-			filter: brightness(1.1) drop-shadow(0 0 0.3rem rgba(var(--typeColorCounter), 1));
-		}
-		100% {
-			filter: brightness(1.1) drop-shadow(0 0 0rem rgba(var(--typeColorCounter), 1));
-		}
+		text-indent: 20px;
+		width: 100%;
 	}
 </style>

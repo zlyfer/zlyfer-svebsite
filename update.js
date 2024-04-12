@@ -16,6 +16,7 @@ http
 				// const signature = req.headers['x-hub-signature-256'];
 
 				console.log('New POST request at: ' + new Date().toLocaleString());
+				console.log(body);
 
 				exec('bash /home/zlyfer/websites/zlyfer-svebsite/update.sh', (error, stdout, stderr) => {
 					if (error) {
