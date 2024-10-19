@@ -1,3 +1,3 @@
-# Svebsite - My portfolio
+# Svebsite - Portfolio
 
 [Visit](https://zlyfer.net)
