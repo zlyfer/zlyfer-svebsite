@@ -6,7 +6,7 @@ After=multi-user.target
 Type=idle
 Environment=PORT=4600
 ExecStart=/home/zlyfer/.nvm/versions/node/v16.16.0/bin/node build
-WorkingDirectory=/home/zlyfer/websites/zlyfer-svebsite
+WorkingDirectory=/var/www/html/net.zlyfer
 Restart=always
 RestartSec=5
 

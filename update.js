@@ -18,7 +18,7 @@ http
 				console.log('New POST request at: ' + new Date().toLocaleString());
 				console.log(body);
 
-				exec('bash /home/zlyfer/websites/zlyfer-svebsite/update.sh', (error, stdout, stderr) => {
+				exec('bash /var/www/html/net.zlyfer/update.sh', (error, stdout, stderr) => {
 					if (error) {
 						console.error(`exec error: ${error}`);
 						return;
