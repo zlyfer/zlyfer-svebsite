@@ -1,9 +1,10 @@
 #!/bin/bash
-#source /home/zlyfer/.nvm/nvm.sh
+
+source /etc/environment
+export PATH=$PATH:/home/zlyfer/.local/share/fnm/node-versions/v16.16.0/installation/bin
 
 cd /var/www/html/net.zlyfer
 git pull
-#nvm use 16.14
 /home/zlyfer/.local/share/fnm/node-versions/v16.16.0/installation/bin/npm install
 /home/zlyfer/.local/share/fnm/node-versions/v16.16.0/installation/bin/npm run build
-sudo systemctl restart svebsite
+sudo /usr/bin/systemctl restart svebsite
