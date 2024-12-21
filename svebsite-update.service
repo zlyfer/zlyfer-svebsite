@@ -8,8 +8,8 @@ ExecStart=/home/zlyfer/.local/share/fnm/node-versions/v16.16.0/installation/bin/
 WorkingDirectory=/var/www/html/net.zlyfer
 Restart=always
 RestartSec=5
-User=www-data
-Group=www-data
+User=zlyfer
+Group=zlyfer
 
 [Install]
 WantedBy=multi-user.target
