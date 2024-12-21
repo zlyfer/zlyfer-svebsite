@@ -5,10 +5,12 @@ After=multi-user.target
 [Service]
 Type=idle
 Environment=PORT=4600
-ExecStart=/home/zlyfer/.nvm/versions/node/v16.16.0/bin/node build
+ExecStart=/home/zlyfer/.local/share/fnm/node-versions/v16.16.0/installation/bin/node build
 WorkingDirectory=/var/www/html/net.zlyfer
 Restart=always
 RestartSec=5
+User=zlyfer
+Group=zlyfer
 
 [Install]
 WantedBy=multi-user.target

@@ -4,10 +4,12 @@ After=multi-user.target
 
 [Service]
 Type=idle
-ExecStart=/home/zlyfer/.nvm/versions/node/v16.14.2/bin/node update.js
+ExecStart=/home/zlyfer/.local/share/fnm/node-versions/v16.16.0/installation/bin/node update.js
 WorkingDirectory=/var/www/html/net.zlyfer
 Restart=always
 RestartSec=5
+User=www-data
+Group=www-data
 
 [Install]
 WantedBy=multi-user.target
