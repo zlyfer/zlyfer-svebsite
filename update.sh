@@ -5,6 +5,6 @@ export PATH=$PATH:/home/zlyfer/.local/share/fnm/node-versions/v16.16.0/installat
 
 cd /var/www/html/net.zlyfer
 git pull
-/home/zlyfer/.local/share/fnm/node-versions/v16.16.0/installation/bin/npm install
-/home/zlyfer/.local/share/fnm/node-versions/v16.16.0/installation/bin/npm run build
+npm install
+npm run build
 sudo /usr/bin/systemctl restart svebsite
