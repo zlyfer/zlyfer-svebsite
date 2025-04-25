@@ -159,6 +159,16 @@
 	<ul class="projectCards">
 		<li>
 			<ProjectCard
+				title="league of legends arena checklist"
+				description="Keep track of your #1 wins in League of Legends Arena!"
+				cardColor="#db4f47"
+				tags={['wip', 'gaming', 'vanilla', 'php', 'sql']}
+				url="https://lolarena.zlyfer.net/"
+				github="https://github.com/zlyfer/lolarena"
+			/>
+		</li>
+		<li>
+			<ProjectCard
 				title="DynChan"
 				description="Discord Bot for fully dynamic voice/text channels!"
 				cardColor="#448aff"

@@ -170,6 +170,12 @@
 	span.subsonic {
 		background-color: #ffd320;
 	}
+	span.vanilla {
+		background-color: #ebdda5;
+	}
+	span.gaming {
+		background-color: #935cc7;
+	}
 
 	.githubIcon {
 		width: 1.5rem;
