@@ -7,12 +7,11 @@
 
 	/* -------- Component Imports ------- */
 
-	import Seperator from '../components/Seperator.svelte';
-	import ChapterTitle from '../components/ChapterTitle.svelte';
-	import SocialCard from '../components/SocialCard.svelte';
-	import SocialCard2 from '../components/SocialCard2.svelte';
-	import SkillCard from '../components/SkillCard.svelte';
-	import ProjectCard from '../components/ProjectCard.svelte';
+	import Seperator from '@components/Seperator.svelte';
+	import ChapterTitle from '@components/ChapterTitle.svelte';
+	import SocialCard from '@components/SocialCard.svelte';
+	import SkillCard from '@components/SkillCard.svelte';
+	import ProjectCard from '@components/ProjectCard.svelte';
 
 	/* -------------- Icons ------------- */
 
@@ -25,17 +24,16 @@
 
 	/* ------------ Variables ----------- */
 
-	// NOTE: tags = ['p5.js', 'vue', 'node.js', 'php', 'sql', 'game', 'animation', 'finished', 'wip', 'discontinued', 'discord',]
-	const projects = [
+	const otherProjects = [
 		{
 			name: 'asteroids',
-			tags: ['finished', 'p5.js', 'game'],
+			tags: ['p5.js', 'game'],
 			description:
 				'An arcade-style Asteroids game with auto generated vertex-based asteroids and infinite border.'
 		},
 		{
 			name: 'snake2',
-			tags: ['finished', 'p5.js', 'game'],
+			tags: ['p5.js', 'game'],
 			description: 'A gridless snake game. More visual pleasing successor of my first attempt.'
 		},
 
@@ -46,37 +44,37 @@
 		},
 		{
 			name: 'square',
-			tags: ['finished', 'p5.js', 'animation'],
+			tags: ['p5.js', 'animation'],
 			description: 'Rainbow shapes animation with 5 different modifiers that change over time.'
 		},
 		{
 			name: 'lissajous-curve-table',
-			tags: ['finished', 'p5.js', 'animation'],
+			tags: ['p5.js', 'animation'],
 			description: 'A visualisation of the lissajous curve table. Inspired by The Coding Train.'
 		},
 		{
 			name: 'condot',
-			tags: ['finished', 'p5.js', 'animation'],
+			tags: ['p5.js', 'animation'],
 			description: 'Slow and calming background animation.'
 		},
 		{
 			name: 'low-poly-art',
-			tags: ['finished', 'p5.js', 'animation'],
+			tags: ['p5.js', 'animation'],
 			description: 'Colorful art using vertex based shapes.'
 		},
 		{
 			name: 'barnsley-fern',
-			tags: ['finished', 'p5.js', 'animation'],
+			tags: ['p5.js', 'animation'],
 			description: 'The Barnsley Fern fractal - visualized in color.'
 		},
 		{
 			name: 'Material-Clock',
-			tags: ['finished', 'p5.js', 'animation'],
+			tags: ['p5.js', 'animation'],
 			description: 'Simplistic material-style clock with milliseconds.'
 		},
 		{
 			name: 'snake',
-			tags: ['finished', 'p5.js', 'game'],
+			tags: ['p5.js', 'game'],
 			description: 'A grid-based snake game with many options and speedrun-potential (seeds).'
 		},
 		{
@@ -86,7 +84,7 @@
 		},
 		{
 			name: 'vertex-based-shapes',
-			tags: ['finished', 'p5.js', 'animation'],
+			tags: ['p5.js', 'animation'],
 			description: 'Shapes made out of vertices that can be controlled with parameters.'
 		},
 		{
@@ -112,33 +110,26 @@
 	}
 </script>
 
-<!-- svelte-ignore a11y-interactive-supports-focus -->
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-
-<main class:darkMode={$_isDarkMode} class:animation={$animation}>
+<main class:darkMode={$_isDarkMode}>
 	<div id="welcome">
-		<div id="welcomeImgContainer">
-			<div id="welcomeImg" />
-		</div>
+		<div id="welcomeImg" />
 		<div class="info">
 			<span class="text">
 				Hello there,
 				<br />
 				<code>Frederik Shull</code> aka <code>zlyfer</code> here!
 				<br />
-				I am a <code>{getAge()}</code> y/o <code>software developer</code>
+				I am a <code>{getAge()}</code> y/o <code>software developer</code> .
 				<br />
-				Feel free to look around!
+				Feel free to look around~
 			</span>
 		</div>
 	</div>
 
 	<Seperator />
-
 	<ChapterTitle text="socials" zoomEffect="true" />
 
 	<ul class="socialCards">
-		<li><SocialCard href="https://dynchan.net" title="DynChan" type="dynchan" /></li>
 		<li><SocialCard href="https://github.com/zlyfer" title="GitHub" type="github" /></li>
 		<li>
 			<SocialCard href="https://instagram.com/zlyfer.arts/" title="Instagram" type="instagram" />
@@ -146,6 +137,9 @@
 		<li><SocialCard href="https://www.tiktok.com/@zlyfer2" title="TikTok" type="tiktok" /></li>
 		<li><SocialCard href="https://www.youtube.com/@zlyfer" title="Youtube" type="youtube" /></li>
 		<li><SocialCard href="https://twitch.tv/zlyfer2" title="Twitch" type="twitch" /></li>
+		<li>
+			<SocialCard href="https://steamcommunity.com/id/zlyfer" title="Steam" type="steam" />
+		</li>
 		<li><SocialCard href="https://twitter.com/zIyfer" title="Twitter" type="twitter" /></li>
 		<li>
 			<SocialCard
@@ -156,31 +150,66 @@
 		</li>
 	</ul>
 
-	<!-- <Seperator />
-
-	<ChapterTitle text="work in progress" zoomEffect="true" /> -->
-
-	<!-- <Seperator />
-
-	<ChapterTitle text="knowledge" zoomEffect="true" />
-
-	<SkillCard /> -->
+	<!-- <Seperator /> -->
+	<!-- <ChapterTitle text="knowledge" zoomEffect="true" /> -->
 
 	<Seperator />
-
-	<ChapterTitle text="some projects" zoomEffect="true" />
+	<ChapterTitle text="full stack projects" zoomEffect="true" />
 
 	<ul class="projectCards">
 		<li>
 			<ProjectCard
 				title="DynChan"
 				description="Discord Bot for fully dynamic voice/text channels!"
+				cardColor="#448aff"
 				tags={['wip', 'discord', 'vue', 'node.js', 'php', 'sql']}
 				url="https://dynchan.net/"
 				github="https://github.com/dynchan"
 			/>
 		</li>
-		{#each projects as project}
+		<li>
+			<ProjectCard
+				title="UnGunWiz"
+				description="PUBG Weapon Stats & Charts! Available as Android App."
+				cardColor="#9d61d5"
+				tags={['wip', 'ionic', 'angular', 'php', 'sql']}
+				url="https://ungunwiz.net/"
+				github="https://github.com/ungunwiz"
+			/>
+		</li>
+	</ul>
+
+	<Seperator />
+	<ChapterTitle text="also working on" zoomEffect="true" />
+
+	<ul class="projectCards">
+		<li>
+			<ProjectCard
+				title="Portfolio"
+				description="This website. Built with SvelteKit!"
+				cardColor="#ea7fa1"
+				tags={['wip', 'sveltekit']}
+				url="https://zlyfer.net/"
+				github="https://github.com/zlyfer/zlyfer-svebsite"
+			/>
+		</li>
+
+		<li>
+			<ProjectCard
+				title="SubChordium"
+				description="A Discord bot that browses and plays music from one or multiple Subsonic servers."
+				cardColor="#ffc419"
+				tags={['wip', 'discord', 'node.js', 'subsonic']}
+				github="https://github.com/zlyfer/subchordium"
+			/>
+		</li>
+	</ul>
+
+	<Seperator />
+	<ChapterTitle text="other projects" zoomEffect="true" />
+
+	<ul class="projectCards">
+		{#each otherProjects as project}
 			<li>
 				<ProjectCard
 					title={project.name}
@@ -194,7 +223,7 @@
 	</ul>
 
 	<span class="badge">
-		made with ❤ by zlyfer | <a href="/imprint">imprint</a>
+		made with <span style="color: #e57a9b;">❤</span> by zlyfer | <a href="/imprint">imprint</a>
 	</span>
 </main>
 
@@ -212,7 +241,8 @@
 	}
 
 	a {
-		color: rgba(var(--accent), 1);
+		color: rgba(var(--accent), 0.7);
+		filter: brightness(1.1);
 		text-decoration: none;
 	}
 
@@ -225,19 +255,14 @@
 		max-height: 55ch;
 		aspect-ratio: 1/1 !important;
 		margin: 2.5rem auto;
-		box-shadow: inset 0 0 5px 2px var(--glowColor);
 		border-radius: 20px;
-		background-image: url('/logo.webp');
+		background-image: url('/selfie.webp');
 		background-size: cover;
 		background-position: center;
 		background-repeat: no-repeat;
-		border: 1px solid var(--glowColor);
-		filter: drop-shadow(0 0 0.2rem var(--glowColor));
-		animation: fadeImage 20s ease-in-out infinite;
+		box-shadow: 0 0 0px 4px rgba(var(--accent), 50%);
 	}
-	.animation #welcomeImg {
-		animation: animation 5s ease-in-out infinite, fadeImage 20s ease-in-out infinite;
-	}
+
 	#welcome .info {
 		margin: 1rem auto 2.5rem auto;
 		text-align: center;
@@ -282,7 +307,8 @@
 	span.badge {
 		display: block;
 		width: fit-content;
-		margin: 35vh auto 8rem auto;
+		/* margin: 35vh auto 8rem auto; */
+		margin: 8rem auto 0 auto;
 		text-align: center;
 		font-size: 1.5rem;
 		display: block;
@@ -360,51 +386,6 @@
 		}
 		span.badge {
 			font-size: 0.8rem;
-		}
-	}
-
-	/* ----------- Animations ----------- */
-
-	@keyframes fadeImage {
-		0% {
-			background-image: url('/selfie.webp');
-			--glowColor: var(--glowSelfie);
-			-webkit-filter: opacity(1) drop-shadow(0 0 0.2rem var(--glowColor));
-		}
-		45% {
-			background-image: url('/selfie.webp');
-			--glowColor: var(--glowSelfie);
-			-webkit-filter: opacity(1) drop-shadow(0 0 0.45rem var(--glowColor));
-		}
-		47% {
-			-webkit-filter: opacity(0.5) drop-shadow(0 0 0.46rem var(--glowColor));
-		}
-		50% {
-			background-image: url('/logo.webp');
-			--glowColor: var(--glowLogo);
-			-webkit-filter: opacity(1) drop-shadow(0 0 0.5rem var(--glowColor));
-		}
-		95% {
-			background-image: url('/logo.webp');
-			--glowColor: var(--glowLogo);
-			-webkit-filter: opacity(1) drop-shadow(0 0 0.46rem var(--glowColor));
-		}
-		97% {
-			-webkit-filter: opacity(0.5) drop-shadow(0 0 0.45rem var(--glowColor));
-		}
-	}
-	@keyframes animation {
-		0% {
-			filter: drop-shadow(0 0 0.2rem var(--glowColor));
-			box-shadow: inset 0 0 5px 2px var(--glowColor);
-		}
-		50% {
-			filter: drop-shadow(0 0 0.5rem var(--glowColor));
-			box-shadow: inset 0 0 12px 2px var(--glowColor);
-		}
-		100% {
-			filter: drop-shadow(0 0 0.2rem var(--glowColor));
-			box-shadow: inset 0 0 5px 2px var(--glowColor);
 		}
 	}
 </style>

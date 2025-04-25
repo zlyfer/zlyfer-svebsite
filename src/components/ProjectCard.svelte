@@ -21,7 +21,7 @@
 	export let description;
 	export let url;
 	export let github;
-	export let cardColor = '#2196f3';
+	export let cardColor = 'rgba(var(--backgroundCounter), 0.8)';
 	export let tags = [];
 
 	/* ------------ Variables ----------- */
@@ -35,12 +35,13 @@
 	/* ------------ Functions ----------- */
 </script>
 
-<!-- svelte-ignore a11y-interactive-supports-focus -->
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-
 <main class="projectCard" class:animation={$animation} style:--cardColor={cardColor}>
-	<!-- <li > -->
-	<a href={url} target={url.startsWith('/project') ? null : '_blank'}>
+	<a {...url ? { href: url, target: url.startsWith('/project') ? null : '_blank' } : {}}>
+		<a class="githubIcon" href={github} target="_blank">
+			<div>
+				<FaGithub />
+			</div>
+		</a>
 		<h2>
 			{title}
 		</h2>
@@ -51,23 +52,17 @@
 			<span class="tag {tag}">{tag}</span>
 		{/each}
 	</a>
-	<!-- </li> -->
-	<div class="githubBar">
-		<a href={github} target="_blank">
-			<div class="githubIcon">
-				<FaGithub />
-			</div>
-			GitHub
-		</a>
-	</div>
 </main>
 
 <style>
+	:root {
+		--cutout-size: 80px;
+	}
+
 	.projectCard {
 		list-style: none;
 		display: flex;
 		padding: 0.25rem;
-		padding-bottom: 3.5rem;
 		background-image: none;
 		background-size: 400%;
 		background-position: 100%;
@@ -76,11 +71,19 @@
 		border-radius: 20px;
 		border-top-left-radius: 20px;
 		border-top-right-radius: 20px;
-		backdrop-filter: blur(var(--blur));
-		-webkit-backdrop-filter: blur(var(--blur));
-		-moz-backdrop-filter: blur(var(--blur));
 		position: relative;
+		min-height: 205px;
 	}
+	.projectCard:hover:not(:has(.githubIcon:hover)) {
+		background-position: 0;
+		background-image: linear-gradient(45deg, var(--cardColor), rgb(var(--background)) 40%);
+		box-shadow: inset 0 0 0 3px rgba(var(--foreground), 0.1);
+		/* filter: brightness(1.1) drop-shadow(0 0 0.3rem var(--cardColor)); */
+	}
+
+	/* .projectCard.animation:hover {
+		animation: animation 3s infinite;
+	} */
 	.projectCard > a {
 		width: 100%;
 		text-decoration: none;
@@ -90,29 +93,10 @@
 		color: var(--cardColor);
 		opacity: 0.8;
 	}
-	.projectCard:hover {
-		background-position: 0;
-		background-image: linear-gradient(45deg, var(--cardColor), rgb(var(--background)) 40%);
-		box-shadow: inset 0 0 0 3px rgba(var(--foreground), 0.5);
-		filter: brightness(1.1) drop-shadow(0 0 0.3rem var(--cardColor));
-	}
-	.projectCard.animation:hover {
-		animation: animation 3s infinite;
-	}
 	.projectCard:hover h2,
 	.projectCard:hover p {
 		color: #eee;
-		text-shadow: rgba(var(--darkBackGround), 1) 2px 1px 7px;
-	}
-	.projectCard:hover .githubBar {
-		box-shadow: inset 0 0 0 3px #eee;
-		color: #eee;
-	}
-	.projectCard:hover .githubIcon {
-		color: #eee;
-	}
-	.projectCard:hover a {
-		color: #eee;
+		text-shadow: rgba(var(--darkBackground), 1) 2px 1px 7px;
 	}
 
 	h2 {
@@ -135,14 +119,11 @@
 		font-size: 0.9rem;
 		font-weight: 600;
 		border-radius: 15px;
-		color: black;
+		color: rgba(0, 0, 0, 0.5);
 		background-color: rgba(var(--foreground), 1);
 		margin: 2px 2px;
 		width: auto;
 		max-width: auto;
-	}
-	span.tag:hover {
-		filter: brightness(1.1);
 	}
 	span.finished {
 		background-color: #5fba62;
@@ -177,46 +158,38 @@
 	span.vue {
 		background-color: #41b883;
 	}
-
-	.githubBar {
-		width: calc(100% - 15px);
-		height: 2.5rem;
-		text-align: center;
-		margin-top: 3px;
-		position: absolute;
-		bottom: 0px;
-		left: 0;
-		margin: 7.5px 7.5px;
-		box-shadow: inset 0 0 0 3px rgba(var(--foreground), 0.1);
-		border-radius: 15px;
-		background-color: rgba(var(--foreground), 0.1);
-		transition: box-shadow 0.2s;
+	span.ionic {
+		background-color: #3880ff;
+	}
+	span.angular {
+		background-color: #dd0031;
+	}
+	span.sveltekit {
+		background-color: #ff3e00;
+	}
+	span.subsonic {
+		background-color: #ffd320;
 	}
 
-	.animation .githubBar:hover {
-		background-color: rgba(var(--background), 0.1);
-	}
-	.githubBar a {
-		text-decoration: none;
-		line-height: 2.5rem;
-		font-weight: bold;
-		color: rgba(var(--foreground), 1);
-		display: block;
-		transition: color 0.2s;
-	}
 	.githubIcon {
 		width: 1.5rem;
 		height: 1.5rem;
-		margin-right: 0.5rem;
-		vertical-align: middle;
 		position: absolute;
-		margin-top: 0.4rem;
-		margin-left: 1rem;
+		top: 14px;
+		right: 15px;
 		color: rgba(var(--foreground), 1);
 		transition: color 0.2s;
+		background: rgba(var(--foreground), 0.1);
+		padding: 5px;
+		border-radius: 10px;
+		border: 2px solid rgba(var(--foreground), 0.1);
+	}
+	.githubIcon:hover {
+		background: rgba(var(--foreground), 0.2);
+		border: 2px solid rgba(var(--foreground), 0.2);
 	}
 
-	@keyframes animation {
+	/* @keyframes animation {
 		0% {
 			filter: brightness(1.1) drop-shadow(0 0 0rem var(--cardColor));
 		}
@@ -226,5 +199,5 @@
 		100% {
 			filter: brightness(1.1) drop-shadow(0 0 0rem var(--cardColor));
 		}
-	}
+	} */
 </style>

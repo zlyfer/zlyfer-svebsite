@@ -12,7 +12,7 @@
 </script>
 
 <main>
-	<span id="wip">WIP</span>
+	<span id="wip">this page is under construction</span>
 </main>
 
 <style>
@@ -25,6 +25,6 @@
 		text-align: center;
 		line-height: 100vh;
 		font-size: 5rem;
-		color: rgba(var(--foreground), 0.7);
+		color: #e57a9b;
 	}
 </style>
