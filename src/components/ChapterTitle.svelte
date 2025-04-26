@@ -95,21 +95,22 @@
 		-webkit-user-select: none;
 		-ms-user-select: none;
 		user-select: none;
+		overflow: hidden;
 	}
 
 	@media (max-width: 600px) {
 		:root {
-			--fontSize: 40;
+			--fontSize: 44;
 		}
 	}
 	@media (max-width: 500px) {
 		:root {
-			--fontSize: 35;
+			--fontSize: 40;
 		}
 	}
 	@media (max-width: 450px) {
 		:root {
-			--fontSize: 30;
+			--fontSize: 36;
 		}
 	}
 	@media (max-width: 350px) {

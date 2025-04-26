@@ -56,5 +56,6 @@
 		left: var(--left);
 		bottom: var(--bottom);
 		right: var(--right);
+		z-index: -1;
 	}
 </style>

@@ -338,12 +338,12 @@
 
 	/* -------- Responsive Design ------- */
 
-	@media (max-width: 875px) {
+	@media (max-width: 888px) {
 		.socialCards {
 			grid-template-columns: repeat(auto-fit, minmax(30ch, 1fr));
 		}
 	}
-	@media (max-width: 775px) {
+	@media (max-width: 786px) {
 		.socialCards {
 			grid-template-columns: repeat(auto-fit, minmax(25ch, 1fr));
 		}
@@ -379,6 +379,7 @@
 			font-size: 1rem;
 		}
 		span.badge {
+			margin: 6rem auto 8rem auto;
 			font-size: 1.2rem;
 		}
 	}

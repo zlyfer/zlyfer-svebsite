@@ -93,8 +93,8 @@
 		color: var(--cardColor);
 		opacity: 0.8;
 	}
-	.projectCard:hover h2,
-	.projectCard:hover p {
+	.projectCard:hover:not(:has(.githubIcon:hover)) h2,
+	.projectCard:hover:not(:has(.githubIcon:hover)) p {
 		color: #eee;
 		text-shadow: rgba(var(--darkBackground), 1) 2px 1px 7px;
 	}
