@@ -31,8 +31,8 @@
 	/* ------------ Variables ----------- */
 
 	let systemDarkMode;
-	let removeP5 = false;
 	const backButtonRoutes = ['/imprint', '/project/'];
+	let windowWidth = 0;
 
 	/* ----------- Life Cycles ---------- */
 
@@ -50,14 +50,23 @@
 		});
 		animation.subscribe((value) => {});
 
+		window.addEventListener('resize', handleResize);
+		handleResize();
+
 		initVariables();
 	});
 
-	onDestroy(() => {
-		removeP5 = true;
-	});
+	onDestroy(() => {});
 
 	/* ------------ Functions ----------- */
+
+	function handleResize() {
+		if (typeof window === 'undefined') {
+			windowWidth = 0;
+			return;
+		}
+		windowWidth = window.innerWidth;
+	}
 
 	function initVariables() {
 		const _darkMode = localStorage.getItem('darkMode') || $darkMode;
@@ -146,19 +155,21 @@
 				{ stop: 1, color: 'hsla(197, 100%, 64%, 0.8)' }
 			]}
 		/>
-		<BackgroundSplash
-			width={250}
-			height={650}
-			rotation={-135}
-			bottom="8%"
-			right="12%"
-			gradientColors={[
-				{ stop: 0, color: 'hsla(225, 100%, 68%, 0.8)' },
-				{ stop: 0.3, color: 'hsla(57, 100%, 71%, 0.8)' },
-				{ stop: 0.5, color: 'hsla(57, 100%, 71%, 0.8)' },
-				{ stop: 1, color: 'hsla(339, 100%, 55%, 0.8)' }
-			]}
-		/>
+		{#if windowWidth > 700}
+			<BackgroundSplash
+				width={250}
+				height={650}
+				rotation={-135}
+				bottom="8%"
+				right="12%"
+				gradientColors={[
+					{ stop: 0, color: 'hsla(225, 100%, 68%, 0.8)' },
+					{ stop: 0.3, color: 'hsla(57, 100%, 71%, 0.8)' },
+					{ stop: 0.5, color: 'hsla(57, 100%, 71%, 0.8)' },
+					{ stop: 1, color: 'hsla(339, 100%, 55%, 0.8)' }
+				]}
+			/>
+		{/if}
 	{/if}
 
 	<div id="styleButtons">

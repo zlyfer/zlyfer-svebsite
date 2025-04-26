@@ -244,7 +244,7 @@
 		max-width: var(--globalWidth);
 		border-radius: 22px;
 		border: 5px solid rgba(var(--accent), 50%);
-		background-color: rgba(255, 255, 255, 0.2);
+		background-color: rgba(180, 180, 180, 0.1);
 	}
 	main.darkMode {
 		background-color: rgba(255, 255, 255, 0.1);
