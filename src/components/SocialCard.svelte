@@ -26,8 +26,6 @@
 
 	/* ----------- Life Cycles ---------- */
 
-	onMount(() => {});
-
 	/* ------------ Functions ----------- */
 </script>
 
@@ -74,8 +72,8 @@
 		box-shadow: 0 0 5px 2px rgba(var(--typeColor), 1);
 	}
 
-	.socialCard:hover h2 {
-		color: white;
+	.socialCard:hover .title {
+		color: rgba(var(--darkForeground), 1);
 	}
 
 	.title {
@@ -87,16 +85,18 @@
 
 	@media (hover: none) and (pointer: coarse) {
 		.socialCard {
-			background-position: 0;
+			background-position: -5px;
 			background-image: linear-gradient(
 				45deg,
-				rgba(var(--typeColor), 30%),
-				rgba(var(--typeColorCounter), 30%) 30%
+				rgb(var(--typeColor)),
+				rgb(var(--typeColorCounter)) 30%
 			);
-			border: 5px solid transparent;
+			box-shadow: 0 0 5px 2px rgba(var(--typeColor), 1);
 		}
-		.title {
-			color: rgba(var(--foreground), 1);
+
+		.socialCard .title {
+			color: rgba(var(--darkForeground), 1);
+			text-shadow: 0 0 1px rgba(var(--darkBackground), 1);
 		}
 	}
 </style>

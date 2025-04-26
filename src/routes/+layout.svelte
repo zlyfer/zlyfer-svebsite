@@ -56,8 +56,6 @@
 		initVariables();
 	});
 
-	onDestroy(() => {});
-
 	/* ------------ Functions ----------- */
 
 	function handleResize() {

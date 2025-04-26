@@ -96,10 +96,6 @@
 
 	/* ----------- Life Cycles ---------- */
 
-	onMount(() => {
-		_isDarkMode.subscribe((value) => {});
-	});
-
 	/* ------------ Functions ----------- */
 
 	function getAge() {

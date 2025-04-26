@@ -76,14 +76,10 @@
 	}
 	.projectCard:hover:not(:has(.githubIcon:hover)) {
 		background-position: 0;
-		background-image: linear-gradient(45deg, var(--cardColor), rgb(var(--background)) 40%);
+		background-image: linear-gradient(45deg, var(--cardColor), rgba(0, 0, 0, 0) 40%);
 		box-shadow: inset 0 0 0 3px rgba(var(--foreground), 0.1);
-		/* filter: brightness(1.1) drop-shadow(0 0 0.3rem var(--cardColor)); */
 	}
 
-	/* .projectCard.animation:hover {
-		animation: animation 3s infinite;
-	} */
 	.projectCard > a {
 		width: 100%;
 		text-decoration: none;
@@ -95,8 +91,8 @@
 	}
 	.projectCard:hover:not(:has(.githubIcon:hover)) h2,
 	.projectCard:hover:not(:has(.githubIcon:hover)) p {
-		color: #eee;
-		text-shadow: rgba(var(--darkBackground), 1) 2px 1px 7px;
+		color: rgba(var(--darkForeground), 1);
+		text-shadow: rgba(var(--darkBackground), 0.5) 0 0 5px;
 	}
 
 	h2 {
@@ -195,15 +191,17 @@
 		border: 2px solid rgba(var(--foreground), 0.2);
 	}
 
-	/* @keyframes animation {
-		0% {
-			filter: brightness(1.1) drop-shadow(0 0 0rem var(--cardColor));
+	@media (hover: none) and (pointer: coarse) {
+		.projectCard {
+			background-position: 0;
+			background-image: linear-gradient(45deg, var(--cardColor), rgba(0, 0, 0, 0) 40%);
+			box-shadow: inset 0 0 0 3px rgba(var(--foreground), 0.1);
 		}
-		50% {
-			filter: brightness(1.1) drop-shadow(0 0 0.3rem var(--cardColor));
+
+		.projectCard h2,
+		.projectCard p {
+			color: rgba(var(--darkForeground), 1);
+			text-shadow: rgba(var(--darkBackground), 0.5) 0 0 5px;
 		}
-		100% {
-			filter: brightness(1.1) drop-shadow(0 0 0rem var(--cardColor));
-		}
-	} */
+	}
 </style>
