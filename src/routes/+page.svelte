@@ -115,9 +115,15 @@
 				<br />
 				<code>Frederik Shull</code> aka <code>zlyfer</code> here!
 				<br />
-				I am a <code>{getAge()}</code> y/o <code>software developer</code> .
+				I am a <code>{getAge()}</code> y/o <code>software developer</code> based in <code>Germany</code>.
 				<br />
-				Feel free to look around~
+				<br />
+				Need something programmed?
+				<br />
+				<span class="highlight">
+					Contact me via <a href="mailto:zlyfer+business@pm.me" target="_blank">email</a> or
+					discord: <code>@zlyfer</code>
+				</span>
 			</span>
 		</div>
 	</div>
@@ -153,14 +159,24 @@
 	<ChapterTitle text="full stack projects" zoomEffect="true" />
 
 	<ul class="projectCards">
+		<!-- <li>
+			<ProjectCard
+				title="imposter game"
+				description="The popular word association game!"
+				cardColor="#3fe280"
+				tags={['gaming', 'angular', 'php', 'sql']}
+				url="https://imposter.zlyfer.net/"
+				github="https://github.com/zlyfer/imposter"
+			/>
+		</li> -->
 		<li>
 			<ProjectCard
-				title="league of legends arena checklist"
+				title="loL arenatracker"
 				description="Keep track of your #1 wins in League of Legends Arena!"
 				cardColor="#db4f47"
-				tags={['wip', 'gaming', 'vanilla', 'php', 'sql']}
-				url="https://lolarena.zlyfer.net/"
-				github="https://github.com/zlyfer/lolarena"
+				tags={['gaming', 'angular', 'php', 'sql']}
+				url="https://arenatracker.zlyfer.net/"
+				github="https://github.com/zlyfer/arenatracker"
 			/>
 		</li>
 		<li>
@@ -251,6 +267,9 @@
 		filter: brightness(1.1);
 		text-decoration: none;
 	}
+	a:hover {
+		color: rgba(var(--accent), 1);
+	}
 
 	/* ---------- Welcome Card ---------- */
 
@@ -287,6 +306,16 @@
 		color: rgb(var(--accent));
 		border-radius: 5px;
 		padding: 0.2em 0.4em;
+	}
+
+	.highlight {
+		border: 2px solid rgba(var(--accent), 50%);
+		padding: 10px;
+		display: block;
+		border-radius: 10px;
+		width: fit-content;
+		margin: 10px auto 0 auto;
+		background-color: rgba(var(--accent), 20%);
 	}
 
 	/* -------------- Cards ------------- */
