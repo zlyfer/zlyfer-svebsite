@@ -316,6 +316,21 @@
 		width: fit-content;
 		margin: 10px auto 0 auto;
 		background-color: rgba(var(--accent), 20%);
+		animation: borderPulse 2s ease-in-out infinite;
+	}
+	.highlight:hover {
+		animation: none;
+	}
+
+	@keyframes borderPulse {
+		0%, 100% {
+			border-color: rgba(var(--accent), 10%);
+			box-shadow: 0 0 0px rgba(var(--accent), 0%);
+		}
+		50% {
+			border-color: rgba(var(--accent), 100%);
+			box-shadow: 0 0 10px rgba(var(--accent), 100%);
+		}
 	}
 
 	/* -------------- Cards ------------- */
