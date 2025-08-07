@@ -50,8 +50,10 @@
 		background-size: 400%;
 		border-radius: 30px;
 		background-position: 100%;
-		transition: background-position 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 		box-shadow: inset 0 0 0 5px rgba(var(--typeColor), 0.5);
+	}
+	.socialCard.animation {
+		transition: background-position 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 	}
 	.socialCard > a {
 		width: 100%;

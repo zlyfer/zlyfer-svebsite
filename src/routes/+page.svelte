@@ -120,7 +120,7 @@
 				<br />
 				Need something programmed?
 				<br />
-				<span class="highlight">
+				<span class="highlight" class:animation={$animation}>
 					Contact me via <a href="mailto:zlyfer+business@pm.me" target="_blank">email</a> or
 					discord: <code>@zlyfer</code>
 				</span>
@@ -266,6 +266,7 @@
 		color: rgba(var(--accent), 0.7);
 		filter: brightness(1.1);
 		text-decoration: none;
+		transition: color 0.2s ease-in-out;
 	}
 	a:hover {
 		color: rgba(var(--accent), 1);
@@ -316,9 +317,11 @@
 		width: fit-content;
 		margin: 10px auto 0 auto;
 		background-color: rgba(var(--accent), 20%);
+	}
+	.highlight.animation {
 		animation: borderPulse 2s ease-in-out infinite;
 	}
-	.highlight:hover {
+	.highlight.animation:hover {
 		animation: none;
 	}
 

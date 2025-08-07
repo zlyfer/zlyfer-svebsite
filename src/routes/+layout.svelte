@@ -140,7 +140,7 @@
 		<a id="backButton" href="/">
 			<IoMdArrowRoundBack />
 		</a>
-	{:else}
+	{:else if $animation}
 		<BackgroundSplash
 			width={400}
 			height={400}

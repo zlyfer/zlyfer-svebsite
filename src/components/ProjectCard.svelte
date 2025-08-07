@@ -66,13 +66,15 @@
 		background-image: none;
 		background-size: 400%;
 		background-position: 100%;
-		transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.2s;
 		box-shadow: inset 0 0 0 3px rgba(var(--foreground), 0.1);
 		border-radius: 20px;
 		border-top-left-radius: 20px;
 		border-top-right-radius: 20px;
 		position: relative;
 		min-height: 205px;
+	}
+	.projectCard.animation {
+		transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.2s;
 	}
 	.projectCard:hover:not(:has(.githubIcon:hover)) {
 		background-position: 0;
@@ -98,8 +100,10 @@
 	h2 {
 		margin: 0;
 		font-size: 1.25rem;
-		transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 		text-transform: capitalize;
+	}
+	.projectCard.animation h2 {
+		transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 	}
 	p {
 		margin-top: 0.5rem;
