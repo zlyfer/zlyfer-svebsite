@@ -118,7 +118,7 @@
 				I am a <code>{getAge()}</code> y/o <code>software developer</code> based in <code>Germany</code>.
 				<br />
 				<br />
-				Need something programmed?
+				Need something coded?
 				<br />
 				<span class="highlight" class:animation={$animation}>
 					Contact me via <a href="mailto:zlyfer+business@pm.me" target="_blank">email</a> or
