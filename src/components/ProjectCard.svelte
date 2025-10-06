@@ -136,6 +136,7 @@
 	}
 	span.game {
 		background-color: #2b9af3;
+		background-image: linear-gradient(45deg, #fab005 0%, #ff8787 25%, #f783ac 50%, #3ac8db 100%);
 	}
 	span.animation {
 		background-color: #c27fd1;
@@ -173,8 +174,13 @@
 	span.vanilla {
 		background-color: #ebdda5;
 	}
-	span.gaming {
+	span.stream {
 		background-color: #935cc7;
+		background-image: linear-gradient(45deg, #a970ff 0%, #d6bbff 100%);
+	}
+	span.overlay {
+		background-color: #797b80;
+		background-image: linear-gradient(45deg, #797b80 0%, #b9b9b9 100%);
 	}
 
 	.githubIcon {

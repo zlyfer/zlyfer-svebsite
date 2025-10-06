@@ -113,9 +113,10 @@
 			<span class="text">
 				Hello there,
 				<br />
-				<code>Frederik Shull</code> aka <code>zlyfer</code> here!
+				<code>Freddy</code> aka <code>zlyfer</code> here!
 				<br />
-				I am a <code>{getAge()}</code> y/o <code>software developer</code> based in <code>Germany</code>.
+				I am a <code>{getAge()}</code> y/o <code>software developer</code> based in
+				<code>Germany</code>.
 				<br />
 				<br />
 				Need something coded?
@@ -171,10 +172,20 @@
 		</li> -->
 		<li>
 			<ProjectCard
+				title="Imposter Game"
+				description="The popular word deduction game!"
+				cardColor="#66BB6A"
+				tags={['game', 'stream', 'overlay', 'angular', 'php', 'sql', 'ionic']}
+				url="https://imposter.zlyfer.net/"
+				github="https://github.com/zlyfer/imposter.zlyfer.net"
+			/>
+		</li>
+		<li>
+			<ProjectCard
 				title="loL arenatracker"
 				description="Keep track of your #1 wins in League of Legends Arena!"
 				cardColor="#db4f47"
-				tags={['gaming', 'angular', 'php', 'sql']}
+				tags={['game', 'stream', 'overlay', 'angular', 'php', 'sql']}
 				url="https://arenatracker.zlyfer.net/"
 				github="https://github.com/zlyfer/arenatracker"
 			/>
@@ -326,7 +337,8 @@
 	}
 
 	@keyframes borderPulse {
-		0%, 100% {
+		0%,
+		100% {
 			border-color: rgba(var(--accent), 10%);
 			box-shadow: 0 0 0px rgba(var(--accent), 0%);
 		}
