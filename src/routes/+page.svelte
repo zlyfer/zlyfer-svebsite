@@ -123,7 +123,7 @@
 				<br />
 				<span class="highlight" class:animation={$animation}>
 					Contact me via <a href="mailto:zlyfer+business@pm.me" target="_blank">email</a> or
-					discord: <code>@zlyfer</code>
+					Discord: <code>@zlyfer</code>
 				</span>
 			</span>
 		</div>
@@ -135,22 +135,25 @@
 	<ul class="socialCards">
 		<li><SocialCard href="https://github.com/zlyfer" title="GitHub" type="github" /></li>
 		<li>
-			<SocialCard href="https://instagram.com/zlyfer.arts/" title="Instagram" type="instagram" />
+			<SocialCard href="https://instagram.com/zlyfer/" title="Instagram" type="instagram" />
 		</li>
-		<li><SocialCard href="https://www.tiktok.com/@zlyfer2" title="TikTok" type="tiktok" /></li>
+		<li>
+			<SocialCard href="https://instagram.com/zlyfer.arts/" title="Instagram Art" type="instagram" />
+		</li>
 		<li><SocialCard href="https://www.youtube.com/@zlyfer" title="Youtube" type="youtube" /></li>
+		<li><SocialCard href="https://www.tiktok.com/@zlyfer2" title="TikTok" type="tiktok" /></li>
 		<li><SocialCard href="https://twitch.tv/zlyfer2" title="Twitch" type="twitch" /></li>
 		<li>
 			<SocialCard href="https://steamcommunity.com/id/zlyfer" title="Steam" type="steam" />
 		</li>
 		<li><SocialCard href="https://twitter.com/zIyfer" title="Twitter" type="twitter" /></li>
-		<li>
+		<!-- <li>
 			<SocialCard
 				href="https://www.linkedin.com/in/frederik-shull-aa4b44228/"
 				title="LinkedIn"
 				type="linkedin"
 			/>
-		</li>
+		</li> -->
 	</ul>
 
 	<!-- <Seperator /> -->
